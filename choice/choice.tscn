@@ -1,0 +1,97 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwydblc7ikama"]
+
+[ext_resource type="Script" uid="uid://df6drbubp3lub" path="res://choice/choice.gd" id="1_s8ia2"]
+[ext_resource type="Texture2D" uid="uid://dateaog7yobbw" path="res://assets/logo.png" id="2_nsr5h"]
+[ext_resource type="FontFile" uid="uid://vpmakd0urni6" path="res://Undertale-Battle-Font.ttf-5b3f8609511f8e0c8fc5e3287eaa9635.fontdata" id="3_gejxk"]
+[ext_resource type="AudioStream" uid="uid://dmoceerf52ppr" path="res://assets/open.wav" id="4_nsr5h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbn87"]
+
+[node name="Choice" type="Node2D"]
+script = ExtResource("1_s8ia2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(260, 75)
+scale = Vector2(5, 5)
+texture = ExtResource("2_nsr5h")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 50.0
+offset_top = 150.0
+offset_right = 370.0
+offset_bottom = 620.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dbn87")
+
+[node name="Label" type="Label" parent="Panel"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 188.0
+scale = Vector2(2.5, 2.5)
+theme_override_fonts/font = ExtResource("3_gejxk")
+text = "chapter 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel2" type="Panel" parent="."]
+offset_left = 400.0
+offset_top = 150.0
+offset_right = 720.0
+offset_bottom = 620.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dbn87")
+
+[node name="Label2" type="Label" parent="Panel2"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 188.0
+scale = Vector2(2.5, 2.5)
+theme_override_fonts/font = ExtResource("3_gejxk")
+text = "chapter 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel3" type="Panel" parent="."]
+offset_left = 750.0
+offset_top = 150.0
+offset_right = 1070.0
+offset_bottom = 620.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dbn87")
+
+[node name="Label3" type="Label" parent="Panel3"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 188.0
+scale = Vector2(2.5, 2.5)
+theme_override_fonts/font = ExtResource("3_gejxk")
+text = "rooms"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 50.0
+offset_top = 150.0
+offset_right = 370.0
+offset_bottom = 620.0
+
+[node name="Button2" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 400.0
+offset_top = 150.0
+offset_right = 720.0
+offset_bottom = 620.0
+
+[node name="Button3" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 750.0
+offset_top = 150.0
+offset_right = 1070.0
+offset_bottom = 620.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_nsr5h")
+
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

@@ -1,0 +1,23 @@
+extends Node3D
+
+func _ready() -> void:
+	$Player.startSpreedrun()
+	$Player.PlayerDeath(-1)
+	$NavigationRegion3D/Living/Label3D.text = Global.game_settings["password"].substr(0, 2) + "??"
+
+func _on_kill_zona_body_entered(body: Node3D) -> void:
+	print("item killZona!!!")
+	print(body)
+	body.global_position = Vector3(0, 1, 0)
+
+func handle_interaction(object_name: String):
+	match object_name:
+		"painting":
+			$NavigationRegion3D/PlayerRoom/board.queue_free()
+			$NavigationRegion3D/PlayerRoom/InteractableObject.queue_free()
+			$NavigationRegion3D/PlayerRoom/board3.visible = true
+		"painting2":
+			$NavigationRegion3D/Living/board5.queue_free()
+			$NavigationRegion3D/Living/InteractableObject.queue_free()
+			$Player.pick_up_item($NavigationRegion3D/Living/Item)
+			

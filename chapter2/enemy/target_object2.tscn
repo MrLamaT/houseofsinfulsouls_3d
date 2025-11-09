@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpobeb8u5x1tt"]
+
+[ext_resource type="Script" uid="uid://djsic6guqoeck" path="res://chapter2/enemy/target_object_2.gd" id="1_s708y"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_v3agd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3uuwj"]
+
+[node name="TargetObject_tscn2" type="Node3D" groups=["enemy_targets2", "target_object"]]
+script = ExtResource("1_s708y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_v3agd")
+
+[node name="Area3D" type="Area3D" parent="." groups=["enemy1"]]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_3uuwj")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

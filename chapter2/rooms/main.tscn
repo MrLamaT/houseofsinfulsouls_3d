@@ -1,0 +1,264 @@
+[gd_scene load_steps=35 format=3 uid="uid://dvyormlmcnr8r"]
+
+[ext_resource type="Script" uid="uid://cu01v74yppo1" path="res://chapter2/rooms/main.gd" id="1_rukgg"]
+[ext_resource type="Texture2D" uid="uid://bd832m7qavblv" path="res://assets/textures/material1.png" id="2_4kqoq"]
+[ext_resource type="PackedScene" uid="uid://cn5qxioc77162" path="res://chapter2/Player/Player.tscn" id="2_dpt77"]
+[ext_resource type="Texture2D" uid="uid://do5y7jxljt63c" path="res://assets/textures/material11.png" id="2_nx5a4"]
+[ext_resource type="PackedScene" uid="uid://bsbcsmkb4kgdi" path="res://chapter2/interactable_object/InteractableObject.tscn" id="2_q48q2"]
+[ext_resource type="PackedScene" uid="uid://c1awuh7hobog0" path="res://chapter2/Item/Item.tscn" id="3_q48q2"]
+[ext_resource type="Texture2D" uid="uid://2bbd2l04tmkp" path="res://assets/textures/material2.png" id="3_vy737"]
+[ext_resource type="Texture2D" uid="uid://cdl3v0e5o2pah" path="res://chapter2/assets/ModIcon/Mod1_0.png" id="4_huhxd"]
+[ext_resource type="Texture2D" uid="uid://b40wi2r6inny2" path="res://chapter2/assets/ModIcon/Mod2_0.png" id="5_dxq0f"]
+[ext_resource type="Texture2D" uid="uid://dbyhf7qkvjq2r" path="res://chapter2/assets/ModIcon/Mod3_0.png" id="6_3uym5"]
+[ext_resource type="Texture2D" uid="uid://de3t47m5nbmbp" path="res://chapter2/assets/ModIcon/Mod6_0.png" id="8_n5xo8"]
+[ext_resource type="PackedScene" uid="uid://66f66cwy6tfc" path="res://chapter2/rooms/decoration/table.tscn" id="8_vy737"]
+[ext_resource type="PackedScene" uid="uid://cbu7r1vpww8t" path="res://chapter2/rooms/decoration/box.tscn" id="9_8lup6"]
+[ext_resource type="Texture2D" uid="uid://cp6ixvtetfy75" path="res://chapter2/assets/ModIcon/Mod4_0.png" id="9_n162l"]
+[ext_resource type="PackedScene" uid="uid://b3em3wop4li52" path="res://chapter2/doors/doors.tscn" id="10_1u0l2"]
+[ext_resource type="PackedScene" uid="uid://iuthusc4lu48" path="res://chapter2/rooms/decoration/board.tscn" id="11_huhxd"]
+[ext_resource type="Texture2D" uid="uid://cf1rnp7rtkfdx" path="res://chapter2/assets/items/vase.png" id="13_vmaj7"]
+[ext_resource type="Texture2D" uid="uid://btlwmjph2uu5r" path="res://chapter2/assets/items/BirdFood.png" id="14_ovupc"]
+[ext_resource type="Texture2D" uid="uid://duh6gy84p1n2s" path="res://chapter2/assets/ModIcon/Mod7_0.png" id="18_n5xo8"]
+[ext_resource type="PackedScene" uid="uid://ppi5cu4cfp8g" path="res://chapter2/rooms/decoration/closet.tscn" id="21_lf7vw"]
+[ext_resource type="PackedScene" uid="uid://2260j2mjo6t8" path="res://chapter2/rooms/decoration/shelf.tscn" id="22_c1l1x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lkhu3"]
+albedo_texture = ExtResource("2_nx5a4")
+uv1_scale = Vector3(50, 1, 50)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_4yxbd"]
+material = SubResource("StandardMaterial3D_lkhu3")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_neroa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8lup6"]
+albedo_texture = ExtResource("2_4kqoq")
+uv1_scale = Vector3(50, 1, 50)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_2k5va"]
+material = SubResource("StandardMaterial3D_8lup6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u0l2"]
+albedo_color = Color(0.168627, 0.176471, 0.258824, 1)
+albedo_texture = ExtResource("3_vy737")
+uv1_scale = Vector3(1, 5, 12)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_nh41j"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_1u0l2")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cjmea"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ovupc"]
+albedo_color = Color(0.16862746, 0.1764706, 0.25882354, 1)
+albedo_texture = ExtResource("3_vy737")
+uv1_scale = Vector3(12, 5, 1)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_ifo8a"]
+material = SubResource("StandardMaterial3D_ovupc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ifo8a"]
+albedo_color = Color(0.16862746, 0.1764706, 0.25882354, 1)
+albedo_texture = ExtResource("3_vy737")
+uv1_scale = Vector3(12, 5, 1)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_nx5a4"]
+material = SubResource("StandardMaterial3D_ifo8a")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n5xo8"]
+size = Vector3(100, 1, 100)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_rukgg")
+
+[node name="floor" type="StaticBody3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
+collision_layer = 36
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+mesh = SubResource("BoxMesh_4yxbd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+shape = SubResource("BoxShape3D_neroa")
+
+[node name="ceiling" type="StaticBody3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 4, 0)
+collision_layer = 36
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ceiling"]
+mesh = SubResource("BoxMesh_2k5va")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ceiling"]
+shape = SubResource("BoxShape3D_neroa")
+
+[node name="ModSkin" parent="." instance=ExtResource("2_q48q2")]
+transform = Transform3D(7.54979e-08, 0, 1, 0, 1, 0, -1, 0, 7.54979e-08, 4.5, 2.056, -4.432)
+visible = false
+interaction_name = "skin"
+handler_node = NodePath("..")
+use_billboard_sprite = true
+sprite_texture = ExtResource("4_huhxd")
+sprite_label = "enemy skin"
+
+[node name="ModEye" parent="." instance=ExtResource("2_q48q2")]
+transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, 3.57832, 2.056, -4.432)
+interaction_name = "Eye"
+handler_node = NodePath("..")
+use_billboard_sprite = true
+sprite_texture = ExtResource("5_dxq0f")
+sprite_label = "enemy: Eye"
+
+[node name="ModScar" parent="." instance=ExtResource("2_q48q2")]
+transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, 2.66088, 2.056, -4.432)
+interaction_name = "Scar"
+handler_node = NodePath("..")
+use_billboard_sprite = true
+sprite_texture = ExtResource("6_3uym5")
+sprite_label = "enemy: Scar"
+
+[node name="ModTraps" parent="." instance=ExtResource("2_q48q2")]
+transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, -0.0908603, 2.06186, -4.43231)
+visible = false
+interaction_name = "Traps"
+handler_node = NodePath("..")
+use_billboard_sprite = true
+sprite_texture = ExtResource("8_n5xo8")
+sprite_label = "more traps"
+
+[node name="ModGhost" parent="." instance=ExtResource("2_q48q2")]
+transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, 1.73999, 2.056, -4.432)
+visible = false
+interaction_name = "Ghost"
+handler_node = NodePath("..")
+use_billboard_sprite = true
+sprite_texture = ExtResource("9_n162l")
+sprite_label = "enemy: Ghost"
+
+[node name="wall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 12, 5.5, 2, 0)
+collision_layer = 4
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="wall" groups=["wall"]]
+mesh = SubResource("BoxMesh_nh41j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall"]
+shape = SubResource("BoxShape3D_cjmea")
+
+[node name="wall2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 12, -5.5, 2, 0)
+collision_layer = 4
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="wall2" groups=["wall"]]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0.0018782616, 0, -0.00051865977)
+mesh = SubResource("BoxMesh_nh41j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall2"]
+shape = SubResource("BoxShape3D_cjmea")
+
+[node name="wall3" type="StaticBody3D" parent="."]
+transform = Transform3D(12, 0, 0, 0, 5, 0, 0, 0, 1, 0, 2, -5.5)
+collision_layer = 4
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="wall3" groups=["wall"]]
+mesh = SubResource("BoxMesh_ifo8a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall3"]
+shape = SubResource("BoxShape3D_cjmea")
+
+[node name="wall4" type="StaticBody3D" parent="."]
+transform = Transform3D(12, 0, 0, 0, 5, 0, 0, 0, 1, 0, 2, 5.5)
+collision_layer = 4
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="wall4" groups=["wall"]]
+mesh = SubResource("BoxMesh_nx5a4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall4"]
+shape = SubResource("BoxShape3D_cjmea")
+
+[node name="Player" parent="." instance=ExtResource("2_dpt77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5065038, 0.842357, 2.2984564)
+
+[node name="Item" parent="." instance=ExtResource("3_q48q2")]
+transform = Transform3D(0.6079164, -0.794001, 3.4706893e-08, 0, -4.37114e-08, -1, 0.794001, 0.6079164, -2.6572877e-08, 3.864653, 2, -0.50435305)
+item_texture = ExtResource("13_vmaj7")
+
+[node name="Item2" parent="." instance=ExtResource("3_q48q2")]
+transform = Transform3D(-0.9923903, -0.12313375, 5.3823435e-09, 3.5701825e-15, -4.3711402e-08, -1, 0.12313375, -0.9923903, 4.337877e-08, -0.25, 0.90849924, 4.5783906)
+item_texture = ExtResource("14_ovupc")
+
+[node name="Table" parent="." instance=ExtResource("8_vy737")]
+transform = Transform3D(2.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 2.36731, 0.5, -4.14495)
+
+[node name="box" parent="." instance=ExtResource("9_8lup6")]
+transform = Transform3D(0.6523895, 0, 0.7578838, 0, 1, 0, -0.7578838, 0, 0.6523895, 3.877, 1.019, -0.428)
+
+[node name="box3" parent="." instance=ExtResource("9_8lup6")]
+transform = Transform3D(-0.49803376, 0, 0.8671577, 0, 1, 0, -0.8671577, 0, -0.49803376, 4.179, 1.019, 1.011)
+
+[node name="box2" parent="." instance=ExtResource("9_8lup6")]
+transform = Transform3D(-0.65698063, 0, -0.75390744, 0, 1, 0, 0.75390744, 0, -0.65698063, -1.6419811, 1.0193117, -4.1332464)
+
+[node name="doors" parent="." instance=ExtResource("10_1u0l2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3, 1.5, -4.95)
+interaction_mode = 1
+target_scene_path = "res://chapter2/rooms/GlobalMain.tscn"
+TextNumber = "PLAY"
+
+[node name="doors2" parent="." instance=ExtResource("10_1u0l2")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.3, 1.5, 4.95)
+interaction_mode = 1
+target_scene_path = "res://choice/choice.tscn"
+TextNumber = "EXIT"
+
+[node name="board" parent="." instance=ExtResource("11_huhxd")]
+transform = Transform3D(-2.14569e-07, 0, 1, 0, 2, 0, -2, 0, -1.07284e-07, -4.99297, 2.23722, 1.62624)
+
+[node name="board2" parent="." instance=ExtResource("11_huhxd")]
+transform = Transform3D(-2.14569e-07, 0, 1, 0, 2, 0, -2, 0, -1.07284e-07, -4.99297, 1.88775, -1.21187)
+
+[node name="Modhard" parent="." instance=ExtResource("2_q48q2")]
+transform = Transform3D(7.54979e-08, 0, 1, 0, 1, 0, -1, 0, 7.54979e-08, 0.827, 2.056, -4.432)
+interaction_name = "hard"
+handler_node = NodePath("..")
+use_billboard_sprite = true
+sprite_texture = ExtResource("18_n5xo8")
+sprite_label = "hard mod"
+
+[node name="KillZona" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillZona"]
+shape = SubResource("BoxShape3D_n5xo8")
+debug_color = Color(0.99607843, 0, 0, 1)
+
+[node name="closet" parent="." instance=ExtResource("21_lf7vw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1.0000001, 0, 8.742278e-08, 0, -1, 4.2341905, 1.6, 3.993369)
+
+[node name="sheif" parent="." instance=ExtResource("22_c1l1x")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.25, 1.1, 3.993)
+
+[node name="sheif2" parent="." instance=ExtResource("22_c1l1x")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 1.1, 3.993)
+
+[node name="sheif3" parent="." instance=ExtResource("22_c1l1x")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.25, 1.1, 3.993)
+
+[connection signal="body_entered" from="KillZona" to="." method="_on_kill_zona_body_entered"]

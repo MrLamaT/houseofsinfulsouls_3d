@@ -1,0 +1,76 @@
+[gd_scene load_steps=15 format=3 uid="uid://cbu7r1vpww8t"]
+
+[ext_resource type="Texture2D" uid="uid://d4jcvbqka82dj" path="res://assets/textures/material4.png" id="1_up6ck"]
+[ext_resource type="Texture2D" uid="uid://ccfsckkqn7gie" path="res://assets/textures/material3.png" id="2_gklm4"]
+[ext_resource type="Texture2D" uid="uid://hrhwrthnmvs3" path="res://assets/textures/material5.png" id="3_0tqr7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_up6ck"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bg2ca"]
+albedo_texture = ExtResource("1_up6ck")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_qltq3"]
+material = SubResource("StandardMaterial3D_bg2ca")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gtxat"]
+albedo_texture = ExtResource("2_gklm4")
+
+[sub_resource type="QuadMesh" id="QuadMesh_utx2o"]
+material = SubResource("StandardMaterial3D_gtxat")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dfejq"]
+albedo_texture = ExtResource("2_gklm4")
+
+[sub_resource type="QuadMesh" id="QuadMesh_o6miq"]
+material = SubResource("StandardMaterial3D_dfejq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ri3em"]
+albedo_texture = ExtResource("3_0tqr7")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_7tdap"]
+material = SubResource("StandardMaterial3D_ri3em")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s3a5s"]
+albedo_texture = ExtResource("2_gklm4")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ytiye"]
+material = SubResource("StandardMaterial3D_s3a5s")
+
+[node name="box" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 7
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+contact_monitor = true
+max_contacts_reported = 10
+linear_damp = 1.0
+angular_damp = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_up6ck")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+mesh = SubResource("QuadMesh_qltq3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -0.5)
+mesh = SubResource("QuadMesh_qltq3")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.5, 0, 0)
+mesh = SubResource("QuadMesh_utx2o")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -0.5, 0, 0)
+mesh = SubResource("QuadMesh_o6miq")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.5, 0)
+mesh = SubResource("QuadMesh_7tdap")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.5, 0)
+mesh = SubResource("QuadMesh_ytiye")

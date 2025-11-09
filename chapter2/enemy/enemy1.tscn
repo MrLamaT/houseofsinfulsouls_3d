@@ -1,0 +1,105 @@
+[gd_scene load_steps=10 format=3 uid="uid://epl1yj604jor"]
+
+[ext_resource type="Script" uid="uid://dg74vvvcsgyw6" path="res://chapter2/enemy/enemy_1.gd" id="1_se8os"]
+[ext_resource type="Texture2D" uid="uid://d38ppj1yfsmhj" path="res://chapter2/assets/enemy/new/Scar/scar4.png" id="2_upn35"]
+[ext_resource type="FontFile" uid="uid://vpmakd0urni6" path="res://Undertale-Battle-Font.ttf-5b3f8609511f8e0c8fc5e3287eaa9635.fontdata" id="3_0mjta"]
+[ext_resource type="Texture2D" uid="uid://cl6ibqqmflyu2" path="res://chapter2/assets/enemy/new/Scar/scar5.png" id="3_2d7oq"]
+[ext_resource type="Texture2D" uid="uid://dtm571iybsx2a" path="res://chapter2/assets/enemy/new/Scar/scar2.png" id="3_7xldo"]
+[ext_resource type="Texture2D" uid="uid://bybgk3oixub2" path="res://chapter2/assets/enemy/new/Scar/scar3.png" id="4_smhvd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_se8os"]
+radius = 0.4
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_upn35"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_upn35")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2d7oq")
+}],
+"loop": true,
+"name": &"idle_back",
+"speed": 2.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_7xldo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_smhvd")
+}],
+"loop": true,
+"name": &"idle_front",
+"speed": 2.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_upn35")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2d7oq")
+}],
+"loop": true,
+"name": &"walk_back",
+"speed": 2.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_7xldo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_smhvd")
+}],
+"loop": true,
+"name": &"walk_front",
+"speed": 2.5
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0mjta"]
+size = Vector3(10, 1, 10)
+
+[node name="Enemy1" type="CharacterBody3D" groups=["enemy1"]]
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_se8os")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_se8os")
+debug_color = Color(0, 0.59607846, 0.7019608, 1)
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, -0.033, 0)
+billboard = 2
+shaded = true
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_upn35")
+animation = &"walk_front"
+
+[node name="VisionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.253056)
+shape = SubResource("BoxShape3D_0mjta")
+
+[node name="CollisionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionArea"]
+shape = SubResource("CapsuleShape3D_se8os")
+debug_color = Color(0, 0.59607846, 0.7019608, 1)
+
+[node name="StateLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2153388, 0)
+visible = false
+billboard = 2
+texture_filter = 0
+font = ExtResource("3_0mjta")
+
+[node name="ResurrectionTimer" type="Timer" parent="."]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+navigation_layers = 7
+
+[connection signal="body_entered" from="VisionArea" to="." method="_on_vision_area_body_entered"]
+[connection signal="body_exited" from="VisionArea" to="." method="_on_vision_area_body_exited"]

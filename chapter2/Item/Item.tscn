@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1awuh7hobog0"]
+
+[ext_resource type="Script" uid="uid://d0jw4oaxfiey2" path="res://chapter2/Item/item.gd" id="1_0mlum"]
+[ext_resource type="AudioStream" uid="uid://cxirtiw7s35mp" path="res://assets/droop.mp3" id="3_tyht3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oabn4"]
+size = Vector3(1, 0.25, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tyht3"]
+albedo_color = Color(1, 0.933333, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_oabn4"]
+material = SubResource("StandardMaterial3D_tyht3")
+size = Vector3(0.25, 0.25, 0.25)
+
+[node name="Item" type="RigidBody3D" groups=["interactive_objects", "item"]]
+collision_layer = 2
+collision_mask = 7
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+contact_monitor = true
+max_contacts_reported = 10
+linear_damp = 1.0
+angular_damp = 1.0
+script = ExtResource("1_0mlum")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_oabn4")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_tyht3")
+volume_db = -25.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.6367873, 0.00030149103, 0.63678306, 1)
+light_indirect_energy = 2.5
+light_size = 1.0
+omni_range = 0.25
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_oabn4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://66f66cwy6tfc"]
+
+[ext_resource type="PackedScene" uid="uid://cdrhd5io8vjva" path="res://chapter2/hide/invisible_trigger.tscn" id="2_n615g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7w8tc"]
+albedo_color = Color(0.43, 0.32909334, 0.24080001, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vy737"]
+material = SubResource("StandardMaterial3D_7w8tc")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cjmea"]
+
+[node name="Table" type="Node3D"]
+
+[node name="StaticBody" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -2, 0, 0.25, 0, 1, 0, -8.74228e-08, 0, 1, 0)
+collision_layer = 4
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody"]
+mesh = SubResource("BoxMesh_vy737")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody"]
+shape = SubResource("BoxShape3D_cjmea")
+
+[node name="StaticBody2" type="StaticBody3D" parent="."]
+transform = Transform3D(-8.74228e-09, 0, -0.2, 0, 1, 0, 0.2, 0, -8.74228e-09, 0.85, 0.5, 0.35)
+collision_layer = 0
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody2"]
+mesh = SubResource("BoxMesh_vy737")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody2"]
+shape = SubResource("BoxShape3D_cjmea")
+
+[node name="StaticBody5" type="StaticBody3D" parent="."]
+transform = Transform3D(-8.74228e-09, 0, -0.2, 0, 1, 0, 0.2, 0, -8.74228e-09, -0.85, 0.5, 0.35)
+collision_layer = 0
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody5"]
+mesh = SubResource("BoxMesh_vy737")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody5"]
+shape = SubResource("BoxShape3D_cjmea")
+
+[node name="StaticBody3" type="StaticBody3D" parent="."]
+transform = Transform3D(-8.74228e-09, 0, -0.2, 0, 1, 0, 0.2, 0, -8.74228e-09, 0.85, 0.5, -0.35)
+collision_layer = 0
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3"]
+mesh = SubResource("BoxMesh_vy737")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3"]
+shape = SubResource("BoxShape3D_cjmea")
+
+[node name="StaticBody4" type="StaticBody3D" parent="."]
+transform = Transform3D(-8.74228e-09, 0, -0.2, 0, 1, 0, 0.2, 0, -8.74228e-09, -0.85, 0.5, -0.35)
+collision_layer = 0
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody4"]
+mesh = SubResource("BoxMesh_vy737")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody4"]
+shape = SubResource("BoxShape3D_cjmea")
+
+[node name="InvisibleTrigger" parent="." instance=ExtResource("2_n615g")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

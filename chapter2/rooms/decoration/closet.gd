@@ -1,0 +1,37 @@
+extends Area3D
+
+@onready var D1 = $D1
+@onready var D1Body1 = $D1/StaticBody3D/Door1
+@onready var D1Body2 = $D1/StaticBody3D/Door2
+@onready var D1BodyCollision = $D1/StaticBody3D/CollisionShape3D
+@onready var invisible_trigger = get_node_or_null("InvisibleTrigger")
+@onready var audio_player = $AudioStreamPlayer
+var open = false
+
+func trigger_interaction():
+	D1BodyCollision.disabled = true
+	D1.disabled = true
+	audio_player.pitch_scale = randf_range(0.9, 1.1)
+	audio_player.volume_db = randf_range(-3.0, 0.0)
+	audio_player.play()
+	if open:
+		$AnimationPlayer.play("close")
+		if invisible_trigger:
+			invisible_trigger.collision_mask = 1
+	else:
+		$AnimationPlayer.play("open")
+		if invisible_trigger:
+			invisible_trigger.collision_mask = 0
+	open = !open
+
+func _on_mouse_entered() -> void:
+	$D1/DoorE.visible = true
+	$D1/DoorE2.visible = true
+
+func _on_mouse_exited() -> void:
+	$D1/DoorE.visible = false
+	$D1/DoorE2.visible = false
+
+func _on_animation_player_animation_finished(_anim_name: String) -> void:
+	D1BodyCollision.disabled = false
+	D1.disabled = false
