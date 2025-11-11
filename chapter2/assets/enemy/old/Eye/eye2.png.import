@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vp4n2vf5tlhv"
-path="res://.godot/imported/spider_traps.png-cdc8789555386146354997178caf932c.ctex"
+uid="uid://ly7qdswdesvo"
+path="res://.godot/imported/eye2.png-414897ee3930ef494d0fd102f01d2759.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://chapter2/assets/enemy/SpiderTraps/spider_traps.png"
-dest_files=["res://.godot/imported/spider_traps.png-cdc8789555386146354997178caf932c.ctex"]
+source_file="res://chapter2/assets/enemy/old/Eye/eye2.png"
+dest_files=["res://.godot/imported/eye2.png-414897ee3930ef494d0fd102f01d2759.ctex"]
 
 [params]
 
@@ -37,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

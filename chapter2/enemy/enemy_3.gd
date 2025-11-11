@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var spawn_chance: float = 0.5 
+@export var item_preset: int = 0
 @onready var vision_area: Area3D = $VisionArea
 @onready var sprite_3d: AnimatedSprite3D = $AnimatedSprite3D
 
@@ -12,11 +12,9 @@ var fade_out_speed: float = 2.0
 var is_fading: bool = false
 
 func _ready():
-	# Проверяем шанс появления
-	if randf() > spawn_chance:
+	if item_preset != 0 and item_preset != Global.game_settings["preset"]:
 		queue_free()
 		return
-	
 	# Инициализация
 	sprite_3d.play("idle")
 	
@@ -33,17 +31,13 @@ func _physics_process(delta):
 func attack_player():
 	if has_attacked:
 		return
-	
 	has_attacked = true
-	
 	# Меняем анимацию на атаку
 	sprite_3d.play("attack")
-	
 	# Заставляем игрока посмотреть на врага
 	if player and player.has_method("look_at_point"):
 		player.look_at_point(global_position)
 		player.screem()
-	
 	# Начинаем исчезновение через небольшую задержку
 	await get_tree().create_timer(0.5).timeout
 	is_fading = true

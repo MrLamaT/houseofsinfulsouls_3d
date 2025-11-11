@@ -8,6 +8,7 @@ extends Area3D
 @export var is_exclusive_to_enemy: bool = false 
 @export var need_key: bool = false 
 @export var keyD: String = "vase" 
+@export var enemy_open_delay: float = 1.0
 var open = false
 
 func _ready() -> void:

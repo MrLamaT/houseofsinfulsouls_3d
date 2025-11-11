@@ -152,10 +152,12 @@ func respawn_player():
 	$AnimationPlayer.play("TimeHP")
 	$tick.play()
 	if Global.game_settings["HP"] <= 0:
+		Global.game_settings["ModHard"] = false
 		await get_tree().create_timer(1).timeout
 		get_tree().change_scene_to_file("res://chapter2/rooms/main.tscn")
 		return
 	await get_tree().create_timer(3.0).timeout
+	global_position = Vector3(2.599, 0.656, 2.599)
 	$tick.stop()
 	$head/Camera3D/Time.visible = false
 	$head/Camera3D/TimeLabel.visible = false

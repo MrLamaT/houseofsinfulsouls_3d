@@ -2,8 +2,11 @@ extends CharacterBody3D
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var vision_area: Area3D = $VisionArea
-@onready var sprite_3d: AnimatedSprite3D = $AnimatedSprite3D
 @onready var state_label: Label3D = $StateLabel
+
+var sprite_3d_old: AnimatedSprite3D
+var sprite_3d_new: AnimatedSprite3D
+var sprite_3d: AnimatedSprite3D
 
 var current_target: Node3D = null
 var player: Node3D = null
@@ -30,13 +33,29 @@ func _ready():
 		print("eye delet")
 		queue_free()
 		return
-	if Global.game_settings["ModHard"]:
-		SPEED = 5
+	initialize_sprites()
 	print("eye speed: ", SPEED)
 	find_target()
 	update_state_label("Patrolling")
 	previous_position = global_position
 	sprite_3d.play("idle_front")
+
+func initialize_sprites():
+	sprite_3d_old = get_node_or_null("AnimatedSprite3D_old")
+	sprite_3d_new = get_node_or_null("AnimatedSprite3D_new")
+	if Global.game_settings["ModSkin"]:
+		sprite_3d = sprite_3d_old
+		if sprite_3d_new:
+			sprite_3d_new.queue_free()
+			sprite_3d_new = null
+	else:
+		sprite_3d = sprite_3d_new
+		if sprite_3d_old:
+			sprite_3d_old.queue_free()
+			sprite_3d_old = null
+	if not sprite_3d:
+		push_error("No valid sprite found for eye enemy!")
+		queue_free()
 
 func _physics_process(delta):
 	if not current_target:

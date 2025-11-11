@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dvyormlmcnr8r"]
+[gd_scene load_steps=35 format=3 uid="uid://dvyormlmcnr8r"]
 
 [ext_resource type="Script" uid="uid://cu01v74yppo1" path="res://chapter2/rooms/main.gd" id="1_rukgg"]
 [ext_resource type="Texture2D" uid="uid://bd832m7qavblv" path="res://assets/textures/material1.png" id="2_4kqoq"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://de3t47m5nbmbp" path="res://chapter2/assets/ModIcon/Mod6_0.png" id="8_n5xo8"]
 [ext_resource type="PackedScene" uid="uid://66f66cwy6tfc" path="res://chapter2/rooms/decoration/table.tscn" id="8_vy737"]
 [ext_resource type="PackedScene" uid="uid://cbu7r1vpww8t" path="res://chapter2/rooms/decoration/box.tscn" id="9_8lup6"]
-[ext_resource type="Texture2D" uid="uid://cp6ixvtetfy75" path="res://chapter2/assets/ModIcon/Mod4_0.png" id="9_n162l"]
 [ext_resource type="PackedScene" uid="uid://b3em3wop4li52" path="res://chapter2/doors/doors.tscn" id="10_1u0l2"]
 [ext_resource type="PackedScene" uid="uid://iuthusc4lu48" path="res://chapter2/rooms/decoration/board.tscn" id="11_huhxd"]
 [ext_resource type="Texture2D" uid="uid://cf1rnp7rtkfdx" path="res://chapter2/assets/items/vase.png" id="13_vmaj7"]
@@ -106,7 +105,6 @@ shape = SubResource("BoxShape3D_neroa")
 
 [node name="ModSkin" parent="." instance=ExtResource("2_q48q2")]
 transform = Transform3D(7.54979e-08, 0, 1, 0, 1, 0, -1, 0, 7.54979e-08, 4.5, 2.056, -4.432)
-visible = false
 interaction_name = "skin"
 handler_node = NodePath("..")
 use_billboard_sprite = true
@@ -130,22 +128,12 @@ sprite_texture = ExtResource("6_3uym5")
 sprite_label = "enemy: Scar"
 
 [node name="ModTraps" parent="." instance=ExtResource("2_q48q2")]
-transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, -0.0908603, 2.06186, -4.43231)
-visible = false
+transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, 1.74, 2.062, -4.432)
 interaction_name = "Traps"
 handler_node = NodePath("..")
 use_billboard_sprite = true
 sprite_texture = ExtResource("8_n5xo8")
 sprite_label = "more traps"
-
-[node name="ModGhost" parent="." instance=ExtResource("2_q48q2")]
-transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, 1.73999, 2.056, -4.432)
-visible = false
-interaction_name = "Ghost"
-handler_node = NodePath("..")
-use_billboard_sprite = true
-sprite_texture = ExtResource("9_n162l")
-sprite_label = "enemy: Ghost"
 
 [node name="wall" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 12, 5.5, 2, 0)

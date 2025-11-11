@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dlc4ndjbvvxsi"]
+[gd_scene load_steps=15 format=3 uid="uid://dlc4ndjbvvxsi"]
 
 [ext_resource type="Script" uid="uid://bn1b15k03rhox" path="res://chapter2/enemy/enemy_2.gd" id="1_isa7v"]
 [ext_resource type="Texture2D" uid="uid://dcxerpj5evaat" path="res://chapter2/assets/enemy/new/Eye/eye4.png" id="2_1oeyt"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://sh0eg5s772cb" path="res://chapter2/assets/enemy/new/Eye/eye2.png" id="4_1oeyt"]
 [ext_resource type="FontFile" uid="uid://vpmakd0urni6" path="res://Undertale-Battle-Font.ttf-5b3f8609511f8e0c8fc5e3287eaa9635.fontdata" id="4_jyd1i"]
 [ext_resource type="Texture2D" uid="uid://b3vwe8odiu71w" path="res://chapter2/assets/enemy/new/Eye/eye3.png" id="5_jyd1i"]
+[ext_resource type="Texture2D" uid="uid://dsav8ds6tntd6" path="res://chapter2/assets/enemy/old/Eye/eye4.png" id="6_bfwgx"]
+[ext_resource type="Texture2D" uid="uid://clw5sc4ronk2o" path="res://chapter2/assets/enemy/old/Eye/eye5.png" id="7_f274j"]
+[ext_resource type="Texture2D" uid="uid://ly7qdswdesvo" path="res://chapter2/assets/enemy/old/Eye/eye2.png" id="8_ypvhf"]
+[ext_resource type="Texture2D" uid="uid://b85xhy300yoly" path="res://chapter2/assets/enemy/old/Eye/eye3.png" id="9_wxjfw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_se8os"]
 radius = 0.4
@@ -57,6 +61,53 @@ animations = [{
 "speed": 2.5
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_jkcik"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_bfwgx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_f274j")
+}],
+"loop": true,
+"name": &"idle_back",
+"speed": 2.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ypvhf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wxjfw")
+}],
+"loop": true,
+"name": &"idle_front",
+"speed": 2.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_bfwgx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_f274j")
+}],
+"loop": true,
+"name": &"walk_back",
+"speed": 2.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ypvhf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wxjfw")
+}],
+"loop": true,
+"name": &"walk_front",
+"speed": 2.5
+}]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_0mjta"]
 size = Vector3(10, 1, 10)
 
@@ -69,12 +120,20 @@ script = ExtResource("1_isa7v")
 shape = SubResource("CapsuleShape3D_se8os")
 debug_color = Color(0, 0.59607846, 0.7019608, 1)
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+[node name="AnimatedSprite3D_new" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, -0.033, 0)
 billboard = 2
 shaded = true
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_r4j1k")
+animation = &"idle_back"
+
+[node name="AnimatedSprite3D_old" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, -0.033, 0)
+billboard = 2
+shaded = true
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_jkcik")
 animation = &"idle_back"
 
 [node name="VisionArea" type="Area3D" parent="."]

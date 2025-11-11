@@ -4,8 +4,6 @@ var game_settings: Dictionary = {
 	"ModSkin": false,
 	"ModEye": false,
 	"ModScar": false,
-	"ModGhost": false,
-	"ModGhostEye": false,
 	"ModTraps": false,
 	"ModHard": false,
 	"gui_settings": {

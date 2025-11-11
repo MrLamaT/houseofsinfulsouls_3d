@@ -232,6 +232,10 @@ UI_fullscreen={
 3d_physics/layer_6="floor"
 3d_navigation/layer_6="floor"
 
+[navigation]
+
+3d/default_cell_size=0.05
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
