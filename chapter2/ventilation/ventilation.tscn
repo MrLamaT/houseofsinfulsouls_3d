@@ -7,20 +7,20 @@
 [ext_resource type="FontFile" uid="uid://vpmakd0urni6" path="res://Undertale-Battle-Font.ttf-5b3f8609511f8e0c8fc5e3287eaa9635.fontdata" id="4_83n5t"]
 [ext_resource type="AudioStream" uid="uid://dwsj25qedus5j" path="res://assets/venti.mp3" id="4_rqoej"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fp0bw"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83n5t"]
 albedo_texture = ExtResource("2_83n5t")
 texture_filter = 0
 
 [sub_resource type="QuadMesh" id="QuadMesh_g543t"]
-material = SubResource("StandardMaterial3D_fp0bw")
+material = SubResource("StandardMaterial3D_83n5t")
 size = Vector2(0.5, 0.5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83n5t"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bwexu"]
 albedo_texture = ExtResource("3_biire")
 texture_filter = 0
 
 [sub_resource type="QuadMesh" id="QuadMesh_bwexu"]
-material = SubResource("StandardMaterial3D_83n5t")
+material = SubResource("StandardMaterial3D_bwexu")
 size = Vector2(0.5, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqoej"]
@@ -50,7 +50,7 @@ size = Vector3(1, 1, 0.1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_83n5t"]
 size = Vector3(1, 1, 0.25)
 
-[node name="ventilation" type="Area3D" groups=["interactive_objects"]]
+[node name="ventilation" type="Area3D" groups=["interactive_objects", "progressive_interactive"]]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_biire")

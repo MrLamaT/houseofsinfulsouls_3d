@@ -69,3 +69,4 @@ shape = SubResource("BoxShape3D_cjmea")
 
 [node name="InvisibleTrigger" parent="." instance=ExtResource("2_n615g")]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+can_stand_up = false

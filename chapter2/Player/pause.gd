@@ -1,5 +1,7 @@
 extends Panel
 
+var player: CharacterBody3D
+
 func toggle_setting(setting_key: String, display_text: String, button_node: Node) -> void:
 	# Переключаем настройку
 	Global.game_settings["gui_settings"][setting_key] = !Global.game_settings["gui_settings"][setting_key]
@@ -19,3 +21,8 @@ func _on_button_timer_pressed() -> void:
 func _on_button_fps_pressed() -> void:
 	toggle_setting("fps", "FPS", $LabelButton)
 	$AudioStreamPlayer.play()
+
+func _on_button_main_pressed() -> void:
+	if Global.game_settings["HP"] <= 5:
+		player = get_tree().get_first_node_in_group("player")
+		player.PlayerDeath(-10)

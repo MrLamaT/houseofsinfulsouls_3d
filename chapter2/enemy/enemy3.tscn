@@ -30,7 +30,7 @@ animations = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_0mjta"]
 size = Vector3(10, 1, 10)
 
-[node name="Enemy3" type="CharacterBody3D" groups=["enemy2"]]
+[node name="Enemy3" type="CharacterBody3D"]
 collision_layer = 16
 collision_mask = 5
 script = ExtResource("1_7a48c")

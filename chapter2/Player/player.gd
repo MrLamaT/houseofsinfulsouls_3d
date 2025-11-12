@@ -2,6 +2,9 @@ extends CharacterBody3D
  
 @onready var head = $head
 @onready var cam = $head/Camera3D
+@onready var stamina_bar = $head/Camera3D/staminaProgressBar
+@onready var time_label = $head/Camera3D/TimeLabel
+@onready var blood_overlay = $head/Camera3D/blood1
 @onready var footstep_player = $FootstepPlayer
 @onready var crosshair = $head/Camera3D/crosshair
 @onready var hand_sprite = $head/Camera3D/hand_position/Sprite3D
@@ -87,7 +90,7 @@ func _ready():
 	Global.game_settings["GodMod"] = false
 	base_camera_position = cam.position
 	update_stamina_display()
-	$head/Camera3D/staminaProgressBar.visible = false  
+	stamina_bar.visible = false  
 	$open.play()
 	if Global.game_settings["ModHard"]:
 		DarkHardMod(true)
@@ -133,34 +136,35 @@ func respawn_player():
 	update_running_speed()
 	update_stamina_display()
 	$head/Camera3D/Time.visible = true
-	$head/Camera3D/TimeLabel.visible = true
-	$head/Camera3D/blood1.visible = false
+	time_label.visible = true
+	blood_overlay.visible = false
 	if Global.game_settings["HP"] == 4:
-		$head/Camera3D/TimeLabel.text = "01:30"
+		time_label.text = "01:30"
 	elif Global.game_settings["HP"] == 3:
-		$head/Camera3D/TimeLabel.text = "02:00"
+		time_label.text = "02:00"
 		SPEED = 4.0
 	elif Global.game_settings["HP"] == 2:
-		$head/Camera3D/TimeLabel.text = "03:30"
+		time_label.text = "03:30"
 		$head/Camera3D/blood2.visible = true
 	elif Global.game_settings["HP"] == 1:
-		$head/Camera3D/TimeLabel.text = "05:00\nlast try"
+		time_label.text = "05:00\nlast try"
 		SPEED = 3.0
 	elif Global.game_settings["HP"] <= 0:
-		$head/Camera3D/TimeLabel.text = "06:00\nYou died..."
+		time_label.text = "06:00\nYou died..."
 	update_running_speed()
 	$AnimationPlayer.play("TimeHP")
 	$tick.play()
 	if Global.game_settings["HP"] <= 0:
 		Global.game_settings["ModHard"] = false
-		await get_tree().create_timer(1).timeout
+		if Global.game_settings["HP"] == 0:
+			await get_tree().create_timer(1).timeout
 		get_tree().change_scene_to_file("res://chapter2/rooms/main.tscn")
 		return
 	await get_tree().create_timer(3.0).timeout
 	global_position = Vector3(2.599, 0.656, 2.599)
 	$tick.stop()
 	$head/Camera3D/Time.visible = false
-	$head/Camera3D/TimeLabel.visible = false
+	time_label.visible = false
 	movement_enabled = true
 
 func throw_camera_out():
@@ -198,8 +202,8 @@ func set_movement_enabled(enabled: bool):
 		velocity.z = 0
 
 func show_blood_overlay():
-	$head/Camera3D/blood1.modulate = Color(1.0, 1.0, 1.0, 1.0)
-	$head/Camera3D/blood1.visible = true
+	blood_overlay.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	blood_overlay.visible = true
 
 func play_blood_animation():
 	$AnimationPlayer.play("blood")
@@ -215,9 +219,10 @@ func toggle_pause():
 		update_gui_visibility()
 
 func update_gui_visibility():
-	$head/Camera3D/coordinates.visible = Global.game_settings["gui_settings"]["coordinates"]
-	$head/Camera3D/fps.visible = Global.game_settings["gui_settings"]["fps"]
-	SpreedrunMod(Global.game_settings["gui_settings"]["timer"])
+	var gui_settings = Global.game_settings["gui_settings"]
+	$head/Camera3D/coordinates.visible = gui_settings["coordinates"]
+	$head/Camera3D/fps.visible = gui_settings["fps"]
+	SpreedrunMod(gui_settings["timer"])
 
 func _input(event: InputEvent): #повороты мышкой
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -243,10 +248,11 @@ func _input(event: InputEvent): #повороты мышкой
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	if Input.is_action_just_pressed("+crouch"):
 		if crouched:
-			if not _is_obstacle_above():
+			if Global.game_settings["CanStandUp"]:
 				crouched = false
 		else:
 			crouched = !crouched  
+		update_running_speed()
 	if Input.is_action_just_pressed("+f1"):
 		cheat_f1 = true
 		cheat_check()
@@ -271,19 +277,11 @@ func _input(event: InputEvent): #повороты мышкой
 			Global.game_settings["Item"] = "shotgun"
 			drop_item()
 	if Input.is_action_just_pressed("+f6") and cheat_mod:
-		if Global.game_settings["Item"] == "":
-			Global.game_settings["Item"] = "scrap"
-			drop_item()
-	if Input.is_action_just_pressed("+f7") and cheat_mod:
 		Global.game_settings["GodMod"] = !Global.game_settings["GodMod"]
 		Global.game_settings["HidePlayer"] = Global.game_settings["GodMod"]
 		$head/Camera3D/IconGod.visible = Global.game_settings["GodMod"]
 
 func cheat_check():
-	if cheat_f1:
-		print("f1")
-	if cheat_f2:
-		print("f2")
 	if cheat_f1 and cheat_f2:
 		$head/Camera3D/cheat.visible = true
 		cheat_mod = true
@@ -331,7 +329,6 @@ func _update_stamina(delta):
 	update_stamina_display()
 
 func update_stamina_display():
-	var stamina_bar = $head/Camera3D/staminaProgressBar
 	stamina_bar.value = stamina
 	# Показываем полосу только когда стамина не полная или восстанавливается
 	if stamina < max_stamina or not can_regenerate:
@@ -492,17 +489,6 @@ func _physics_process(delta):
 		if is_running:
 			is_running = false
 			update_running_speed()
-	if crouched:
-		var is_under_obstacle_now = _is_obstacle_above()
-		
-		if was_under_obstacle and not is_under_obstacle_now:
-			crouched = false
-			was_under_obstacle = false
-			update_running_speed()
-		elif is_under_obstacle_now:
-			was_under_obstacle = true
-	else:
-		update_running_speed()
 	if is_on_floor() and input_dir.length() > 0:
 		if not is_walking:
 			is_walking = true
@@ -536,6 +522,11 @@ func _physics_process(delta):
 	
 	move_and_slide()
 
+func force_stand_up():
+	if crouched:
+		crouched = false
+		update_running_speed()
+
 func update_running_speed():
 	if is_running and stamina > 0:
 		SPEED = 8  # Скорость бега
@@ -543,22 +534,6 @@ func update_running_speed():
 	else:
 		SPEED = base_speed
 		footstep_delay = 0.5   # Обычная частота шагов
-
-func _is_obstacle_above() -> bool:
-	var space_state = get_world_3d().direct_space_state
-	
-	# Начинаем проверку от позиции коллайдера
-	var from = global_position + Vector3(0, $CollisionShape3D.position.y, 0)
-	# Конечная точка - на высоте стоячего положения
-	var to = from + Vector3(0, standing_collision_height - crouching_collision_height + 0.1, 0)
-	
-	var query = PhysicsRayQueryParameters3D.create(from, to)
-	query.exclude = [self]  # Исключаем самого игрока
-	query.collision_mask = 4  
-	query.collide_with_areas = false  # Проверяем только физические тела
-	
-	var result = space_state.intersect_ray(query)
-	return result != null and not result.is_empty()
 
 func _check_interactable():
 	var space_state = get_world_3d().direct_space_state

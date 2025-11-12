@@ -355,16 +355,13 @@ omni_range = 10.0
 [node name="Pause" type="Panel" parent="head/Camera3D"]
 visible = false
 z_index = 2
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -560.0
-offset_top = -148.0
-offset_right = -260.0
-offset_bottom = 152.0
-grow_horizontal = 2
+offset_left = 16.0
+offset_top = -200.0
+offset_right = 316.0
+offset_bottom = 200.0
 grow_vertical = 2
 pivot_offset = Vector2(250, 250)
 theme_override_styles/panel = SubResource("StyleBoxFlat_puud3")
@@ -400,6 +397,16 @@ offset_right = 38.0
 offset_bottom = 210.0
 scale = Vector2(30, 11)
 
+[node name="ButtonMain" type="Button" parent="head/Camera3D/Pause"]
+modulate = Color(1, 1, 1, 0)
+z_index = 4
+layout_mode = 0
+offset_left = 30.0
+offset_top = 298.0
+offset_right = 38.0
+offset_bottom = 306.0
+scale = Vector2(30, 11)
+
 [node name="LabelButton2" parent="head/Camera3D/Pause" instance=ExtResource("2_exxaw")]
 layout_mode = 0
 offset_left = 150.0
@@ -424,8 +431,28 @@ offset_right = 190.0
 offset_bottom = 248.0
 text = "FPS [OFF]"
 
+[node name="LabelButton4" parent="head/Camera3D/Pause" instance=ExtResource("2_exxaw")]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_left = 150.0
+offset_top = 343.0
+offset_right = 190.0
+offset_bottom = 343.0
+text = "Reset"
+direction_A_and_D = "A"
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="head/Camera3D/Pause"]
 stream = ExtResource("4_kd1ih")
+
+[node name="Label" type="Label" parent="head/Camera3D/Pause"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = -25.0
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("3_sfgwg")
+text = "Options"
 
 [node name="Time" type="ColorRect" parent="head/Camera3D"]
 visible = false
@@ -674,3 +701,4 @@ pitch_scale = 0.5
 [connection signal="pressed" from="head/Camera3D/Pause/ButtonCoords" to="head/Camera3D/Pause" method="_on_button_coords_pressed"]
 [connection signal="pressed" from="head/Camera3D/Pause/ButtonTimer" to="head/Camera3D/Pause" method="_on_button_timer_pressed"]
 [connection signal="pressed" from="head/Camera3D/Pause/ButtonFPS" to="head/Camera3D/Pause" method="_on_button_fps_pressed"]
+[connection signal="pressed" from="head/Camera3D/Pause/ButtonMain" to="head/Camera3D/Pause" method="_on_button_main_pressed"]

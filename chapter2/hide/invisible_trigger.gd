@@ -1,25 +1,29 @@
 extends Area3D
 
+@export var can_stand_up: bool = true 
+
 func _ready():
 	$MeshInstance3D.visible = false
 	visible = false
-	
 	monitoring = true
 	monitorable = false
 
 func _on_body_entered(body):
-	if body.is_in_group("player"):  # Убедитесь, что ваш игрок добавлен в группу "player"
+	if body.is_in_group("player"):  
 		Global.game_settings["HidePlayer"] = true
+		if not can_stand_up:
+			Global.game_settings["CanStandUp"] = false
 		print("HidePlayer установлен в true")
 
 func _on_body_exited(body):
 	if body.is_in_group("player"):
 		if !Global.game_settings["GodMod"]:
 			Global.game_settings["HidePlayer"] = false
+			Global.game_settings["CanStandUp"] = true
+			body.force_stand_up()
 			print("HidePlayer установлен в false")
 		else:
 			print("HidePlayer GodMode")
-
 
 func _on_mouse_entered() -> void:
 	pass # Replace with function body.

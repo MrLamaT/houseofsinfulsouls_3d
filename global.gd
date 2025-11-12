@@ -14,6 +14,7 @@ var game_settings: Dictionary = {
 	"password": "0000",
 	"preset": 1,
 	"HidePlayer": false,
+	"CanStandUp": true,
 	"GodMod": false,
 	"Item": "",
 	"HP": 6,
