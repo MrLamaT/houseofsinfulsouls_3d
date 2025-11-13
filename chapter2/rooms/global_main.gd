@@ -15,9 +15,18 @@ func handle_interaction(object_name: String):
 		"painting":
 			$NavigationRegion3D/PlayerRoom/board.queue_free()
 			$NavigationRegion3D/PlayerRoom/InteractableObject.queue_free()
-			$NavigationRegion3D/PlayerRoom/board3.visible = true
+			$Player.pick_up_item($NavigationRegion3D/PlayerRoom/Item1)
 		"painting2":
 			$NavigationRegion3D/Living/board5.queue_free()
 			$NavigationRegion3D/Living/InteractableObject.queue_free()
 			$Player.pick_up_item($NavigationRegion3D/Living/Item)
-			
+		"GIVEpainting":
+			if Global.game_settings["Item"] == "painting2":
+				$Player.clear_item()
+				$NavigationRegion3D/cabinet/board2.visible = true
+				$NavigationRegion3D/cabinet/InteractableObject2.queue_free()
+		"GIVEpainting2":
+			if Global.game_settings["Item"] == "painting":
+				$Player.clear_item()
+				$NavigationRegion3D/cabinet/board3.visible = true
+				$NavigationRegion3D/cabinet/InteractableObject.queue_free()

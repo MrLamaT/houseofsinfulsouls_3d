@@ -7,9 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bsbcsmkb4kgdi" path="res://chapter2/interactable_object/InteractableObject.tscn" id="2_q48q2"]
 [ext_resource type="PackedScene" uid="uid://c1awuh7hobog0" path="res://chapter2/Item/Item.tscn" id="3_q48q2"]
 [ext_resource type="Texture2D" uid="uid://2bbd2l04tmkp" path="res://assets/textures/material2.png" id="3_vy737"]
-[ext_resource type="Texture2D" uid="uid://cdl3v0e5o2pah" path="res://chapter2/assets/ModIcon/Mod1_0.png" id="4_huhxd"]
-[ext_resource type="Texture2D" uid="uid://b40wi2r6inny2" path="res://chapter2/assets/ModIcon/Mod2_0.png" id="5_dxq0f"]
-[ext_resource type="Texture2D" uid="uid://dbyhf7qkvjq2r" path="res://chapter2/assets/ModIcon/Mod3_0.png" id="6_3uym5"]
+[ext_resource type="Texture2D" uid="uid://cqb60o2hbtou4" path="res://chapter2/assets/ModIcon/Mod1_0.png" id="4_huhxd"]
+[ext_resource type="Texture2D" uid="uid://cou1a7vn4plk4" path="res://chapter2/assets/ModIcon/Mod3_0.png" id="6_3uym5"]
+[ext_resource type="Texture2D" uid="uid://vdygen704vkp" path="res://chapter2/assets/ModIcon/Mod2_0.png" id="6_lf7vw"]
 [ext_resource type="Texture2D" uid="uid://de3t47m5nbmbp" path="res://chapter2/assets/ModIcon/Mod6_0.png" id="8_n5xo8"]
 [ext_resource type="PackedScene" uid="uid://66f66cwy6tfc" path="res://chapter2/rooms/decoration/table.tscn" id="8_vy737"]
 [ext_resource type="PackedScene" uid="uid://cbu7r1vpww8t" path="res://chapter2/rooms/decoration/box.tscn" id="9_8lup6"]
@@ -116,7 +116,7 @@ transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, 3.57832,
 interaction_name = "Eye"
 handler_node = NodePath("..")
 use_billboard_sprite = true
-sprite_texture = ExtResource("5_dxq0f")
+sprite_texture = ExtResource("6_lf7vw")
 sprite_label = "enemy: Eye"
 
 [node name="ModScar" parent="." instance=ExtResource("2_q48q2")]

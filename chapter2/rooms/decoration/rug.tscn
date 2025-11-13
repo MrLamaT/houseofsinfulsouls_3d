@@ -34,8 +34,8 @@ shape = SubResource("BoxShape3D_ko8pt")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="."]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, -0.01, 0)
-collision_layer = 4
-collision_mask = 3
+collision_layer = 0
+collision_mask = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 0.25, 0, 1, 0, -4.371139e-08, 0, 0, 0)

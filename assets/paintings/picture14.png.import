@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cp6ixvtetfy75"
-path="res://.godot/imported/Mod4_0.png-fe8fc38a5e351cd6f204c57cdb718389.ctex"
+uid="uid://brqmbrrdbg65d"
+path="res://.godot/imported/picture14.png-477a34ad105ed09f5d649dbbd2debd45.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://chapter2/assets/ModIcon/Mod4_0.png"
-dest_files=["res://.godot/imported/Mod4_0.png-fe8fc38a5e351cd6f204c57cdb718389.ctex"]
+source_file="res://assets/paintings/picture14.png"
+dest_files=["res://.godot/imported/picture14.png-477a34ad105ed09f5d649dbbd2debd45.ctex"]
 
 [params]
 

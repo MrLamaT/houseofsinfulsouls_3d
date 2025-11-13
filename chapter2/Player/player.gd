@@ -115,6 +115,7 @@ func PlayerDeath(Hp):
 		throw_camera_out()
 		drop_item()
 		movement_enabled = false
+		is_running = false
 		await get_tree().create_timer(2.5).timeout
 	respawn_player()
 
@@ -451,6 +452,10 @@ func drop_item():
 	hand_sprite.texture = null
 	$head/Camera3D/shoot.visible = false
 	$head/Camera3D/shoot2.visible = false
+
+func clear_item():
+	Global.game_settings["Item"] = ""
+	hand_sprite.texture = null
 
 func handle_item_pickup(item_name: String):
 	match item_name:

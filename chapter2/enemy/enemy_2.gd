@@ -29,12 +29,12 @@ var previous_position: Vector3
 var movement_direction: Vector3
 
 func _ready():
-	if !Global.game_settings["ModEye"]:
-		print("eye delet")
+	if !Global.game_settings["ModScar"]:
+		print("scar delet")
 		queue_free()
 		return
 	initialize_sprites()
-	print("eye speed: ", SPEED)
+	print("scar speed: ", SPEED)
 	find_target()
 	update_state_label("Patrolling")
 	previous_position = global_position

@@ -1,27 +1,27 @@
 [gd_scene load_steps=15 format=3 uid="uid://epl1yj604jor"]
 
 [ext_resource type="Script" uid="uid://dg74vvvcsgyw6" path="res://chapter2/enemy/enemy_1.gd" id="1_se8os"]
-[ext_resource type="Texture2D" uid="uid://d38ppj1yfsmhj" path="res://chapter2/assets/enemy/new/Scar/scar4.png" id="2_upn35"]
+[ext_resource type="Texture2D" uid="uid://dcxerpj5evaat" path="res://chapter2/assets/enemy/new/Eye/eye4.png" id="2_gbrfq"]
 [ext_resource type="FontFile" uid="uid://vpmakd0urni6" path="res://Undertale-Battle-Font.ttf-5b3f8609511f8e0c8fc5e3287eaa9635.fontdata" id="3_0mjta"]
-[ext_resource type="Texture2D" uid="uid://cl6ibqqmflyu2" path="res://chapter2/assets/enemy/new/Scar/scar5.png" id="3_2d7oq"]
-[ext_resource type="Texture2D" uid="uid://dtm571iybsx2a" path="res://chapter2/assets/enemy/new/Scar/scar2.png" id="3_7xldo"]
-[ext_resource type="Texture2D" uid="uid://bybgk3oixub2" path="res://chapter2/assets/enemy/new/Scar/scar3.png" id="4_smhvd"]
-[ext_resource type="Texture2D" uid="uid://2aox5pbdefrh" path="res://chapter2/assets/enemy/old/Scar/scar4.png" id="6_gbrfq"]
-[ext_resource type="Texture2D" uid="uid://cfd17l5hphps2" path="res://chapter2/assets/enemy/old/Scar/scar5.png" id="7_f4a0o"]
-[ext_resource type="Texture2D" uid="uid://ces3n1kkabc60" path="res://chapter2/assets/enemy/old/Scar/scar2.png" id="8_qlu23"]
-[ext_resource type="Texture2D" uid="uid://dtbpuics51xvl" path="res://chapter2/assets/enemy/old/Scar/scar3.png" id="9_xai3o"]
+[ext_resource type="Texture2D" uid="uid://6e00jekpy53l" path="res://chapter2/assets/enemy/new/Eye/eye5.png" id="3_f4a0o"]
+[ext_resource type="Texture2D" uid="uid://sh0eg5s772cb" path="res://chapter2/assets/enemy/new/Eye/eye2.png" id="4_qlu23"]
+[ext_resource type="Texture2D" uid="uid://b3vwe8odiu71w" path="res://chapter2/assets/enemy/new/Eye/eye3.png" id="5_xai3o"]
+[ext_resource type="Texture2D" uid="uid://dsav8ds6tntd6" path="res://chapter2/assets/enemy/old/Eye/eye4.png" id="6_kkywk"]
+[ext_resource type="Texture2D" uid="uid://clw5sc4ronk2o" path="res://chapter2/assets/enemy/old/Eye/eye5.png" id="7_jrc55"]
+[ext_resource type="Texture2D" uid="uid://ly7qdswdesvo" path="res://chapter2/assets/enemy/old/Eye/eye2.png" id="8_172hk"]
+[ext_resource type="Texture2D" uid="uid://b85xhy300yoly" path="res://chapter2/assets/enemy/old/Eye/eye3.png" id="9_neorp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_se8os"]
 radius = 0.4
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_upn35"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ndl0m"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_upn35")
+"texture": ExtResource("2_gbrfq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_2d7oq")
+"texture": ExtResource("3_f4a0o")
 }],
 "loop": true,
 "name": &"idle_back",
@@ -29,10 +29,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_7xldo")
+"texture": ExtResource("4_qlu23")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_smhvd")
+"texture": ExtResource("5_xai3o")
 }],
 "loop": true,
 "name": &"idle_front",
@@ -40,10 +40,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_upn35")
+"texture": ExtResource("2_gbrfq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_2d7oq")
+"texture": ExtResource("3_f4a0o")
 }],
 "loop": true,
 "name": &"walk_back",
@@ -51,24 +51,24 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_7xldo")
+"texture": ExtResource("4_qlu23")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_smhvd")
+"texture": ExtResource("5_xai3o")
 }],
 "loop": true,
 "name": &"walk_front",
 "speed": 2.5
 }]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_kkywk"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_oq3ji"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_gbrfq")
+"texture": ExtResource("6_kkywk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_f4a0o")
+"texture": ExtResource("7_jrc55")
 }],
 "loop": true,
 "name": &"idle_back",
@@ -76,10 +76,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("8_qlu23")
+"texture": ExtResource("8_172hk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_xai3o")
+"texture": ExtResource("9_neorp")
 }],
 "loop": true,
 "name": &"idle_front",
@@ -87,10 +87,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_gbrfq")
+"texture": ExtResource("6_kkywk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_f4a0o")
+"texture": ExtResource("7_jrc55")
 }],
 "loop": true,
 "name": &"walk_back",
@@ -98,10 +98,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("8_qlu23")
+"texture": ExtResource("8_172hk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_xai3o")
+"texture": ExtResource("9_neorp")
 }],
 "loop": true,
 "name": &"walk_front",
@@ -120,20 +120,20 @@ script = ExtResource("1_se8os")
 shape = SubResource("CapsuleShape3D_se8os")
 debug_color = Color(0, 0.59607846, 0.7019608, 1)
 
-[node name="AnimatedSprite3D_new" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, -0.033, 0)
-billboard = 2
-shaded = true
-texture_filter = 0
-sprite_frames = SubResource("SpriteFrames_upn35")
-animation = &"walk_front"
-
 [node name="AnimatedSprite3D_old" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, -0.033, 0)
 billboard = 2
 shaded = true
 texture_filter = 0
-sprite_frames = SubResource("SpriteFrames_kkywk")
+sprite_frames = SubResource("SpriteFrames_ndl0m")
+animation = &"idle_back"
+
+[node name="AnimatedSprite3D_new" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, -0.033, 0)
+billboard = 2
+shaded = true
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_oq3ji")
 animation = &"walk_front"
 
 [node name="VisionArea" type="Area3D" parent="."]
