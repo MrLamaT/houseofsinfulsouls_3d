@@ -23,7 +23,7 @@ var player_hide_timeout: float = 3.0
 var was_player_hidden: bool = false
 
 # Дистанция атаки
-var ATTACK_DISTANCE: float = 2.0  # Увеличьте это значение для большей дистанции атаки
+var ATTACK_DISTANCE: float = 2.0 
 
 var previous_position: Vector3
 var movement_direction: Vector3
@@ -62,35 +62,26 @@ func initialize_sprites():
 func _physics_process(delta):
 	if not current_target:
 		return
-	# Обновляем путь к цели
 	navigation_agent.target_position = current_target.global_position
-	# Проверяем возможность атаки (даже если не дошли до конечной точки навигации)
 	if is_chasing_player and player and can_attack_player():
 		attack_player()
 		return
 	if navigation_agent.is_navigation_finished():
 		if is_chasing_player:
-			# Достигли позиции игрока - атакуем (если можем)
 			if can_attack_player():
 				attack_player()
 			else:
-				# Игрок убежал или скрылся
 				lose_player()
 		else:
-			# Достигли точки патрулирования - ищем следующую
 			find_target()
 		return
-	# Проверяем, скрылся ли игрок во время погони
 	if is_chasing_player and player:
 		check_player_hidden(delta)
-	# Двигаемся к цели
 	var next_position = navigation_agent.get_next_path_position()
 	var direction = (next_position - global_position).normalized()
-	# Поворачиваемся в направлении движения
 	if direction.length() > 0.1:
 		var target_rotation = atan2(direction.x, direction.z)
 		rotation.y = lerp_angle(rotation.y, target_rotation, ROTATION_SPEED * delta)
-	# Движение
 	var target_velocity = direction * SPEED
 	velocity = velocity.lerp(target_velocity, ACCELERATION * delta)
 	movement_direction = global_position - previous_position
@@ -133,30 +124,24 @@ func can_attack_player() -> bool:
 func check_player_hidden(delta):
 	if Global.game_settings["HidePlayer"]:
 		if not was_player_hidden:
-			# Игрок только что скрылся, запускаем таймер
 			was_player_hidden = true
 			player_hide_timer = 0.0
 			update_state_label("Lost Player?")
 		else:
-			# Игрок продолжает быть скрытым, обновляем таймер
 			player_hide_timer += delta
 			if player_hide_timer >= player_hide_timeout:
-				# Игрок скрывался достаточно долго - прекращаем погоню
 				lose_player()
 	else:
-		# Игрок снова видим, сбрасываем таймер
 		if was_player_hidden:
 			was_player_hidden = false
 			player_hide_timer = 0.0
 			update_state_label("Chasing Player")
 
 func lose_player():
-	# Прекращаем погоню за игроком
 	is_chasing_player = false
 	was_player_hidden = false
 	player_hide_timer = 0.0
 	
-	# Возвращаемся к патрулированию
 	find_target()
 	update_state_label("Returning to Patrol")
 

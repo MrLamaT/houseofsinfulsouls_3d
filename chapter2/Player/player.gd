@@ -12,9 +12,9 @@ extends CharacterBody3D
 var accel = 6
 var SPEED = 5.0
 var base_speed = 5.0
-var crouched = false #определяет приседает игрок или нет
-var input_dir = Vector3(0,0,0) #направление нажатия кнопок
-var direction = Vector3() # направление игрок
+var crouched = false
+var input_dir = Vector3(0,0,0)
+var direction = Vector3() 
 var sens = 0.005
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") 
 var is_walking = false
@@ -77,10 +77,8 @@ var regen_timer = 0.0
 var is_paused = false
 
 func look_at_point(target_point: Vector3):
-	# Просто поворачиваем голову в сторону точки (только по горизонтали)
 	var head_look_point = Vector3(target_point.x, head.global_position.y, target_point.z)
 	head.look_at(head_look_point, Vector3.UP)
-	# Сбрасываем вертикальный наклон камеры
 	cam.rotation.x = 0
 
 func _ready():
@@ -174,7 +172,7 @@ func throw_camera_out():
 	get_parent().add_child(thrown_cam)
 	thrown_cam.global_position = cam.global_position
 	thrown_cam.global_rotation = cam.global_rotation
-	var throw_direction = -cam.global_transform.basis.z # Вперед от взгляда
+	var throw_direction = -cam.global_transform.basis.z 
 	var throw_force = throw_direction + Vector3.UP * 3.0
 	if thrown_cam.has_method("apply_impulse"):
 		thrown_cam.apply_impulse(throw_force)
@@ -295,11 +293,9 @@ func _process(delta):
 	if is_interacting and interaction_target:
 		interaction_progress += delta
 		update_interaction_progress_bar()
-		# Проверяем завершено ли взаимодействие
 		if interaction_progress >= interaction_time_required:
 			complete_interaction()
 	else:
-		# Сбрасываем прогресс, если не взаимодействуем
 		if interaction_progress > 0:
 			interaction_progress = 0
 			hide_interaction_progress_bar()
@@ -311,16 +307,13 @@ func _process(delta):
 
 func _update_stamina(delta):
 	if is_running and input_dir.length() > 0 and movement_enabled and is_on_floor():
-		# Расходуем стамину при беге
 		stamina = max(0, stamina - stamina_depletion_rate * delta)
 		can_regenerate = false
 		regen_timer = 0.0
-		# Если стамина закончилась, прекращаем бег
 		if stamina <= 0:
 			is_running = false
 			update_running_speed()
 	else:
-		# Восстанавливаем стамину когда не бежим
 		if not can_regenerate:
 			regen_timer += delta
 			if regen_timer >= regen_delay:
@@ -331,12 +324,10 @@ func _update_stamina(delta):
 
 func update_stamina_display():
 	stamina_bar.value = stamina
-	# Показываем полосу только когда стамина не полная или восстанавливается
 	if stamina < max_stamina or not can_regenerate:
 		stamina_bar.visible = true
 	else:
 		stamina_bar.visible = false
-	# Меняем цвет в зависимости от уровня стамины
 	if stamina > 20:
 		stamina_bar.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	else:
@@ -344,37 +335,27 @@ func update_stamina_display():
 
 func _update_fov_effects(delta):
 	var target_fov = base_fov
-	# Увеличиваем FOV при движении
 	if movement_enabled and input_dir.length() > 0.1:
-		# Чем быстрее движение, тем больше FOV
 		var speed_factor = clamp(velocity.length() / SPEED, 0.0, 1.0)
 		target_fov = lerp(base_fov, running_fov, speed_factor)
-	# Плавное изменение FOV
 	current_fov = lerp(current_fov, target_fov, fov_transition_speed * delta)
 	cam.fov = current_fov
 
 func _update_camera_dynamics(delta):
-	# Наклон камеры при движении
 	var target_tilt = 0.0
 	if movement_enabled and input_dir.length() > 0.1:
-		# Наклон в сторону движения (A/D для бокового наклона)
 		target_tilt = -input_dir.x * camera_tilt_amount
 	
-	# Плавный переход к целевому наклону
 	current_tilt = lerp(current_tilt, target_tilt, camera_tilt_speed * delta)
 	
-	# Применяем наклон только по Z-оси (крен)
 	cam.rotation.z = deg_to_rad(current_tilt)
 	
-	# Анимация дыхания (только когда игрок стоит на месте)
 	if movement_enabled and input_dir.length() < 0.1 and is_on_floor():
 		breathing_time += delta * breathing_frequency
 		var breathing_offset = sin(breathing_time) * breathing_amplitude
 		cam.position.y = base_camera_position.y + breathing_offset
 	else:
-		# Плавное возвращение к базовой позиции при движении
 		cam.position.y = lerp(cam.position.y, base_camera_position.y, 5.0 * delta)
-		# Сбрасываем таймер дыхания для синхронизации
 		if input_dir.length() > 0.1:
 			breathing_time = 0.0
 
@@ -386,13 +367,11 @@ func start_interaction():
 	if current_interactable.is_in_group("item"):
 		pick_up_item(current_interactable)
 	elif current_interactable.is_in_group("progressive_interactive"):
-		# Начинаем прогрессивное взаимодействие
 		is_interacting = true
 		interaction_target = current_interactable
 		interaction_progress = 0.0
 		show_interaction_progress_bar()
 	else:
-		# Мгновенное взаимодействие для обычных объектов
 		current_interactable.trigger_interaction()
 
 func stop_interaction():
@@ -422,10 +401,8 @@ func pick_up_item(item_node):
 		return
 	if Global.game_settings["Item"] != "":
 		drop_item()
-	# Получаем имя текстуры и извлекаем название предмета
 	var texture_path = item_node.item_texture.resource_path
 	var item_name = texture_path.get_file().get_basename()
-	# Сохраняем в глобальных настройках
 	Global.game_settings["Item"] = item_name
 	hand_sprite.texture = item_node.item_texture
 	item_node.queue_free()
@@ -435,19 +412,14 @@ func pick_up_item(item_node):
 func drop_item():
 	if Global.game_settings["Item"] == "":
 		return
-	# Создаем новый экземпляр предмета
 	var item_scene = load("res://chapter2/Item/item.tscn")
 	var new_item = item_scene.instantiate()
-	# Устанавливаем текстуру
 	var texture_path = "res://chapter2/assets/items/" + Global.game_settings["Item"] + ".png"
 	new_item.item_texture = load(texture_path)
-	# Добавляем на сцену
 	get_parent().add_child(new_item)
 	new_item.global_position = global_position + Vector3(0, 0.5, 0)
-	# Даем импульс вперед
 	var throw_force = cam.global_transform.basis.z * -3
 	new_item.apply_impulse(throw_force)
-	# Очищаем руку
 	Global.game_settings["Item"] = ""
 	hand_sprite.texture = null
 	$head/Camera3D/shoot.visible = false
@@ -543,10 +515,10 @@ func update_running_speed():
 func _check_interactable():
 	var space_state = get_world_3d().direct_space_state
 	var from = cam.global_position
-	var to = from + cam.global_transform.basis.z * -5  # 5 метров вперед
+	var to = from + cam.global_transform.basis.z * -5 
 	
 	var query = PhysicsRayQueryParameters3D.create(from, to)
-	query.exclude = [self]  # Исключаем самого игрока
+	query.exclude = [self] 
 	query.collision_mask = 2 | 4 | 8
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
@@ -560,19 +532,15 @@ func _check_interactable():
 			if collider.is_in_group("interactive_objects"):
 				found_interactable = collider
 	
-	# Обрабатываем изменение текущего интерактивного объекта
 	if found_interactable != current_interactable:
-		# Выходим из предыдущего объекта
 		if current_interactable:
 			current_interactable._on_mouse_exited()
 			stop_interaction()
 		
-		# Входим в новый объект
 		current_interactable = found_interactable
 		if current_interactable:
 			current_interactable._on_mouse_entered()
 	
-	# Обновляем прицел
 	if current_interactable:
 		crosshair.texture = preload("res://assets/crosshair2.png")
 		$head/Camera3D/Use.visible = true
