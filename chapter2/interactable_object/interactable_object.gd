@@ -17,6 +17,7 @@ func _ready():
 		billboard_sprite.texture = sprite_texture
 		$AnimationPlayer.play("movement")
 		billboard_label.text = sprite_label
+	# Проверяем что название взаимодействия установлено
 	if interaction_name == "":
 		push_warning("InteractableObject at %s has no interaction name set!" % global_position)
 	if handler_node.is_empty():

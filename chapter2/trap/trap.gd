@@ -5,7 +5,7 @@ extends Area3D
 var is_active: bool = true
 var player_trapped: bool = false
 var respawn_timer: float = 0.0
-var respawn_delay: float = 60.0  
+var respawn_delay: float = 60.0  # 1 минута
 var trapped_player: Node3D = null
 
 func _ready():
@@ -40,6 +40,7 @@ func disarm_trap():
 	set_collision_layer_value(4, false)  
 	set_collision_mask_value(1, false)
 	$CollisionShape3D.disabled = true
+	
 	respawn_timer = respawn_delay
 
 func respawn_trap():
@@ -52,6 +53,7 @@ func respawn_trap():
 func trap_player(player: Node3D):
 	if not is_active or player_trapped:
 		return
+	
 	player_trapped = true
 	trapped_player = player
 	var targets = get_tree().get_nodes_in_group("enemy_targets1")
