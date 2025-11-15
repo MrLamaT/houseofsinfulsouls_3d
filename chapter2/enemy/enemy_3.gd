@@ -17,13 +17,9 @@ func _ready():
 		return
 	# Инициализация
 	sprite_3d.play("idle")
-	
-	# Ждем появления игрока в зоне видимости
-	print("Simple enemy spawned")
 
 func _physics_process(delta):
 	if is_fading:
-		# Плавное исчезновение
 		sprite_3d.modulate.a = max(0, sprite_3d.modulate.a - fade_out_speed * delta)
 		if sprite_3d.modulate.a <= 0:
 			queue_free()
@@ -32,13 +28,10 @@ func attack_player():
 	if has_attacked:
 		return
 	has_attacked = true
-	# Меняем анимацию на атаку
 	sprite_3d.play("attack")
-	# Заставляем игрока посмотреть на врага
 	if player and player.has_method("look_at_point"):
 		player.look_at_point(global_position)
 		player.screem()
-	# Начинаем исчезновение через небольшую задержку
 	await get_tree().create_timer(0.5).timeout
 	is_fading = true
 
