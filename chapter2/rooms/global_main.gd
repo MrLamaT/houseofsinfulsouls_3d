@@ -1,5 +1,7 @@
 extends Node3D
 
+var painting = 0
+
 func _ready() -> void:
 	$Player.startSpreedrun()
 	$Player.PlayerDeath(-1)
@@ -25,8 +27,16 @@ func handle_interaction(object_name: String):
 				$Player.clear_item()
 				$NavigationRegion3D/cabinet/board2.visible = true
 				$NavigationRegion3D/cabinet/InteractableObject2.queue_free()
+				painting += 1
+				if painting > 1:
+					$NavigationRegion3D/cabinet/Opendoors2.trigger_interaction()
+					print(11111111)
 		"GIVEpainting2":
 			if Global.game_settings["Item"] == "painting":
 				$Player.clear_item()
 				$NavigationRegion3D/cabinet/board3.visible = true
 				$NavigationRegion3D/cabinet/InteractableObject.queue_free()
+				painting += 1
+				if painting > 1:
+					$NavigationRegion3D/cabinet/Opendoors2.trigger_interaction()
+					print(11111111)

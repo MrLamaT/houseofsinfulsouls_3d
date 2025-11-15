@@ -42,9 +42,6 @@ var interaction_target: Node3D = null
 
 var movement_enabled: bool = true
 
-var cheat_f1: bool = false
-var cheat_f2: bool = false
-var cheat_mod: bool = false
 var cheat_f3: bool = false
 
 # Динамика камеры
@@ -75,6 +72,7 @@ var regen_delay = 6  # Задержка перед восстановление�
 var regen_timer = 0.0
 
 var is_paused = false
+var is_terminal = false
 
 func look_at_point(target_point: Vector3):
 	var head_look_point = Vector3(target_point.x, head.global_position.y, target_point.z)
@@ -217,6 +215,15 @@ func toggle_pause():
 		$head/Camera3D/Pause.visible = false
 		update_gui_visibility()
 
+func toggle_terminal():
+	is_terminal = !is_terminal
+	if is_terminal:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		$head/Camera3D/Terminal.visible = true
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		$head/Camera3D/Terminal.visible = false
+
 func update_gui_visibility():
 	var gui_settings = Global.game_settings["gui_settings"]
 	$head/Camera3D/coordinates.visible = gui_settings["coordinates"]
@@ -225,7 +232,10 @@ func update_gui_visibility():
 
 func _input(event: InputEvent): #повороты мышкой
 	if Input.is_action_just_pressed("ui_cancel"):
-		toggle_pause()
+		if !is_terminal:
+			toggle_pause()
+		else:
+			toggle_terminal()
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
 			head.rotate_y(-event.relative.x * sens)
@@ -253,37 +263,28 @@ func _input(event: InputEvent): #повороты мышкой
 			crouched = !crouched  
 		update_running_speed()
 	if Input.is_action_just_pressed("+f1"):
-		cheat_f1 = true
-		cheat_check()
-	if Input.is_action_just_pressed("+f2"):
-		cheat_f2 = true
-		cheat_check()
-	if Input.is_action_just_released("+f1"):
-		cheat_f1 = false
-	if Input.is_action_just_released("+f2"):
-		cheat_f2 = false
-	if Input.is_action_just_pressed("+f3") and cheat_mod:
-		cheat_f3 = !cheat_f3
-		if cheat_f3:
-			collision_mask = 1 << 5
+		if !is_paused:
+			toggle_terminal()
 		else:
-			collision_mask = (1 << 2) | (1 << 3) | (1 << 5)
-		$head/Camera3D/cheat2.visible = cheat_f3
-	if Input.is_action_just_pressed("+f4") and cheat_mod:
-		global_position = Vector3(0, 0, 0)
-	if Input.is_action_just_pressed("+f5") and cheat_mod:
+			toggle_pause()
+	if Input.is_action_just_pressed("+f5"):
 		if Global.game_settings["Item"] == "":
 			Global.game_settings["Item"] = "shotgun"
 			drop_item()
-	if Input.is_action_just_pressed("+f6") and cheat_mod:
+	if Input.is_action_just_pressed("+f6"):
 		Global.game_settings["GodMod"] = !Global.game_settings["GodMod"]
 		Global.game_settings["HidePlayer"] = Global.game_settings["GodMod"]
 		$head/Camera3D/IconGod.visible = Global.game_settings["GodMod"]
 
 func cheat_check():
-	if cheat_f1 and cheat_f2:
-		$head/Camera3D/cheat.visible = true
-		cheat_mod = true
+	$head/Camera3D/cheat.visible = true
+
+func ghost_cheat():
+	cheat_f3 = !cheat_f3
+	if cheat_f3:
+		collision_mask = 1 << 5
+	else:
+		collision_mask = (1 << 2) | (1 << 3) | (1 << 5)
 
 func _process(delta):
 	$head/Camera3D/fps.text = "FPS: %d" % Engine.get_frames_per_second()

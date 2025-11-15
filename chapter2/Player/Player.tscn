@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cn5qxioc77162"]
+[gd_scene load_steps=25 format=3 uid="uid://cn5qxioc77162"]
 
 [ext_resource type="Script" uid="uid://bl04fl8vcqlgm" path="res://chapter2/Player/player.gd" id="1_3dlvw"]
 [ext_resource type="Script" uid="uid://bopviik6y8keo" path="res://chapter2/Player/pause.gd" id="2_68v2k"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://dsic1c8h3j8lw" path="res://assets/tick.mp3" id="8_xng4x"]
 [ext_resource type="Texture2D" uid="uid://cog2rg2ks14k1" path="res://chapter2/assets/ModIcon/modIconGod.png" id="9_n1vqc"]
 [ext_resource type="AudioStream" uid="uid://tfw84iepyf0d" path="res://assets/damage.mp3" id="10_puud3"]
+[ext_resource type="PackedScene" uid="uid://dt32mdlwj8ff5" path="res://chapter2/Player/terminal/terminal.tscn" id="10_u8yn7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_al2fp"]
 
@@ -528,18 +529,6 @@ text = "[cheats ON]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="cheat2" type="Label" parent="head/Camera3D"]
-visible = false
-modulate = Color(1, 1, 1, 0.5019608)
-offset_top = 96.0
-offset_right = 144.0
-offset_bottom = 119.0
-scale = Vector2(2, 2)
-theme_override_fonts/font = ExtResource("3_sfgwg")
-text = "[ghost ON]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="coordinates" type="Label" parent="head/Camera3D"]
 visible = false
 modulate = Color(1, 1, 1, 0.5019608)
@@ -675,6 +664,9 @@ visible = false
 position = Vector2(45, 603)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("9_n1vqc")
+
+[node name="Terminal" parent="head/Camera3D" instance=ExtResource("10_u8yn7")]
+visible = false
 
 [node name="FootstepPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_kd1ih")
