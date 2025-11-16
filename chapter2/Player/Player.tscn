@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cn5qxioc77162"]
+[gd_scene load_steps=24 format=3 uid="uid://cn5qxioc77162"]
 
 [ext_resource type="Script" uid="uid://bl04fl8vcqlgm" path="res://chapter2/Player/player.gd" id="1_3dlvw"]
 [ext_resource type="Script" uid="uid://bopviik6y8keo" path="res://chapter2/Player/pause.gd" id="2_68v2k"]
@@ -10,7 +10,6 @@
 [ext_resource type="AudioStream" uid="uid://dmoceerf52ppr" path="res://assets/open.wav" id="4_kd1ih"]
 [ext_resource type="Texture2D" uid="uid://l6d7ofh7ucs6" path="res://assets/blood2.png" id="5_xng4x"]
 [ext_resource type="AudioStream" uid="uid://dsic1c8h3j8lw" path="res://assets/tick.mp3" id="8_xng4x"]
-[ext_resource type="Texture2D" uid="uid://cog2rg2ks14k1" path="res://chapter2/assets/ModIcon/modIconGod.png" id="9_n1vqc"]
 [ext_resource type="AudioStream" uid="uid://tfw84iepyf0d" path="res://assets/damage.mp3" id="10_puud3"]
 [ext_resource type="PackedScene" uid="uid://dt32mdlwj8ff5" path="res://chapter2/Player/terminal/terminal.tscn" id="10_u8yn7"]
 
@@ -658,12 +657,6 @@ grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_3lojj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xng4x")
 show_percentage = false
-
-[node name="IconGod" type="Sprite2D" parent="head/Camera3D"]
-visible = false
-position = Vector2(45, 603)
-scale = Vector2(2.5, 2.5)
-texture = ExtResource("9_n1vqc")
 
 [node name="Terminal" parent="head/Camera3D" instance=ExtResource("10_u8yn7")]
 visible = false

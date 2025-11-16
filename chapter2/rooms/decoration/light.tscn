@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdrhprd8i3g4q"]
+[gd_scene load_steps=7 format=3 uid="uid://cdrhprd8i3g4q"]
+
+[ext_resource type="Script" uid="uid://d1ir82tmhk5a5" path="res://chapter2/rooms/decoration/light.gd" id="1_vnnpa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnnpa"]
 shading_mode = 0
@@ -19,6 +21,7 @@ size = Vector3(0.2, 0.2, 0.2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_4hct6"]
 
 [node name="Light" type="Area3D"]
+script = ExtResource("1_vnnpa")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18165858, 0)

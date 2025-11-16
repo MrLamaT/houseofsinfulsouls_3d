@@ -267,14 +267,6 @@ func _input(event: InputEvent): #повороты мышкой
 			toggle_terminal()
 		else:
 			toggle_pause()
-	if Input.is_action_just_pressed("+f5"):
-		if Global.game_settings["Item"] == "":
-			Global.game_settings["Item"] = "shotgun"
-			drop_item()
-	if Input.is_action_just_pressed("+f6"):
-		Global.game_settings["GodMod"] = !Global.game_settings["GodMod"]
-		Global.game_settings["HidePlayer"] = Global.game_settings["GodMod"]
-		$head/Camera3D/IconGod.visible = Global.game_settings["GodMod"]
 
 func cheat_check():
 	$head/Camera3D/cheat.visible = true
