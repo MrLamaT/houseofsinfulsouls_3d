@@ -80,7 +80,7 @@ func parse_command(text: String):
 	match command:
 		"cheat":
 			SystemPrint("Cheats included")
-			player.cheat_check()
+			player.get_node("head/Camera3D/cheat").visible = true
 			cheat_mod = true
 		"ghost":
 			if cheat_mod:
@@ -119,7 +119,7 @@ func parse_command(text: String):
 					ErrorPrint("The hand must be empty")
 			else:
 				ErrorPrint("No rights")
-		"godmode":
+		"godmode", "god":
 			if cheat_mod:
 				Global.game_settings["GodMod"] = !Global.game_settings["GodMod"]
 				Global.game_settings["HidePlayer"] = Global.game_settings["GodMod"]
@@ -154,6 +154,23 @@ func parse_command(text: String):
 		"quit", "exit":
 			get_tree().quit()
 		"light":
-			player.get_node("head/Camera3D/OmniLight3D").queue_free()
+			if argument == "":
+				ErrorPrint("Usage: light [color_name|null]")
+				return
+			if argument.to_lower() == "null":
+				player.get_node("head/Camera3D/SpotLight3D").visible = false
+				player.get_node("head/Camera3D/SpotLight3D2").visible = false
+				SystemPrint("Flashlights disabled")
+			else:
+				var color = Color(argument)
+				if color == Color(0, 0, 0, 1) and argument.to_lower() != "black":
+					ErrorPrint("Invalid color: " + argument)
+					SystemPrint("Use color names (red, blue, green) or hex codes (#ff0000)")
+					return
+				var light1 = player.get_node("head/Camera3D/SpotLight3D")
+				var light2 = player.get_node("head/Camera3D/SpotLight3D2")
+				light1.light_color = color
+				light2.light_color = color
+				SystemPrint("Flashlight color changed to: " + argument)
 		_:
 			ErrorPrint("Unknown command: " + command)

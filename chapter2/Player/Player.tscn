@@ -349,8 +349,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="Camera3D" type="Camera3D" parent="head"]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="head/Camera3D"]
-omni_range = 10.0
+[node name="SpotLight3D" type="SpotLight3D" parent="head/Camera3D"]
+spot_range = 15.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="head/Camera3D"]
+light_energy = 0.5
+spot_angle = 90.0
 
 [node name="Pause" type="Panel" parent="head/Camera3D"]
 visible = false

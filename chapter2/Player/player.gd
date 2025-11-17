@@ -94,10 +94,10 @@ func _ready():
 
 func DarkHardMod(mod):
 	if mod:
-		$head/Camera3D/OmniLight3D.omni_range = 5
+		$head/Camera3D/SpotLight3D.visible = false
 		$head/Camera3D/label.text = "Enemy will revive in 60 seconds."
 	else:
-		$head/Camera3D/OmniLight3D.omni_range = 10
+		$head/Camera3D/SpotLight3D.visible = true
 		$head/Camera3D/label.text = "Enemy will revive in 120 seconds."
 
 func PlayerDeath(Hp):
@@ -267,9 +267,6 @@ func _input(event: InputEvent): #повороты мышкой
 			toggle_terminal()
 		else:
 			toggle_pause()
-
-func cheat_check():
-	$head/Camera3D/cheat.visible = true
 
 func ghost_cheat():
 	cheat_f3 = !cheat_f3
