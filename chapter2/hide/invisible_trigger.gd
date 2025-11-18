@@ -19,11 +19,9 @@ func _on_body_exited(body):
 	if body.is_in_group("player"):
 		if !Global.game_settings["GodMod"]:
 			Global.game_settings["HidePlayer"] = false
-			Global.game_settings["CanStandUp"] = true
-			body.force_stand_up()
 			print("HidePlayer установлен в false")
-		else:
-			print("HidePlayer GodMode")
+		Global.game_settings["CanStandUp"] = true
+		body.force_stand_up()
 
 func _on_mouse_entered() -> void:
 	pass # Replace with function body.
