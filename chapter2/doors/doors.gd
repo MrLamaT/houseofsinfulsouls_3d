@@ -46,7 +46,7 @@ func teleport_player():
 func change_scene():
 	if target_scene_path != "" and ResourceLoader.exists(target_scene_path):
 		await get_tree().process_frame
-		get_tree().change_scene_to_file(target_scene_path)
+		SceneManager.load_scene_with_loading(target_scene_path)
 	else:
 		push_error("Invalid scene path: %s" % target_scene_path)
 

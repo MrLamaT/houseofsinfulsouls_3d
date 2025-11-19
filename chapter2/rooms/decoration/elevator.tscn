@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c6ob6b8hbhn6m"]
+[gd_scene load_steps=29 format=3 uid="uid://c6ob6b8hbhn6m"]
 
 [ext_resource type="Texture2D" uid="uid://do5y7jxljt63c" path="res://assets/textures/material11.png" id="1_1lycv"]
 [ext_resource type="Script" uid="uid://bp83puvv7dy66" path="res://chapter2/rooms/decoration/elevator.gd" id="1_mvdua"]
@@ -65,44 +65,8 @@ albedo_color = Color(0.02745098, 0.03137255, 0.047058824, 1)
 material = SubResource("StandardMaterial3D_74r7q")
 size = Vector3(0.15, 0.5, 0.25)
 
-[sub_resource type="Animation" id="Animation_mvdua"]
-resource_name = "open"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(5.6478853, 2, 3.184), Vector3(5.648, 2, 2.184)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("D2:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(5.648, 2, 4.33), Vector3(5.648, 2, 5.33)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("wall3/Door:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
+[sub_resource type="BoxShape3D" id="BoxShape3D_dgojc"]
+size = Vector3(1, 1, 0.7006836)
 
 [sub_resource type="Animation" id="Animation_74r7q"]
 length = 0.001
@@ -182,6 +146,45 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_mvdua"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(5.6478853, 2, 3.184), Vector3(5.648, 2, 2.184)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(5.648, 2, 4.33), Vector3(5.648, 2, 5.33)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("wall3/Door:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_063x6"]
 _data = {
 &"RESET": SubResource("Animation_74r7q"),
@@ -189,7 +192,7 @@ _data = {
 &"open": SubResource("Animation_mvdua")
 }
 
-[node name="Elevator" type="StaticBody3D"]
+[node name="Elevator" type="StaticBody3D" groups=["elevators"]]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_mvdua")
@@ -389,6 +392,10 @@ transform = Transform3D(-1.0927847e-08, -0.15, 6.556708e-08, 0, -6.5567107e-09, 
 interaction_name = "open"
 handler_node = NodePath("../../..")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="board2"]
+transform = Transform3D(1, 8.742278e-09, 3.8214188e-15, 8.742278e-07, -1, -8.742278e-07, -3.8214188e-15, 8.742278e-09, -1, -0.0004696846, -8.031769, 0.0036965609)
+shape = SubResource("BoxShape3D_dgojc")
+
 [node name="board3" type="StaticBody3D" parent="."]
 transform = Transform3D(4.371139e-08, -0.1, -8.742278e-08, -1, -4.371139e-09, 0, -3.821371e-15, 8.742278e-09, -1, 5.0533624, 2.0334697, 1.3480345)
 collision_layer = 4
@@ -407,6 +414,10 @@ transform = Transform3D(-1.0927847e-08, -0.15, 6.556708e-08, 0, -6.5567107e-09, 
 interaction_name = "open"
 handler_node = NodePath("../../..")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="board3"]
+transform = Transform3D(1, -3.340749e-23, 4.785736e-20, -3.3407902e-21, 1, 0, 4.785736e-20, 0, 1, 0, -1.7346115, -0.0036621094)
+shape = SubResource("BoxShape3D_dgojc")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_063x6")
@@ -414,3 +425,6 @@ libraries = {
 
 [node name="InvisibleTrigger" parent="." instance=ExtResource("10_74r7q")]
 transform = Transform3D(4.122537, 0, 0, 0, 3.4248512, 0, 0, 0, 2.8973246, 3.3152661, 2.214, 0)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0)

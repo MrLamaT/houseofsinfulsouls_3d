@@ -155,7 +155,7 @@ func respawn_player():
 		Global.game_settings["ModHard"] = false
 		if Global.game_settings["HP"] == 0:
 			await get_tree().create_timer(1).timeout
-		get_tree().change_scene_to_file("res://chapter2/rooms/main.tscn")
+		SceneManager.load_scene_with_loading("res://chapter2/rooms/main.tscn")
 		return
 	await get_tree().create_timer(3.0).timeout
 	global_position = Vector3(2.599, 0.656, 2.599)

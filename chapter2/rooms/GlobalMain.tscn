@@ -1995,4 +1995,12 @@ item_preset = 1
 [node name="Elevator" parent="NavigationRegion3D" instance=ExtResource("50_avtcs")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.1, -0.016, -14.69)
 
+[node name="Elevator3" parent="NavigationRegion3D" instance=ExtResource("50_avtcs")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.1, -6.6668034, -14.69)
+elevator_id = "basement"
+
+[node name="Elevator2" parent="NavigationRegion3D" instance=ExtResource("50_avtcs")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.1, 7.1034164, -14.69)
+elevator_id = "attic"
+
 [connection signal="body_entered" from="NavigationRegion3D/floor_ceiling/KillZona" to="." method="_on_kill_zona_body_entered"]

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://2b46d713lssn"]
+
+[ext_resource type="Script" uid="uid://c23egdnmpri5b" path="res://chapter2/load/splash_screen.gd" id="1_2pka5"]
+
+[node name="SplashScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_2pka5")

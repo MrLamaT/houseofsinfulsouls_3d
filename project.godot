@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="House Of Sinful Souls 3D"
-run/main_scene="uid://dvyormlmcnr8r"
+run/main_scene="uid://2b46d713lssn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global="*res://global.gd"
+SceneManager="*res://chapter2/load/SceneManager.gd"
 
 [display]
 
@@ -47,6 +48,7 @@ target_object=""
 enemy_targets1=""
 enemy_targets2=""
 enemy2=""
+elevators=""
 
 [input]
 
