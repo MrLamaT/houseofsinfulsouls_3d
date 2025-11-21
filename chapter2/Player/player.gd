@@ -9,6 +9,8 @@ extends CharacterBody3D
 @onready var crosshair = $head/Camera3D/crosshair
 @onready var hand_sprite = $head/Camera3D/hand_position/Sprite3D
 
+var interaction_manager: InteractionManager
+
 var accel = 6
 var SPEED = 5.0
 var base_speed = 5.0
@@ -21,8 +23,6 @@ var is_walking = false
 var footstep_timer = 0.0
 var footstep_delay = 0.5
 
-var current_interactable: Node3D = null
-
 var standing_height = 1.85
 var crouching_height = 1.0
 var standing_collision_height = 1.143
@@ -34,11 +34,6 @@ var was_under_obstacle = false
 
 var time_elapsed: float = 0.0
 var is_runningTime: bool = false
-
-var is_interacting: bool = false
-var interaction_progress: float = 0.0
-var interaction_time_required: float = 2.0
-var interaction_target: Node3D = null
 
 var movement_enabled: bool = true
 
@@ -80,6 +75,13 @@ func look_at_point(target_point: Vector3):
 	cam.rotation.x = 0
 
 func _ready():
+	interaction_manager = InteractionManager.new(
+		self,
+		cam,
+		crosshair,
+		$head/Camera3D/InteractionProgressBar,
+		hand_sprite
+	)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	movement_enabled = true
 	Global.game_settings["Item"] = ""
@@ -125,6 +127,7 @@ func respawn_player():
 		Global.game_settings["ThrownCamera"].queue_free()
 		Global.game_settings["ThrownCamera"] = null
 	cam.current = true
+	velocity = Vector3.ZERO
 	global_position = Vector3(2.599, 0.656, 2.599)
 	movement_enabled = false
 	stamina = max_stamina
@@ -246,10 +249,6 @@ func _input(event: InputEvent): #повороты мышкой
 			cam.rotate_x(vertical_rotation)
 	if Input.is_action_just_pressed("+drop") and Global.game_settings["Item"] != "":
 		drop_item()
-	if Input.is_action_just_pressed("+e") and current_interactable:
-		start_interaction()
-	if Input.is_action_just_released("+e"):
-		stop_interaction()
 	if event.is_action_pressed("UI_fullscreen"):
 		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
@@ -267,6 +266,7 @@ func _input(event: InputEvent): #повороты мышкой
 			toggle_terminal()
 		else:
 			toggle_pause()
+	interaction_manager.process_interaction_input()
 
 func ghost_cheat():
 	cheat_f3 = !cheat_f3
@@ -280,20 +280,12 @@ func _process(delta):
 	if is_runningTime:
 		time_elapsed += delta
 		update_textSpreedrun()
-	if is_interacting and interaction_target:
-		interaction_progress += delta
-		update_interaction_progress_bar()
-		if interaction_progress >= interaction_time_required:
-			complete_interaction()
-	else:
-		if interaction_progress > 0:
-			interaction_progress = 0
-			hide_interaction_progress_bar()
 	_update_camera_dynamics(delta)
 	_update_fov_effects(delta)
 	_update_stamina(delta)
 	_update_camera_dynamics(delta)
 	_update_fov_effects(delta)
+	interaction_manager.update_interaction(delta)
 
 func _update_stamina(delta):
 	if is_running and input_dir.length() > 0 and movement_enabled and is_on_floor():
@@ -349,56 +341,6 @@ func _update_camera_dynamics(delta):
 		if input_dir.length() > 0.1:
 			breathing_time = 0.0
 
-func start_interaction():
-	if not current_interactable:
-		return
-	
-	# Проверяем тип взаимодействия
-	if current_interactable.is_in_group("item"):
-		pick_up_item(current_interactable)
-	elif current_interactable.is_in_group("progressive_interactive"):
-		is_interacting = true
-		interaction_target = current_interactable
-		interaction_progress = 0.0
-		show_interaction_progress_bar()
-	else:
-		current_interactable.trigger_interaction()
-
-func stop_interaction():
-	is_interacting = false
-	interaction_target = null
-	hide_interaction_progress_bar()
-
-func complete_interaction():
-	if interaction_target:
-		interaction_target.trigger_interaction()
-		is_interacting = false
-		interaction_target = null
-		hide_interaction_progress_bar()
-
-func update_interaction_progress_bar():
-	var progress_percent = interaction_progress / interaction_time_required
-	$head/Camera3D/InteractionProgressBar.value = progress_percent * 100
-
-func show_interaction_progress_bar():
-	$head/Camera3D/InteractionProgressBar.visible = true
-
-func hide_interaction_progress_bar():
-	$head/Camera3D/InteractionProgressBar.visible = false
-
-func pick_up_item(item_node):
-	if not is_instance_valid(item_node):
-		return
-	if Global.game_settings["Item"] != "":
-		drop_item()
-	var texture_path = item_node.item_texture.resource_path
-	var item_name = texture_path.get_file().get_basename()
-	Global.game_settings["Item"] = item_name
-	hand_sprite.texture = item_node.item_texture
-	item_node.queue_free()
-	current_interactable = null
-	handle_item_pickup(item_name)
-
 func drop_item():
 	if Global.game_settings["Item"] == "":
 		return
@@ -419,14 +361,6 @@ func clear_item():
 	Global.game_settings["Item"] = ""
 	hand_sprite.texture = null
 
-func handle_item_pickup(item_name: String):
-	match item_name:
-		"shotgun":
-			$head/Camera3D/shoot.visible = true
-			$head/Camera3D/shoot2.visible = true
-		_:
-			print("Подобран предмет: ", item_name)
-
 func update_textSpreedrun():
 	var minutes = int(time_elapsed / 60)
 	var seconds = int(time_elapsed) % 60
@@ -445,7 +379,6 @@ func message(Mtext):
 	$AnimationPlayer.play("message")
 
 func _physics_process(delta):
-	_check_interactable()
 	$head/Camera3D/shoot2.text = "%01d/2" % [Global.game_settings["ShootGun_cartridge"]]
 	$head/Camera3D/coordinates.text = "%03d:%03d:%03d" % [global_position.x, global_position.y, global_position.z]
 	if Input.is_action_pressed("+shift") and stamina > 0 and input_dir.length() > 0 and movement_enabled and not crouched:
@@ -488,6 +421,7 @@ func _physics_process(delta):
 		velocity.z = lerp(velocity.z ,direction.z * SPEED, accel * delta)
 	
 	move_and_slide()
+	interaction_manager.check_interactable()
 
 func force_stand_up():
 	if crouched:
@@ -501,42 +435,6 @@ func update_running_speed():
 	else:
 		SPEED = base_speed
 		footstep_delay = 0.5   # Обычная частота шагов
-
-func _check_interactable():
-	var space_state = get_world_3d().direct_space_state
-	var from = cam.global_position
-	var to = from + cam.global_transform.basis.z * -5 
-	
-	var query = PhysicsRayQueryParameters3D.create(from, to)
-	query.exclude = [self] 
-	query.collision_mask = 2 | 4 | 8
-	query.collide_with_areas = true
-	query.collide_with_bodies = true
-	
-	var result = space_state.intersect_ray(query)
-	var found_interactable = null
-	
-	if result: 
-		var collider = result.collider
-		if collider and (collider is Area3D or collider is RigidBody3D):
-			if collider.is_in_group("interactive_objects"):
-				found_interactable = collider
-	
-	if found_interactable != current_interactable:
-		if current_interactable:
-			current_interactable._on_mouse_exited()
-			stop_interaction()
-		
-		current_interactable = found_interactable
-		if current_interactable:
-			current_interactable._on_mouse_entered()
-	
-	if current_interactable:
-		crosshair.texture = preload("res://assets/crosshair2.png")
-		$head/Camera3D/Use.visible = true
-	else:
-		crosshair.texture = preload("res://assets/crosshair1.png")
-		$head/Camera3D/Use.visible = false
 
 func AnimationPlayPlayer(Anim):
 	$AnimationPlayer.play(Anim)

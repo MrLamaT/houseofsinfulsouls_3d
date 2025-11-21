@@ -479,7 +479,7 @@ navigation_layers = 4
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="wall" type="StaticBody3D" parent="NavigationRegion3D/PlayerRoom"]
-transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 11, 5.25, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 11, 5.25, 2, -0.110489845)
 collision_layer = 4
 collision_mask = 3
 
@@ -1086,7 +1086,7 @@ mesh = SubResource("BoxMesh_nh41j")
 shape = SubResource("BoxShape3D_cjmea")
 
 [node name="wall2" type="StaticBody3D" parent="NavigationRegion3D/Room"]
-transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 11, -5.25, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 11, -5.25, 2, -0.110489845)
 collision_layer = 4
 collision_mask = 3
 
@@ -1306,7 +1306,7 @@ collision_mask = 3
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D/Foyer/wall5"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Foyer/wall5/CSGCombiner3D"]
-transform = Transform3D(0.9999999, 0, 1.6786572e-13, 0, 0.99999976, 0, -3.9108272e-11, 0, 0.99996865, -0.30471897, 0, 0)
+transform = Transform3D(0.9999999, 0, 2.5579538e-13, 0, 0.99999976, 0, -6.0595085e-11, 0, 0.9999574, -0.30471897, 0, 0)
 size = Vector3(0.34316406, 1, 0.5)
 material = SubResource("StandardMaterial3D_0gqrf")
 
@@ -1985,7 +1985,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.369114, 0.7472677, 1.8068
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.000182, 0.65761375, -17.643873)
 
 [node name="Enemy3_1" parent="NavigationRegion3D" instance=ExtResource("35_n4wpw")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -22.353865, 1.253, -8.277921)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -22.353865, 1.253, -8.443084)
 item_preset = 2
 
 [node name="Enemy3_2" parent="NavigationRegion3D" instance=ExtResource("35_n4wpw")]

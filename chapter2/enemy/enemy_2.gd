@@ -29,7 +29,7 @@ var previous_position: Vector3
 var movement_direction: Vector3
 
 func _ready():
-	if !Global.game_settings["ModScar"]:
+	if Global.game_settings["ModScar"]:
 		print("scar delet")
 		queue_free()
 		return
@@ -182,3 +182,12 @@ func _on_vision_area_body_entered(body):
 func _on_vision_area_body_exited(body):
 	if body == player and is_chasing_player:
 		lose_player()
+
+func trigger_interaction():
+	print(1)
+
+func _on_mouse_entered() -> void:
+	pass
+
+func _on_mouse_exited() -> void:
+	pass

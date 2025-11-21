@@ -49,6 +49,7 @@ enemy_targets1=""
 enemy_targets2=""
 enemy2=""
 elevators=""
+click_interact=""
 
 [input]
 

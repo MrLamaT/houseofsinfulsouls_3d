@@ -17,11 +17,11 @@ func handle_interaction(object_name: String):
 		"painting":
 			$NavigationRegion3D/PlayerRoom/board.queue_free()
 			$NavigationRegion3D/PlayerRoom/InteractableObject.queue_free()
-			$Player.pick_up_item($NavigationRegion3D/PlayerRoom/Item1)
+			$Player.interaction_manager.pick_up_item($NavigationRegion3D/PlayerRoom/Item1)
 		"painting2":
 			$NavigationRegion3D/Living/board5.queue_free()
 			$NavigationRegion3D/Living/InteractableObject.queue_free()
-			$Player.pick_up_item($NavigationRegion3D/Living/Item)
+			$Player.interaction_manager.pick_up_item($NavigationRegion3D/Living/Item)
 		"GIVEpainting":
 			if Global.game_settings["Item"] == "painting2":
 				$Player.clear_item()
@@ -30,7 +30,6 @@ func handle_interaction(object_name: String):
 				painting += 1
 				if painting > 1:
 					$NavigationRegion3D/cabinet/Opendoors2.trigger_interaction()
-					print(11111111)
 		"GIVEpainting2":
 			if Global.game_settings["Item"] == "painting":
 				$Player.clear_item()
@@ -39,4 +38,3 @@ func handle_interaction(object_name: String):
 				painting += 1
 				if painting > 1:
 					$NavigationRegion3D/cabinet/Opendoors2.trigger_interaction()
-					print(11111111)

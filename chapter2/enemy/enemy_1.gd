@@ -13,7 +13,7 @@ var player: Node3D = null
 var is_chasing_player: bool = false
 
 # Настройки движения
-var SPEED: float = 3.0
+var SPEED: float = 3.5
 var ACCELERATION: float = 5.0
 var ROTATION_SPEED: float = 10.0
 
@@ -192,3 +192,12 @@ func _on_vision_area_body_exited(body):
 	if body == player and is_chasing_player:
 		# Если игрок вышел из зоны видимости, сразу теряем его
 		lose_player()
+		
+func trigger_interaction():
+	print(1)
+
+func _on_mouse_entered() -> void:
+	pass
+
+func _on_mouse_exited() -> void:
+	pass

@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c1awuh7hobog0" path="res://chapter2/Item/Item.tscn" id="3_q48q2"]
 [ext_resource type="Texture2D" uid="uid://2bbd2l04tmkp" path="res://assets/textures/material2.png" id="3_vy737"]
 [ext_resource type="Texture2D" uid="uid://cqb60o2hbtou4" path="res://chapter2/assets/ModIcon/Mod1_0.png" id="4_huhxd"]
-[ext_resource type="Texture2D" uid="uid://cou1a7vn4plk4" path="res://chapter2/assets/ModIcon/Mod3_0.png" id="6_3uym5"]
+[ext_resource type="Texture2D" uid="uid://dbyhf7qkvjq2r" path="res://chapter2/assets/ModIcon/Mod3_0.png" id="6_3uym5"]
 [ext_resource type="Texture2D" uid="uid://vdygen704vkp" path="res://chapter2/assets/ModIcon/Mod2_0.png" id="6_lf7vw"]
 [ext_resource type="Texture2D" uid="uid://de3t47m5nbmbp" path="res://chapter2/assets/ModIcon/Mod6_0.png" id="8_n5xo8"]
 [ext_resource type="PackedScene" uid="uid://66f66cwy6tfc" path="res://chapter2/rooms/decoration/table.tscn" id="8_vy737"]
@@ -127,7 +127,7 @@ use_billboard_sprite = true
 sprite_texture = ExtResource("6_3uym5")
 sprite_label = "enemy: Scar"
 
-[node name="ModTraps" parent="." instance=ExtResource("2_q48q2")]
+[node name="ModTraps" parent="." groups=["click_interact"] instance=ExtResource("2_q48q2")]
 transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, 1.74, 2.062, -4.432)
 interaction_name = "Traps"
 handler_node = NodePath("..")
@@ -208,12 +208,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3, 1.5, -4.95)
 interaction_mode = 1
 target_scene_path = "res://chapter2/rooms/GlobalMain.tscn"
 TextNumber = "PLAY"
-
-[node name="doors2" parent="." instance=ExtResource("10_1u0l2")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.3, 1.5, 4.95)
-interaction_mode = 1
-target_scene_path = "res://choice/choice.tscn"
-TextNumber = "EXIT"
 
 [node name="board" parent="." instance=ExtResource("11_huhxd")]
 transform = Transform3D(-2.14569e-07, 0, 1, 0, 2, 0, -2, 0, -1.07284e-07, -4.99297, 2.23722, 1.62624)
