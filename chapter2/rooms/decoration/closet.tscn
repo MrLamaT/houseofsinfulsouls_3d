@@ -202,6 +202,7 @@ libraries = {
 
 [node name="InvisibleTrigger" parent="." instance=ExtResource("5_enub4")]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 0.6, 0, 0, -0.35)
+can_throw_item = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 collision_layer = 4

@@ -30,7 +30,6 @@ func _on_timer_timeout() -> void:
 	set_random_position_from_list()
 
 func timeStart():
-	print("startTimeTO")
 	$Timer.start()
 
 func set_random_position_from_list():

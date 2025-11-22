@@ -113,6 +113,7 @@ func PlayerDeath(Hp):
 		throw_camera_out()
 		drop_item()
 		movement_enabled = false
+		velocity = Vector3.ZERO
 		is_running = false
 		await get_tree().create_timer(2.5).timeout
 	respawn_player()
@@ -342,7 +343,7 @@ func _update_camera_dynamics(delta):
 			breathing_time = 0.0
 
 func drop_item():
-	if Global.game_settings["Item"] == "":
+	if Global.game_settings["Item"] == "" or !Global.game_settings["CanThrowItem"]:
 		return
 	var item_scene = load("res://chapter2/Item/item.tscn")
 	var new_item = item_scene.instantiate()
@@ -379,7 +380,6 @@ func message(Mtext):
 	$AnimationPlayer.play("message")
 
 func _physics_process(delta):
-	$head/Camera3D/shoot2.text = "%01d/2" % [Global.game_settings["ShootGun_cartridge"]]
 	$head/Camera3D/coordinates.text = "%03d:%03d:%03d" % [global_position.x, global_position.y, global_position.z]
 	if Input.is_action_pressed("+shift") and stamina > 0 and input_dir.length() > 0 and movement_enabled and not crouched:
 		if not is_running:

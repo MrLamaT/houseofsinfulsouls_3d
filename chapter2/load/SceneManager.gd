@@ -6,6 +6,7 @@ var current_scene: Node = null
 
 func _ready():
 	loading_screen = preload("res://chapter2/load/LoadingScreen.tscn")
+	current_scene = get_tree().current_scene
 
 func load_scene_with_loading(scene_path: String):
 	show_loading_screen()

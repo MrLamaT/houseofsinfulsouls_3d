@@ -127,7 +127,7 @@ use_billboard_sprite = true
 sprite_texture = ExtResource("6_3uym5")
 sprite_label = "enemy: Scar"
 
-[node name="ModTraps" parent="." groups=["click_interact"] instance=ExtResource("2_q48q2")]
+[node name="ModTraps" parent="." instance=ExtResource("2_q48q2")]
 transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, 1.74, 2.062, -4.432)
 interaction_name = "Traps"
 handler_node = NodePath("..")

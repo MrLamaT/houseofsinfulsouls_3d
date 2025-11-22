@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dopl01nk55aia"
-path="res://.godot/imported/Taser.png-6df0d340b6725f16ed1fcfffda7c0a1b.ctex"
+path="res://.godot/imported/taser.png-dad758e88a1ac70a5ecdf0b6f34909bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://chapter2/assets/items/Taser.png"
-dest_files=["res://.godot/imported/Taser.png-6df0d340b6725f16ed1fcfffda7c0a1b.ctex"]
+source_file="res://chapter2/assets/items/taser.png"
+dest_files=["res://.godot/imported/taser.png-dad758e88a1ac70a5ecdf0b6f34909bb.ctex"]
 
 [params]
 

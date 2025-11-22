@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://66f66cwy6tfc"]
+[gd_scene load_steps=6 format=3 uid="uid://66f66cwy6tfc"]
 
+[ext_resource type="Script" uid="uid://dommb2huw2mr" path="res://chapter2/rooms/decoration/table.gd" id="1_n615g"]
 [ext_resource type="PackedScene" uid="uid://cdrhd5io8vjva" path="res://chapter2/hide/invisible_trigger.tscn" id="2_n615g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7w8tc"]
@@ -11,6 +12,7 @@ material = SubResource("StandardMaterial3D_7w8tc")
 [sub_resource type="BoxShape3D" id="BoxShape3D_cjmea"]
 
 [node name="Table" type="Node3D"]
+script = ExtResource("1_n615g")
 
 [node name="StaticBody" type="StaticBody3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -2, 0, 0.25, 0, 1, 0, -8.74228e-08, 0, 1, 0)

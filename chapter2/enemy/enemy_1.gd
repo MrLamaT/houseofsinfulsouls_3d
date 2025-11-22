@@ -3,6 +3,7 @@ extends CharacterBody3D
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var vision_area: Area3D = $VisionArea
 @onready var state_label: Label3D = $StateLabel
+@onready var shock_timer: Timer = $shock_timer
 
 var sprite_3d_old: AnimatedSprite3D
 var sprite_3d_new: AnimatedSprite3D
@@ -27,6 +28,9 @@ var ATTACK_DISTANCE: float = 2.0
 
 var previous_position: Vector3
 var movement_direction: Vector3
+var spawnpoint: Vector3
+
+var is_shocked: bool = false
 
 func _ready():
 	if Global.game_settings["ModEye"]:
@@ -41,6 +45,8 @@ func _ready():
 	update_state_label("Patrolling")
 	previous_position = global_position
 	sprite_3d.play("idle_front")
+	apply_shock(5.0)
+	spawnpoint = global_position
 
 func initialize_sprites():
 	sprite_3d_old = get_node_or_null("AnimatedSprite3D_old")
@@ -60,6 +66,9 @@ func initialize_sprites():
 		queue_free()
 
 func _physics_process(delta):
+	if is_shocked:
+		move_and_slide()
+		return
 	if not current_target:
 		return
 	navigation_agent.target_position = current_target.global_position
@@ -90,6 +99,8 @@ func _physics_process(delta):
 	move_and_slide()
 
 func update_sprite_animation():
+	if is_shocked:
+		return
 	if movement_direction.length() < 0.01:
 		if sprite_3d.animation.begins_with("walk_"):
 			var direction = sprite_3d.animation.replace("walk_", "")
@@ -165,12 +176,16 @@ func stop_chasing_player():
 	update_state_label("Returning to Patrol")
 
 func attack_player():
-	if not can_attack_player():
+	if not can_attack_player() or is_shocked:
 		return
 	
 	if player and player.has_method("PlayerDeath"):
 		player.look_at_point(global_position)
 		player.PlayerDeath(-1)
+		apply_shock(3.0)
+		await get_tree().create_timer(3).timeout
+		global_position = spawnpoint
+		print(global_position)
 
 	find_target()
 
@@ -190,14 +205,67 @@ func _on_vision_area_body_entered(body):
 
 func _on_vision_area_body_exited(body):
 	if body == player and is_chasing_player:
-		# Если игрок вышел из зоны видимости, сразу теряем его
 		lose_player()
 		
 func trigger_interaction():
-	print(1)
+	if Global.game_settings["Item"] == "shotgun":
+		apply_shock(120.0)
+	elif Global.game_settings["Item"] == "taser":
+		var distance_to_player = global_position.distance_to(player.global_position)
+		var shock_duration = max(10.0 - distance_to_player, 1.0)
+		print(shock_duration)
+		apply_shock(shock_duration)
+		start_shock_animation(shock_duration)
 
 func _on_mouse_entered() -> void:
 	pass
 
 func _on_mouse_exited() -> void:
 	pass
+
+func apply_shock(duration: float):
+	if is_shocked:
+		return
+	is_shocked = true
+	update_state_label("Shocked!")
+	stop_shock_animation()
+	velocity = Vector3.ZERO
+	sprite_3d.play("shock")
+	shock_timer.start(duration)
+
+var shock_tween: Tween
+
+func start_shock_animation(duration: float):
+	var original_position = global_position
+	if shock_tween:
+		shock_tween.kill()
+	shock_tween = create_tween()
+	shock_tween.set_loops()
+	var shake_intensity = 0.1  # Интенсивность тряски
+	var shake_duration = 0.05  # Длительность каждого колебания
+	for i in range(0, int(duration / shake_duration)):
+		var random_offset = Vector3(
+			randf_range(-shake_intensity, shake_intensity),
+			randf_range(-shake_intensity * 0.5, shake_intensity * 0.5),
+			randf_range(-shake_intensity, shake_intensity)
+		)
+		shock_tween.tween_property(self, "global_position", original_position + random_offset, shake_duration)
+		shock_tween.tween_property(self, "global_position", original_position, shake_duration)
+	if sprite_3d:
+		sprite_3d.modulate = Color(0.5, 0.8, 1.0)  # Синеватый оттенок
+
+func stop_shock_animation():
+	if shock_tween:
+		shock_tween.kill()
+		shock_tween = null
+	if sprite_3d:
+		sprite_3d.modulate = Color.WHITE
+
+func _on_shock_timer_timeout() -> void:
+	is_shocked = false
+	stop_shock_animation()
+	update_sprite_animation()
+	if is_chasing_player:
+		update_state_label("Chasing Player")
+	else:
+		update_state_label("Patrolling")

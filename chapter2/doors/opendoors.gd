@@ -48,7 +48,10 @@ func _on_animation_player_animation_finished(_anim_name: String) -> void:
 	D1BodyCollision.set_deferred("disabled", false)
 	D1.set_deferred("disabled", false)
 
-func _on_enemy_open_body_entered(_body: Node3D) -> void:
+func _on_enemy_open_body_entered(body: Node3D) -> void:
+	if !open:
+		body.apply_shock(1.0)
+		await get_tree().create_timer(1).timeout
 	if !open:
 		call_deferred("trigger_interaction")
 
