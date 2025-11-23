@@ -115,6 +115,10 @@ func _handle_item_pickup(item_name: String):
 	match item_name:
 		"shotgun":
 			_player.get_node("head/Camera3D/shoot").visible = true
+		"NailGun":
+			_player.get_node("head/Camera3D/shoot").visible = true
+			_player.get_node("head/Camera3D/shoot2").visible = true
+			_player.get_node("head/Camera3D/shoot2").text = "%01d/8" % [Global.game_settings["nails_cartridge"]]
 		"taser":
 			_player.get_node("head/Camera3D/shoot").visible = true
 			_player.get_node("head/Camera3D/shoot2").visible = true

@@ -591,7 +591,7 @@ offset_right = 518.0
 offset_bottom = 159.0
 scale = Vector2(2.25, 2.25)
 theme_override_fonts/font = ExtResource("3_sfgwg")
-text = "Enemy will revive in 120 seconds."
+text = "Enemy will revive in 60 seconds."
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -626,6 +626,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.2, -0.5)
 
 [node name="Sprite3D" type="Sprite3D" parent="head/Camera3D/hand_position"]
 transform = Transform3D(-0.012548685, 0, -0.99992126, 0, 1, 0, 0.99992126, 0, -0.012548685, 0.28171474, 0, -0.11359966)
+shaded = true
 texture_filter = 0
 
 [node name="InteractionProgressBar" type="ProgressBar" parent="head/Camera3D"]

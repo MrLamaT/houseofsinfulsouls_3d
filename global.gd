@@ -19,7 +19,7 @@ var game_settings: Dictionary = {
 	"GodMod": false,
 	"Item": "",
 	"HP": 6,
-	"nails_cartridge": 4,
+	"nails_cartridge": 8,
 	"shock_cartridge": 2,
 	"IsDying": false,
 	"ThrownCamera": null

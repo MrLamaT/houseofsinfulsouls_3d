@@ -97,10 +97,16 @@ func _ready():
 func DarkHardMod(mod):
 	if mod:
 		$head/Camera3D/SpotLight3D.visible = false
-		$head/Camera3D/label.text = "Enemy will revive in 60 seconds."
 	else:
 		$head/Camera3D/SpotLight3D.visible = true
-		$head/Camera3D/label.text = "Enemy will revive in 120 seconds."
+
+func UpdateCartridge(itemShot):
+	if itemShot == "NailGun":
+		Global.game_settings["nails_cartridge"] -= 1
+		$head/Camera3D/shoot2.text = "%01d/8" % [Global.game_settings["nails_cartridge"]]
+	if itemShot == "taser":
+		Global.game_settings["shock_cartridge"] -= 1
+		$head/Camera3D/shoot2.text = "%01d/2" % [Global.game_settings["shock_cartridge"]]
 
 func PlayerDeath(Hp):
 	if Global.game_settings["IsDying"]:

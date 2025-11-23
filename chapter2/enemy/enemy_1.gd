@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var vision_area: Area3D = $VisionArea
 @onready var state_label: Label3D = $StateLabel
 @onready var shock_timer: Timer = $shock_timer
+@onready var shock_animation_timer: Timer = $shock_animation_timer
 
 var sprite_3d_old: AnimatedSprite3D
 var sprite_3d_new: AnimatedSprite3D
@@ -210,12 +211,19 @@ func _on_vision_area_body_exited(body):
 func trigger_interaction():
 	if Global.game_settings["Item"] == "shotgun":
 		apply_shock(120.0)
-	elif Global.game_settings["Item"] == "taser":
+	elif Global.game_settings["Item"] == "NailGun" and Global.game_settings["nails_cartridge"] > 0:
 		var distance_to_player = global_position.distance_to(player.global_position)
 		var shock_duration = max(10.0 - distance_to_player, 1.0)
 		print(shock_duration)
 		apply_shock(shock_duration)
-		start_shock_animation(shock_duration)
+		$nail.play()
+		player.UpdateCartridge("NailGun")
+	elif Global.game_settings["Item"] == "taser" and Global.game_settings["shock_cartridge"] > 0:
+		apply_shock(60)
+		start_shock_animation()
+		$shock.play()
+		player.AnimationPlayPlayer("KillEnemy")
+		player.UpdateCartridge("taser")
 
 func _on_mouse_entered() -> void:
 	pass
@@ -235,7 +243,7 @@ func apply_shock(duration: float):
 
 var shock_tween: Tween
 
-func start_shock_animation(duration: float):
+func start_shock_animation():
 	var original_position = global_position
 	if shock_tween:
 		shock_tween.kill()
@@ -243,7 +251,9 @@ func start_shock_animation(duration: float):
 	shock_tween.set_loops()
 	var shake_intensity = 0.1  # Интенсивность тряски
 	var shake_duration = 0.05  # Длительность каждого колебания
-	for i in range(0, int(duration / shake_duration)):
+	var animation_duration = 2.0
+	var iterations = int(animation_duration / (shake_duration * 2))
+	for i in range(iterations):
 		var random_offset = Vector3(
 			randf_range(-shake_intensity, shake_intensity),
 			randf_range(-shake_intensity * 0.5, shake_intensity * 0.5),
@@ -253,6 +263,7 @@ func start_shock_animation(duration: float):
 		shock_tween.tween_property(self, "global_position", original_position, shake_duration)
 	if sprite_3d:
 		sprite_3d.modulate = Color(0.5, 0.8, 1.0)  # Синеватый оттенок
+	shock_animation_timer.start(animation_duration)
 
 func stop_shock_animation():
 	if shock_tween:
@@ -260,6 +271,9 @@ func stop_shock_animation():
 		shock_tween = null
 	if sprite_3d:
 		sprite_3d.modulate = Color.WHITE
+
+func _on_shock_animation_timer_timeout() -> void:
+	stop_shock_animation()
 
 func _on_shock_timer_timeout() -> void:
 	is_shocked = false

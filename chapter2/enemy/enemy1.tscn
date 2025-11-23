@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://epl1yj604jor"]
+[gd_scene load_steps=19 format=3 uid="uid://epl1yj604jor"]
 
 [ext_resource type="Script" uid="uid://dg74vvvcsgyw6" path="res://chapter2/enemy/enemy_1.gd" id="1_se8os"]
 [ext_resource type="Texture2D" uid="uid://dcxerpj5evaat" path="res://chapter2/assets/enemy/new/Eye/eye4.png" id="2_gbrfq"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://ly7qdswdesvo" path="res://chapter2/assets/enemy/old/Eye/eye2.png" id="8_172hk"]
 [ext_resource type="Texture2D" uid="uid://b85xhy300yoly" path="res://chapter2/assets/enemy/old/Eye/eye3.png" id="9_neorp"]
 [ext_resource type="Texture2D" uid="uid://dl2xvp3qcmunk" path="res://chapter2/assets/enemy/old/Eye/eye.png" id="11_xai3o"]
+[ext_resource type="AudioStream" uid="uid://bll553j7ykk0i" path="res://assets/shock.mp3" id="13_xai3o"]
+[ext_resource type="AudioStream" uid="uid://c2w52baurjymm" path="res://assets/nail.wav" id="14_kkywk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_se8os"]
 radius = 0.4
@@ -181,6 +183,16 @@ navigation_layers = 7
 [node name="shock_timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="shock_animation_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="shock" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("13_xai3o")
+
+[node name="nail" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("14_kkywk")
+
 [connection signal="body_entered" from="VisionArea" to="." method="_on_vision_area_body_entered"]
 [connection signal="body_exited" from="VisionArea" to="." method="_on_vision_area_body_exited"]
 [connection signal="timeout" from="shock_timer" to="." method="_on_shock_timer_timeout"]
+[connection signal="timeout" from="shock_animation_timer" to="." method="_on_shock_animation_timer_timeout"]
