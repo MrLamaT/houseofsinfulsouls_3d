@@ -42,6 +42,7 @@ func _ready():
 	if Global.game_settings["ModHard"]:
 		SPEED = 5
 	print("eye speed: ", SPEED)
+	player = get_tree().get_first_node_in_group("player")
 	find_target()
 	update_state_label("Patrolling")
 	previous_position = global_position

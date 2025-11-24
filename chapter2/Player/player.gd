@@ -86,6 +86,8 @@ func _ready():
 	movement_enabled = true
 	Global.game_settings["Item"] = ""
 	Global.game_settings["GodMod"] = false
+	Global.game_settings["nails_cartridge"] = 8
+	Global.game_settings["shock_cartridge"] = 2
 	base_camera_position = cam.position
 	update_stamina_display()
 	stamina_bar.visible = false  
@@ -104,9 +106,11 @@ func UpdateCartridge(itemShot):
 	if itemShot == "NailGun":
 		Global.game_settings["nails_cartridge"] -= 1
 		$head/Camera3D/shoot2.text = "%01d/8" % [Global.game_settings["nails_cartridge"]]
+		print(Global.game_settings["nails_cartridge"])
 	if itemShot == "taser":
 		Global.game_settings["shock_cartridge"] -= 1
 		$head/Camera3D/shoot2.text = "%01d/2" % [Global.game_settings["shock_cartridge"]]
+		print(Global.game_settings["shock_cartridge"])
 
 func PlayerDeath(Hp):
 	if Global.game_settings["IsDying"]:
@@ -443,7 +447,13 @@ func update_running_speed():
 		footstep_delay = 0.5   # Обычная частота шагов
 
 func AnimationPlayPlayer(Anim):
-	$AnimationPlayer.play(Anim)
+	if not is_instance_valid(self) or not is_inside_tree():
+		return
+	var anim_player = $AnimationPlayer
+	if anim_player and anim_player.has_animation(Anim):
+		anim_player.play(Anim)
+	else:
+		push_error("AnimationPlayer или анимация не найдены: " + str(Anim))
 
 func play_footstep():
 	if movement_enabled:

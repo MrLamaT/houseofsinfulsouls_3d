@@ -6,9 +6,14 @@ extends Area3D
 @onready var D1BodyCollision = $D1/StaticBody3D/CollisionShape3D
 @onready var invisible_trigger = get_node_or_null("InvisibleTrigger")
 @onready var audio_player = $AudioStreamPlayer
+@export var need_key: bool = false 
+@export var keyD: String = "vase" 
 var open = false
 
 func trigger_interaction():
+	if need_key and Global.game_settings["Item"] != keyD:
+		return
+	need_key = false
 	D1BodyCollision.disabled = true
 	D1.disabled = true
 	audio_player.pitch_scale = randf_range(0.9, 1.1)
@@ -25,12 +30,18 @@ func trigger_interaction():
 	open = !open
 
 func _on_mouse_entered() -> void:
-	$D1/DoorE.visible = true
-	$D1/DoorE2.visible = true
+	if need_key and Global.game_settings["Item"] != keyD:
+		$D1/Label3D.visible = true
+		$D1/DoorENot.visible = true
+	else:
+		$D1/DoorE.visible = true
+		$D1/DoorE2.visible = true
 
 func _on_mouse_exited() -> void:
 	$D1/DoorE.visible = false
 	$D1/DoorE2.visible = false
+	$D1/Label3D.visible = false
+	$D1/DoorENot.visible = false
 
 func _on_animation_player_animation_finished(_anim_name: String) -> void:
 	D1BodyCollision.disabled = false

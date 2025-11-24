@@ -1,9 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://ppi5cu4cfp8g"]
+[gd_scene load_steps=29 format=3 uid="uid://ppi5cu4cfp8g"]
 
 [ext_resource type="Script" uid="uid://b1rkf7sldtwit" path="res://chapter2/rooms/decoration/closet.gd" id="1_enub4"]
 [ext_resource type="Texture2D" uid="uid://dothpbt8u5xb1" path="res://assets/textures/material6.png" id="2_noj0d"]
 [ext_resource type="Texture2D" uid="uid://d1yrjgdfnrsrq" path="res://assets/E.png" id="3_0i3ap"]
+[ext_resource type="Texture2D" uid="uid://c83n0xd647eyd" path="res://assets/NotE.png" id="4_fblti"]
 [ext_resource type="AudioStream" uid="uid://deuwk68fwacjc" path="res://assets/door.mp3" id="4_pigal"]
+[ext_resource type="FontFile" uid="uid://vpmakd0urni6" path="res://Undertale-Battle-Font.ttf-5b3f8609511f8e0c8fc5e3287eaa9635.fontdata" id="5_eivnq"]
 [ext_resource type="PackedScene" uid="uid://cdrhd5io8vjva" path="res://chapter2/hide/invisible_trigger.tscn" id="5_enub4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6iqkm"]
@@ -33,6 +35,14 @@ texture_filter = 0
 
 [sub_resource type="QuadMesh" id="QuadMesh_g543t"]
 material = SubResource("StandardMaterial3D_fp0bw")
+size = Vector2(0.85, 0.85)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_url4k"]
+albedo_texture = ExtResource("4_fblti")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_e5w14"]
+material = SubResource("StandardMaterial3D_url4k")
 size = Vector2(0.85, 0.85)
 
 [sub_resource type="Animation" id="Animation_qx72u"]
@@ -191,6 +201,19 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 2.22
 visible = false
 mesh = SubResource("QuadMesh_g543t")
 skeleton = NodePath("../..")
+
+[node name="DoorENot" type="MeshInstance3D" parent="D1"]
+transform = Transform3D(1, 0, -2.3841858e-07, 0, 1, 0, 2.3841858e-07, 0, 1, -2.7179246e-09, -0.2638636, 0.018)
+visible = false
+mesh = SubResource("QuadMesh_e5w14")
+skeleton = NodePath("../..")
+
+[node name="Label3D" type="Label3D" parent="D1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4981364, 0.01)
+visible = false
+texture_filter = 0
+text = "need a key"
+font = ExtResource("5_eivnq")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_pigal")
