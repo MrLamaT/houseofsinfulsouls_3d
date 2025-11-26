@@ -53,8 +53,8 @@ func get_available_items() -> Array:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if file_name.ends_with(".png") and not dir.current_is_dir():
-				items.append(file_name.get_basename())
+			if file_name.ends_with(".png.import") and not dir.current_is_dir():
+				items.append(file_name.replace(".png.import", ""))
 			file_name = dir.get_next()
 		dir.list_dir_end()
 	items.sort()
@@ -103,8 +103,8 @@ func parse_command(text: String):
 				if argument.to_lower() == "list":
 					show_available_items()
 					return
-				var item_path = "res://chapter2/assets/items/" + argument + ".png"
-				if not FileAccess.file_exists(item_path):
+				var item_path = "res://chapter2/assets/items/%s.png" % argument
+				if not ResourceLoader.exists(item_path):
 					ErrorPrint("Item not found: " + argument)
 					SystemPrint("Available items:")
 					var items = get_available_items()

@@ -16,7 +16,7 @@ func _ready():
 		# Если указана конкретная картина, пытаемся загрузить её
 		if specific_painting != "":
 			var specific_path = paintings_path.path_join(specific_painting)
-			if FileAccess.file_exists(specific_path):
+			if ResourceLoader.exists(specific_path):
 				selected_texture = load(specific_path)
 				if not selected_texture:
 					push_warning("Не удалось загрузить указанную картину: " + specific_painting + ". Используется случайная.")
@@ -51,11 +51,18 @@ func _get_image_files(path: String) -> Array[String]:
 	var files: Array[String] = []
 	var dir = DirAccess.open(path)
 	
+	print("Opening directory: ", path)
 	if dir:
+		print("Directory opened successfully")
 		var file_names = dir.get_files()
+		print("Files found: ", file_names)
 		for file_name in file_names:
-			# Исключаем .import файлы и проверяем расширения
-			if not file_name.ends_with(".import") and file_name.get_extension() in ["png", "jpg", "jpeg", "webp", "bmp", "tga"]:
-				files.append(path.path_join(file_name))
+			if file_name.ends_with(".png.import"):
+				var cleaned = file_name.replace(".png.import", ".png")
+				files.append(path.path_join(cleaned))
+				print("Added file: ", file_name)
+	else:
+		print("Failed to open directory")
 	
+	print("Total image files: ", files.size())
 	return files

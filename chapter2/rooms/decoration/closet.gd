@@ -8,12 +8,17 @@ extends Area3D
 @onready var audio_player = $AudioStreamPlayer
 @export var need_key: bool = false 
 @export var keyD: String = "vase" 
+@export var item: NodePath
 var open = false
 
 func trigger_interaction():
 	if need_key and Global.game_settings["Item"] != keyD:
 		return
 	need_key = false
+	if item and not item.is_empty():
+		var item_node = get_node_or_null(item)
+		if item_node:
+			item_node.add_to_group("interactive_objects")
 	D1BodyCollision.disabled = true
 	D1.disabled = true
 	audio_player.pitch_scale = randf_range(0.9, 1.1)

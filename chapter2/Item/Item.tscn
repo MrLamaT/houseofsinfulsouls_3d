@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c1awuh7hobog0"]
 
-[ext_resource type="Script" uid="uid://d0jw4oaxfiey2" path="res://chapter2/Item/item.gd" id="1_0mlum"]
+[ext_resource type="Script" uid="uid://d0jw4oaxfiey2" path="res://chapter2/item/item.gd" id="1_0mlum"]
 [ext_resource type="AudioStream" uid="uid://cxirtiw7s35mp" path="res://assets/droop.mp3" id="3_tyht3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oabn4"]

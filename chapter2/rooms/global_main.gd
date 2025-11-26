@@ -38,3 +38,7 @@ func handle_interaction(object_name: String):
 				painting += 1
 				if painting > 1:
 					$NavigationRegion3D/cabinet/Opendoors2.trigger_interaction()
+		"basementDoorExit":
+			$Player.AnimationPlayPlayer("BlackOut")
+			await get_tree().create_timer(0.25).timeout
+			$Player.global_position = Vector3(0, 0, 2)

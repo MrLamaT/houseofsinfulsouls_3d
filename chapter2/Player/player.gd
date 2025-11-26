@@ -179,7 +179,7 @@ func respawn_player():
 	movement_enabled = true
 
 func throw_camera_out():
-	var cam_scene = load("res://chapter2/Item/cam.tscn")
+	var cam_scene = load("res://chapter2/item/cam.tscn")
 	var thrown_cam = cam_scene.instantiate()
 	get_parent().add_child(thrown_cam)
 	thrown_cam.global_position = cam.global_position
@@ -355,9 +355,10 @@ func _update_camera_dynamics(delta):
 func drop_item():
 	if Global.game_settings["Item"] == "" or !Global.game_settings["CanThrowItem"]:
 		return
-	var item_scene = load("res://chapter2/Item/item.tscn")
+	var item_scene = load("res://chapter2/item/item.tscn")
 	var new_item = item_scene.instantiate()
-	var texture_path = "res://chapter2/assets/items/" + Global.game_settings["Item"] + ".png"
+	var texture_path = "res://chapter2/assets/items/%s.png" % Global.game_settings["Item"]
+	print(texture_path)
 	new_item.item_texture = load(texture_path)
 	get_parent().add_child(new_item)
 	new_item.global_position = global_position + Vector3(0, 0.5, 0)

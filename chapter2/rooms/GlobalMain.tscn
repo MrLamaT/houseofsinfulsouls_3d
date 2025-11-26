@@ -1,9 +1,9 @@
-[gd_scene load_steps=172 format=3 uid="uid://coa0qjrqe67hj"]
+[gd_scene load_steps=173 format=3 uid="uid://coa0qjrqe67hj"]
 
 [ext_resource type="Script" uid="uid://c1b3ijvg6fiwb" path="res://chapter2/rooms/global_main.gd" id="1_w630j"]
 [ext_resource type="PackedScene" uid="uid://6v0pay6q4xwe" path="res://chapter2/rooms/decoration/window.tscn" id="4_5xes0"]
 [ext_resource type="Texture2D" uid="uid://2bbd2l04tmkp" path="res://assets/textures/material2.png" id="4_akdvk"]
-[ext_resource type="PackedScene" uid="uid://c1awuh7hobog0" path="res://chapter2/Item/Item.tscn" id="5_h1qgk"]
+[ext_resource type="PackedScene" uid="uid://c1awuh7hobog0" path="res://chapter2/item/item.tscn" id="5_h1qgk"]
 [ext_resource type="Texture2D" uid="uid://cf1rnp7rtkfdx" path="res://chapter2/assets/items/vase.png" id="6_h6cr0"]
 [ext_resource type="Texture2D" uid="uid://m1msdenwiqru" path="res://chapter2/assets/items/screwdriver.png" id="7_80e1f"]
 [ext_resource type="PackedScene" uid="uid://66f66cwy6tfc" path="res://chapter2/rooms/decoration/table.tscn" id="7_ges2j"]
@@ -552,6 +552,9 @@ size = Vector3(0.5477478, 1, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7ee6c"]
 size = Vector3(0.33824462, 1, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3xhh4"]
+size = Vector3(0.99026185, 1, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ee6c"]
 albedo_color = Color(0.38039216, 0.36862746, 0.3254902, 1)
@@ -2283,17 +2286,9 @@ operation = 2
 size = Vector3(0.099121094, 0.6191406, 0.32705688)
 material = SubResource("StandardMaterial3D_xqg7d")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D2/basement/wall4"]
-transform = Transform3D(0.9999999, 0, 1.150191e-13, 0, 0.99999976, 0, -2.6886694e-11, 0, 0.99996346, 0.64463156, 0, -1.9073486e-06)
-shape = SubResource("BoxShape3D_fglvc")
-
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D2/basement/wall4"]
-transform = Transform3D(0.9999999, 0, 1.11022286e-14, 0, 0.99999976, 0, -2.8989259e-12, 0, 0.99997413, 0.099883914, 0, 9.536743e-07)
-shape = SubResource("BoxShape3D_7ee6c")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="NavigationRegion3D2/basement/wall4"]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.99999976, 0, 0, 0, 0.9999914, 0.31949782, 0.30932617, 0)
-shape = SubResource("BoxShape3D_gn84f")
+transform = Transform3D(0.9999999, 0, 1.11022286e-14, 0, 0.99999976, 0, -2.898886e-12, 0, 0.99996316, 0.42589247, 0, 0)
+shape = SubResource("BoxShape3D_3xhh4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D2/basement"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008238792, 0, 0)
@@ -2388,10 +2383,21 @@ texture = ExtResource("54_ti352")
 
 [node name="safe" parent="NavigationRegion3D2/basement" instance=ExtResource("23_poeaw")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.8831272, 1.1000004, 1.4931812)
+item = NodePath("../Item")
 
 [node name="Item" parent="NavigationRegion3D2/basement" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3.5107975, 0.7609353, 1.4780626)
+available = false
 item_texture = ExtResource("37_wpvhy")
+
+[node name="Opendoors2" parent="NavigationRegion3D2/basement" instance=ExtResource("12_afyk1")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3.940115, 1.4849491, -0.06390476)
+is_exclusive_to_enemy = true
+
+[node name="InteractableObject" parent="NavigationRegion3D2/basement" instance=ExtResource("16_k2u2h")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1.9161344, 0, -1, 0, -4.371139e-08, -4.2388344, 1.5480161, -0.07109165)
+interaction_name = "basementDoorExit"
+handler_node = NodePath("../../..")
 
 [node name="floor_ceiling" type="Node3D" parent="NavigationRegion3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0, -19.5)

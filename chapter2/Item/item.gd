@@ -1,5 +1,6 @@
 extends RigidBody3D
 
+@export var available: bool = true
 @export var item_texture: Texture2D
 @export var item_preset: int = 0
 @onready var audio_player = $AudioStreamPlayer3D
@@ -7,6 +8,8 @@ extends RigidBody3D
 func _ready():
 	if item_preset != 0 and item_preset != Global.game_settings["preset"]:
 		queue_free()
+	if !available:
+		remove_from_group("interactive_objects")
 	$MeshInstance3D.queue_free()
 	create_item_mesh()
 
