@@ -12,7 +12,7 @@ func _ready() -> void:
 		remove_from_group("progressive_interactive")
 
 func trigger_interaction():
-	if need_key:
+	if need_key: 
 		if Global.game_settings["Item"] != "scrap":
 			return
 		need_key = false

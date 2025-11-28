@@ -139,7 +139,10 @@ func respawn_player():
 		Global.game_settings["ThrownCamera"] = null
 	cam.current = true
 	velocity = Vector3.ZERO
-	global_position = Vector3(2.599, 0.656, 2.599)
+	if Global.game_settings["HP"] <= 1:
+		global_position = Vector3(-22.0, -6.24, -15.0)
+	else:
+		global_position = Vector3(2.599, 0.656, 2.599)
 	movement_enabled = false
 	stamina = max_stamina
 	is_running = false
@@ -172,7 +175,6 @@ func respawn_player():
 		SceneManager.load_scene_with_loading("res://chapter2/rooms/main.tscn")
 		return
 	await get_tree().create_timer(3.0).timeout
-	global_position = Vector3(2.599, 0.656, 2.599)
 	$tick.stop()
 	$head/Camera3D/Time.visible = false
 	time_label.visible = false

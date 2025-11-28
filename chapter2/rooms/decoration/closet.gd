@@ -13,6 +13,7 @@ var open = false
 
 func trigger_interaction():
 	if need_key and Global.game_settings["Item"] != keyD:
+		print(Global.game_settings["Item"], " ", keyD)
 		return
 	need_key = false
 	if item and not item.is_empty():
