@@ -42,3 +42,10 @@ func handle_interaction(object_name: String):
 			$Player.AnimationPlayPlayer("BlackOut")
 			await get_tree().create_timer(0.25).timeout
 			$Player.global_position = Vector3(0, 0, 2)
+		"SpiderDoor":
+			if Global.game_settings["Item"] == "battery":
+				$Player.clear_item()
+				$NavigationRegion3D2/basement/SpiderDoor/Sprite3D.visible = true
+				$NavigationRegion3D2/basement/SpiderDoor/InteractableObject2.queue_free()
+				$NavigationRegion3D2/basement/SpiderDoor/StaticBody3D/CollisionShape3D.queue_free()
+				$NavigationRegion3D2/basement/SpiderDoor/AnimationPlayer.play("spider")
