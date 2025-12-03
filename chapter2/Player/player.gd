@@ -164,15 +164,25 @@ func respawn_player():
 		time_label.text = "05:00\nlast try"
 		SPEED = 3.0
 	elif Global.game_settings["HP"] <= 0:
-		time_label.text = "06:00\nYou died..."
+		time_label.text = "06:00"
 	update_running_speed()
 	$AnimationPlayer.play("TimeHP")
 	$tick.play()
 	if Global.game_settings["HP"] <= 0:
 		Global.game_settings["ModHard"] = false
 		if Global.game_settings["HP"] == 0:
-			await get_tree().create_timer(1).timeout
-		SceneManager.load_scene_with_loading("res://chapter2/rooms/main.tscn")
+			if get_tree().root.has_node("GlobalMain/NavigationRegion3D2/basement/cutscene/Camera3D"):
+				get_node("/root/GlobalMain/NavigationRegion3D2/basement/cutscene/Camera3D").current = true
+				await get_tree().create_timer(1.0).timeout
+				get_node("/root/GlobalMain/NavigationRegion3D2/basement/cutscene/AnimationPlayer").play("cutscene")
+				await get_tree().create_timer(4.25).timeout
+				$head/Camera3D/TheEND.visible = true
+				$head/Camera3D/TheEND2.visible = true
+				stopSpreedrun()
+				SpreedrunMod(true)
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			SceneManager.load_scene_with_loading("res://chapter2/rooms/main.tscn")
 		return
 	await get_tree().create_timer(3.0).timeout
 	$tick.stop()
@@ -462,3 +472,7 @@ func play_footstep():
 	if movement_enabled:
 		footstep_player.pitch_scale = randf_range(0.9, 1.1) # Случайный тон
 		footstep_player.play()
+
+
+func _on_end_exit_pressed() -> void:
+	SceneManager.load_scene_with_loading("res://chapter2/rooms/main.tscn")

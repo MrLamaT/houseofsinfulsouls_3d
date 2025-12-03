@@ -145,8 +145,16 @@ func parse_command(text: String):
 				ErrorPrint("No rights")
 		"kill":
 			if cheat_mod:
-				player.PlayerDeath(-1)
-				SystemPrint("Player killed")
+				if argument == "":
+					player.PlayerDeath(-1)
+					SystemPrint("Player killed")
+				else:
+					if argument.is_valid_int():
+						var damage_value = argument.to_int()
+						player.PlayerDeath(damage_value)
+						SystemPrint("Player killed")
+					else:
+						ErrorPrint("Invalid argument: must be an integer number")
 			else:
 				ErrorPrint("No rights")
 		"clear":
