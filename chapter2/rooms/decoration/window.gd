@@ -1,12 +1,15 @@
 extends Node3D
 
 @export var boards: bool = false
-var need_key: bool = true 
+@export var need_key: bool = true 
 
 func _ready() -> void:
 	$StaticBody/Sprite3D2.visible = boards
 	$StaticBody/Sprite3D3.visible = boards
 	$StaticBody/Sprite3D.visible = !boards
+	if !need_key:
+		$StaticBody/Sprite3D2.visible = false
+		remove_from_group("progressive_interactive")
 	if !boards:
 		remove_from_group("interactive_objects")
 		remove_from_group("progressive_interactive")

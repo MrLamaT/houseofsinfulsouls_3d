@@ -150,6 +150,7 @@ func respawn_player():
 	update_running_speed()
 	update_stamina_display()
 	$head/Camera3D/Time.visible = true
+	$head/Camera3D/label.visible = false
 	time_label.visible = true
 	blood_overlay.visible = false
 	if Global.game_settings["HP"] == 4:

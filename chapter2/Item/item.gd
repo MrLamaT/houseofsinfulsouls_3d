@@ -2,16 +2,46 @@ extends RigidBody3D
 
 @export var available: bool = true
 @export var item_texture: Texture2D
-@export var item_preset: int = 0
+@export var item_texture_1: Texture2D
+@export var item_texture_2: Texture2D
+@export var item_texture_3: Texture2D
+@export var item_texture_4: Texture2D
+@export var item_texture_5: Texture2D
+
 @onready var audio_player = $AudioStreamPlayer3D
 
 func _ready():
-	if item_preset != 0 and item_preset != Global.game_settings["preset"]:
-		queue_free()
+	apply_preset_texture()
+	
 	if !available:
 		remove_from_group("interactive_objects")
+	
 	$MeshInstance3D.queue_free()
 	create_item_mesh()
+
+func apply_preset_texture():
+	var current_preset = Global.game_settings["preset"]
+	var preset_texture = null
+	
+	match current_preset:
+		1:
+			preset_texture = item_texture_1
+		2:
+			preset_texture = item_texture_2
+		3:
+			preset_texture = item_texture_3
+		4:
+			preset_texture = item_texture_4
+		5:
+			preset_texture = item_texture_5
+		_:
+			preset_texture = item_texture 
+	
+	if preset_texture:
+		item_texture = preset_texture
+	else:
+		if not item_texture:
+			queue_free()
 
 func create_item_mesh():
 	# Основной меш

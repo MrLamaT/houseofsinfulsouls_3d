@@ -74,7 +74,7 @@ visible = false
 mesh = SubResource("QuadMesh_e01qn")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3793189, 0.19558111)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62988704, 0.19558111)
 visible = false
 texture_filter = 0
 text = "need a crowbar"

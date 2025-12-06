@@ -137,6 +137,26 @@ func parse_command(text: String):
 					SystemPrint(argument + " " + str(value))
 				else:
 					ErrorPrint("Key not found: " + argument)
+		"preset":
+			if cheat_mod:
+				if argument == "":
+					SystemPrint("Usage: preset [0-5]")
+					return
+				
+				if not argument.is_valid_int():
+					ErrorPrint("Preset value must be an integer number from 0 to 5")
+					return
+				
+				var preset_value = argument.to_int()
+				if preset_value < 0 or preset_value > 5:
+					ErrorPrint("Preset value must be from 0 to 5 (got: " + argument + ")")
+					return
+				
+				# Устанавливаем новое значение
+				Global.game_settings["preset"] = preset_value
+				SystemPrint("Preset value set to: " + str(preset_value))
+			else:
+				ErrorPrint("No rights")
 		"restart", "respawn":
 			if cheat_mod:
 				player.respawn_player()
