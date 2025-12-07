@@ -6,6 +6,27 @@ func _ready() -> void:
 	$Player.startSpreedrun()
 	$Player.PlayerDeath(-1)
 	$NavigationRegion3D/Living/Label3D.text = Global.game_settings["password"].substr(0, 2) + "??"
+	setup_seasonal_materials()
+	var env_scene = preload("res://chapter2/sky/skybox.tscn")
+	var env_instance = env_scene.instantiate()
+	add_child(env_instance)
+
+func setup_seasonal_materials():
+	# Получаем текущую дату
+	var now = Time.get_datetime_dict_from_system()
+	var month = now["month"]
+	var day = now["day"]
+	var material = StandardMaterial3D.new()
+	if (month == 12 and day >= 10) or (month == 1 and day <= 10):
+		material.albedo_color = Color("c2c4d0")
+	else:
+		material.albedo_color = Color("323f18")
+	material.roughness = 0.8  
+	material.metallic = 0.0   
+	if $NavigationRegion3D/floor_ceiling/dirt/CSGCombiner3D/CSGBox3D:
+		$NavigationRegion3D/floor_ceiling/dirt/CSGCombiner3D/CSGBox3D.material = material
+	else:
+		push_error("CSGBox3D не найден!")
 
 func _on_kill_zona_body_entered(body: Node3D) -> void:
 	print("item killZona!!!")

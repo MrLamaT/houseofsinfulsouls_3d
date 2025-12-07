@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dvyormlmcnr8r"]
+[gd_scene load_steps=36 format=3 uid="uid://dvyormlmcnr8r"]
 
 [ext_resource type="Script" uid="uid://cu01v74yppo1" path="res://chapter2/rooms/main.gd" id="1_rukgg"]
 [ext_resource type="Texture2D" uid="uid://bd832m7qavblv" path="res://assets/textures/material1.png" id="2_4kqoq"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://duh6gy84p1n2s" path="res://chapter2/assets/ModIcon/Mod7_0.png" id="18_n5xo8"]
 [ext_resource type="PackedScene" uid="uid://ppi5cu4cfp8g" path="res://chapter2/rooms/decoration/closet.tscn" id="21_lf7vw"]
 [ext_resource type="PackedScene" uid="uid://2260j2mjo6t8" path="res://chapter2/rooms/decoration/shelf.tscn" id="22_c1l1x"]
+[ext_resource type="PackedScene" uid="uid://dq1nlqrg1a1d3" path="res://chapter2/rooms/decoration/NewYearTree.tscn" id="22_ifo8a"]
 [ext_resource type="PackedScene" uid="uid://cdrhprd8i3g4q" path="res://chapter2/rooms/decoration/light.tscn" id="22_ovupc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lkhu3"]
@@ -246,5 +247,8 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.2
 
 [node name="Light" parent="." instance=ExtResource("22_ovupc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.132, 0)
+
+[node name="NewYearTree" parent="." instance=ExtResource("22_ifo8a")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 1.9, -0.35957903)
 
 [connection signal="body_entered" from="KillZona" to="." method="_on_kill_zona_body_entered"]
