@@ -27,6 +27,10 @@ func setup_seasonal_materials():
 		$NavigationRegion3D/floor_ceiling/dirt/CSGCombiner3D/CSGBox3D.material = material
 	else:
 		push_error("CSGBox3D не найден!")
+	if $NavigationRegion3D/floor_ceiling/dirt2/CSGCombiner3D/CSGBox3D:
+		$NavigationRegion3D/floor_ceiling/dirt2/CSGCombiner3D/CSGBox3D.material = material
+	else:
+		push_error("CSGBox3D не найден!")
 
 func _on_kill_zona_body_entered(body: Node3D) -> void:
 	print("item killZona!!!")
