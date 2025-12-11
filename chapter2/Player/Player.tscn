@@ -676,6 +676,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.2, -0.5)
 transform = Transform3D(-0.012548685, 0, -0.99992126, 0, 1, 0, 0.99992126, 0, -0.012548685, 0.28171474, 0, -0.11359966)
 shaded = true
 texture_filter = 0
+render_priority = 1
 
 [node name="InteractionProgressBar" type="ProgressBar" parent="head/Camera3D"]
 visible = false

@@ -21,6 +21,10 @@ func setup_seasonal_materials():
 		material.albedo_color = Color("c2c4d0")
 	else:
 		material.albedo_color = Color("323f18")
+		$NavigationRegion3D/outdoors/GPUParticles3D.queue_free()
+		$NavigationRegion3D/outdoors/GPUParticles3D2.queue_free()
+		$NavigationRegion3D/outdoors/GPUParticles3D3.queue_free()
+		$NavigationRegion3D/outdoors2/GPUParticles3D4.queue_free()
 	material.roughness = 0.8  
 	material.metallic = 0.0   
 	if $NavigationRegion3D/floor_ceiling/dirt/CSGCombiner3D/CSGBox3D:
@@ -63,10 +67,6 @@ func handle_interaction(object_name: String):
 				painting += 1
 				if painting > 1:
 					$NavigationRegion3D/cabinet/Opendoors2.trigger_interaction()
-		"basementDoorExit":
-			$Player.AnimationPlayPlayer("BlackOut")
-			await get_tree().create_timer(0.25).timeout
-			$Player.global_position = Vector3(0, 0, 2)
 		"SpiderDoor":
 			if Global.game_settings["Item"] == "battery":
 				$Player.clear_item()
@@ -74,3 +74,10 @@ func handle_interaction(object_name: String):
 				$NavigationRegion3D2/basement/SpiderDoor/InteractableObject2.queue_free()
 				$NavigationRegion3D2/basement/SpiderDoor/StaticBody3D/CollisionShape3D.queue_free()
 				$NavigationRegion3D2/basement/SpiderDoor/AnimationPlayer.play("spider")
+		"book":
+			if Global.game_settings["Item"] == "book":
+				$Player.clear_item()
+				$NavigationRegion3D/barn/BookTable/Sprite3D.visible = true
+				$NavigationRegion3D/barn/InteractableObject.queue_free()
+				$NavigationRegion3D/barn/StaticBody3D/CollisionShape3D.queue_free()
+				$NavigationRegion3D/barn/AnimationPlayer.play("book")
