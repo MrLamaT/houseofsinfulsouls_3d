@@ -13,20 +13,20 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_frdbb"]
 size = Vector3(1, 1.890625, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fp0bw"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frdbb"]
 albedo_texture = ExtResource("5_frdbb")
 texture_filter = 0
 
 [sub_resource type="QuadMesh" id="QuadMesh_wudbw"]
-material = SubResource("StandardMaterial3D_fp0bw")
+material = SubResource("StandardMaterial3D_frdbb")
 size = Vector2(0.5, 0.5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83n5t"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f1j44"]
 albedo_texture = ExtResource("6_f1j44")
 texture_filter = 0
 
 [sub_resource type="QuadMesh" id="QuadMesh_e01qn"]
-material = SubResource("StandardMaterial3D_83n5t")
+material = SubResource("StandardMaterial3D_f1j44")
 size = Vector2(0.5, 0.5)
 
 [node name="window" type="Area3D" groups=["interactive_objects", "progressive_interactive"]]

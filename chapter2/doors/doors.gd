@@ -35,7 +35,6 @@ func teleport_player():
 	if player:
 		if closed:
 			closed = false
-			$AudioStreamPlayer.play()
 			player.AnimationPlayPlayer("BlackOut")
 			await get_tree().create_timer(0.25).timeout
 			player.global_position = teleport_target_position

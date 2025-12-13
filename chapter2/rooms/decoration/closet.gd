@@ -6,6 +6,7 @@ extends Area3D
 @onready var D1BodyCollision = $D1/StaticBody3D/CollisionShape3D
 @onready var invisible_trigger = get_node_or_null("InvisibleTrigger")
 @onready var audio_player = $AudioStreamPlayer
+@onready var audio_player2 = $AudioStreamPlayer2
 @export var need_key: bool = false 
 @export var keyD: String = "vase" 
 @export var item: NodePath
@@ -22,15 +23,18 @@ func trigger_interaction():
 			item_node.add_to_group("interactive_objects")
 	D1BodyCollision.disabled = true
 	D1.disabled = true
-	audio_player.pitch_scale = randf_range(0.9, 1.1)
-	audio_player.volume_db = randf_range(-3.0, 0.0)
-	audio_player.play()
+	audio_player.pitch_scale = randf_range(0.7, 0.9)
+	audio_player.volume_db = randf_range(-6.0, -3.0)
+	audio_player2.pitch_scale = randf_range(0.7, 0.9)
+	audio_player2.volume_db = randf_range(-6.0, -3.0)
 	if open:
 		$AnimationPlayer.play("close")
+		audio_player2.play()
 		if invisible_trigger:
 			invisible_trigger.collision_mask = 1
 	else:
 		$AnimationPlayer.play("open")
+		audio_player.play()
 		if invisible_trigger:
 			invisible_trigger.collision_mask = 0
 	open = !open

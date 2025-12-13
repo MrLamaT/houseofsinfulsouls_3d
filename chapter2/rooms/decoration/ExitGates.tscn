@@ -1,6 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://2wrfubx7a0ln"]
+[gd_scene load_steps=12 format=3 uid="uid://2wrfubx7a0ln"]
 
 [ext_resource type="Texture2D" uid="uid://cmtiux7f2mf7g" path="res://assets/textures/material22.png" id="1_c3jm7"]
+[ext_resource type="Script" uid="uid://b6ib1sytl28fw" path="res://chapter2/rooms/decoration/exit_gates.gd" id="1_yxun7"]
+[ext_resource type="Texture2D" uid="uid://ilkd253irnxk" path="res://assets/textures/material14.png" id="2_k87ym"]
+[ext_resource type="PackedScene" uid="uid://bsbcsmkb4kgdi" path="res://chapter2/interactable_object/InteractableObject.tscn" id="3_equ5c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hxb8"]
 albedo_color = Color(0.28627452, 0.18039216, 0.10980392, 1)
@@ -27,6 +30,7 @@ size = Vector3(1, 5, 1)
 size = Vector3(6, 4, 0.5)
 
 [node name="ExitGates" type="Node3D"]
+script = ExtResource("1_yxun7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 collision_layer = 4
@@ -61,3 +65,16 @@ transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 1, -2.6, -0.45, 0)
 shaded = true
 texture_filter = 0
 texture = ExtResource("1_c3jm7")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 1, 3.1174994, 0, -0.33616626)
+shaded = true
+texture_filter = 0
+render_priority = 1
+texture = ExtResource("2_k87ym")
+
+[node name="InteractableObject" parent="." groups=["progressive_interactive"] instance=ExtResource("3_equ5c")]
+transform = Transform3D(-5, 0, -1.509958e-07, 0, 4, 0, 7.54979e-07, 0, -1, 3.0382555, -0.5746633, -0.18151426)
+visible = false
+interaction_name = "boards"
+handler_node = NodePath("..")

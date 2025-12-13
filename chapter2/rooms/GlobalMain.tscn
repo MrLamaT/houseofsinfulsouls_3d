@@ -1,4 +1,4 @@
-[gd_scene load_steps=244 format=3 uid="uid://coa0qjrqe67hj"]
+[gd_scene load_steps=247 format=3 uid="uid://coa0qjrqe67hj"]
 
 [ext_resource type="Script" uid="uid://c1b3ijvg6fiwb" path="res://chapter2/rooms/global_main.gd" id="1_w630j"]
 [ext_resource type="PackedScene" uid="uid://6v0pay6q4xwe" path="res://chapter2/rooms/decoration/window.tscn" id="4_5xes0"]
@@ -251,21 +251,6 @@ texture_filter = 0
 [sub_resource type="BoxShape3D" id="BoxShape3D_cwx2t"]
 size = Vector3(0.07904053, 2.1182861, 1.1169434)
 
-[sub_resource type="Animation" id="Animation_3a5pw"]
-resource_name = "book"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StaticBody3D:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 0.8]
-}
-
 [sub_resource type="Animation" id="Animation_2sus3"]
 length = 0.001
 tracks/0/type = "value"
@@ -279,6 +264,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3a5pw"]
+resource_name = "book"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody3D:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.8]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_emt8f"]
@@ -447,6 +447,115 @@ size = Vector3(0.15268469, 0.28552246, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8lrw6"]
 size = Vector3(0.15268469, 0.41333008, 0.5)
+
+[sub_resource type="Animation" id="Animation_emt8f"]
+resource_name = "TheEnd"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.15, 2.75, 6.75), Vector3(1.15, 2.75, 26.583)]
+}
+
+[sub_resource type="Animation" id="Animation_wrtcm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.15, 2.75, 6.75)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cwx2t"]
+_data = {
+&"RESET": SubResource("Animation_wrtcm"),
+&"TheEnd": SubResource("Animation_emt8f")
+}
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2sus3"]
 lifetime_randomness = 0.5
@@ -2148,6 +2257,7 @@ item_texture = ExtResource("7_80e1f")
 
 [node name="Item9" parent="NavigationRegion3D/Foyer" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(-0.39850885, 0.9171644, -4.0090534e-08, 1.410429e-15, -4.3711385e-08, -1, -0.9171644, -0.39850885, 1.741937e-08, -0.33480453, 2, 4.771757)
+item_texture = ExtResource("37_wpvhy")
 item_texture_3 = ExtResource("10_3dqjl")
 item_texture_4 = ExtResource("35_7sbb1")
 item_texture_5 = ExtResource("36_rhube")
@@ -2419,6 +2529,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.9, 2.989, 2.7999992)
 [node name="ExitGates" parent="NavigationRegion3D/outdoors/StreetWall" instance=ExtResource("41_2sus3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 2.989, 2.8)
 
+[node name="InteractableObject" parent="NavigationRegion3D/outdoors/StreetWall" instance=ExtResource("16_k2u2h")]
+transform = Transform3D(-5, 0, -1.509958e-07, 0, 4, 0, 7.54979e-07, 0, -1, 1.1873341, 2.792682, 15.511902)
+visible = false
+interaction_name = "EXIT"
+handler_node = NodePath("../../../..")
+
 [node name="Lamp" type="Node3D" parent="NavigationRegion3D/outdoors"]
 
 [node name="StreetLamp" parent="NavigationRegion3D/outdoors/Lamp" instance=ExtResource("41_3a5pw")]
@@ -2445,9 +2561,6 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 2
 [node name="StreetLamp8" parent="NavigationRegion3D/outdoors/Lamp" instance=ExtResource("41_3a5pw")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 2.5, -1)
 
-[node name="StreetLamp17" parent="NavigationRegion3D/outdoors/Lamp" instance=ExtResource("41_3a5pw")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4.000002, 2.5, 22.578003)
-
 [node name="StreetLamp9" parent="NavigationRegion3D/outdoors/Lamp" instance=ExtResource("41_3a5pw")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 2.5, -23.000004)
 
@@ -2472,6 +2585,51 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 
 [node name="StreetLamp16" parent="NavigationRegion3D/outdoors/Lamp" instance=ExtResource("41_3a5pw")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 2.5, -1)
 
+[node name="Lamp2" type="Node3D" parent="NavigationRegion3D/outdoors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.861023e-06, 0, 30.220718)
+
+[node name="StreetLamp" parent="NavigationRegion3D/outdoors/Lamp2" instance=ExtResource("41_3a5pw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 2.5, -23.000004)
+
+[node name="StreetLamp2" parent="NavigationRegion3D/outdoors/Lamp2" instance=ExtResource("41_3a5pw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 2.5, -20)
+
+[node name="StreetLamp3" parent="NavigationRegion3D/outdoors/Lamp2" instance=ExtResource("41_3a5pw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 2.5, -17)
+
+[node name="StreetLamp4" parent="NavigationRegion3D/outdoors/Lamp2" instance=ExtResource("41_3a5pw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 2.5, -14)
+
+[node name="StreetLamp5" parent="NavigationRegion3D/outdoors/Lamp2" instance=ExtResource("41_3a5pw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 2.5, -11)
+
+[node name="StreetLamp6" parent="NavigationRegion3D/outdoors/Lamp2" instance=ExtResource("41_3a5pw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 2.5, -8)
+
+[node name="StreetLamp7" parent="NavigationRegion3D/outdoors/Lamp2" instance=ExtResource("41_3a5pw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 2.5, -5)
+
+[node name="StreetLamp9" parent="NavigationRegion3D/outdoors/Lamp2" instance=ExtResource("41_3a5pw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 2.5, -23.000004)
+
+[node name="StreetLamp10" parent="NavigationRegion3D/outdoors/Lamp2" instance=ExtResource("41_3a5pw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 2.5, -20)
+
+[node name="StreetLamp11" parent="NavigationRegion3D/outdoors/Lamp2" instance=ExtResource("41_3a5pw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 2.5, -17)
+
+[node name="StreetLamp12" parent="NavigationRegion3D/outdoors/Lamp2" instance=ExtResource("41_3a5pw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 2.5, -14)
+
+[node name="StreetLamp13" parent="NavigationRegion3D/outdoors/Lamp2" instance=ExtResource("41_3a5pw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 2.5, -11)
+
+[node name="StreetLamp14" parent="NavigationRegion3D/outdoors/Lamp2" instance=ExtResource("41_3a5pw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 2.5, -8)
+
+[node name="StreetLamp15" parent="NavigationRegion3D/outdoors/Lamp2" instance=ExtResource("41_3a5pw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 2.5, -5)
+
 [node name="cutscene" type="Node3D" parent="NavigationRegion3D/outdoors"]
 
 [node name="Label3D" type="Label3D" parent="NavigationRegion3D/outdoors/cutscene"]
@@ -2485,6 +2643,25 @@ font = ExtResource("34_n4wpw")
 
 [node name="Camera3D" type="Camera3D" parent="NavigationRegion3D/outdoors/cutscene"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.75, 6.75)
+
+[node name="Sprite3D" type="Sprite3D" parent="NavigationRegion3D/outdoors/cutscene"]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 1.2551193, 1.496, 4.5675125)
+visible = false
+billboard = 2
+texture_filter = 0
+texture = ExtResource("57_fxxdm")
+
+[node name="Sprite3D2" type="Sprite3D" parent="NavigationRegion3D/outdoors/cutscene"]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0.20456314, 1.4960003, 3.386837)
+visible = false
+billboard = 2
+texture_filter = 0
+texture = ExtResource("58_8akci")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NavigationRegion3D/outdoors/cutscene"]
+libraries = {
+&"": SubResource("AnimationLibrary_cwx2t")
+}
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="NavigationRegion3D/outdoors"]
 transform = Transform3D(-1, 0, -2.457724e-08, 0, 1, 0, 8.742278e-08, 0, -0.28113085, -1.9073486e-06, 8.415114, -16.805397)
@@ -3193,8 +3370,8 @@ shape = SubResource("BoxShape3D_6dbuq")
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D/floor_ceiling/dirt"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/floor_ceiling/dirt/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0065307617, 0, 0.02811408)
-size = Vector3(1.0130615, 1, 1.0562286)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006530732, 0, 0.2367742)
+size = Vector3(1.0130615, 1, 1.4735489)
 material = SubResource("StandardMaterial3D_kmrdn")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/floor_ceiling/dirt/CSGCombiner3D"]
