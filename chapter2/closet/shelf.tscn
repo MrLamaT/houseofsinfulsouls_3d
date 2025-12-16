@@ -1,26 +1,26 @@
-[gd_scene load_steps=31 format=3 uid="uid://denoheqg287im"]
+[gd_scene load_steps=31 format=3 uid="uid://dpbv8185gbpla"]
 
-[ext_resource type="Script" uid="uid://b1rkf7sldtwit" path="res://chapter2/rooms/decoration/closet.gd" id="1_pstyr"]
-[ext_resource type="Texture2D" uid="uid://e4jpgrbitvpd" path="res://assets/textures/material19.png" id="2_pstyr"]
-[ext_resource type="Texture2D" uid="uid://d1yrjgdfnrsrq" path="res://assets/E.png" id="3_c3m54"]
-[ext_resource type="Texture2D" uid="uid://c83n0xd647eyd" path="res://assets/NotE.png" id="4_i68ko"]
-[ext_resource type="FontFile" uid="uid://vpmakd0urni6" path="res://Undertale-Battle-Font.ttf-5b3f8609511f8e0c8fc5e3287eaa9635.fontdata" id="5_4i2vf"]
-[ext_resource type="AudioStream" uid="uid://cqirlw0fn7sdl" path="res://assets/door1.wav" id="6_y0ijf"]
-[ext_resource type="AudioStream" uid="uid://conq8tsl5on0c" path="res://assets/door2.wav" id="7_c3m54"]
+[ext_resource type="Script" uid="uid://b1rkf7sldtwit" path="res://chapter2/closet/closet.gd" id="1_2cf5a"]
+[ext_resource type="Texture2D" uid="uid://dothpbt8u5xb1" path="res://assets/textures/material6.png" id="2_82ibu"]
+[ext_resource type="Texture2D" uid="uid://d1yrjgdfnrsrq" path="res://assets/E.png" id="3_f7un4"]
+[ext_resource type="Texture2D" uid="uid://c83n0xd647eyd" path="res://assets/NotE.png" id="4_f7un4"]
+[ext_resource type="FontFile" uid="uid://vpmakd0urni6" path="res://Undertale-Battle-Font.ttf-5b3f8609511f8e0c8fc5e3287eaa9635.fontdata" id="5_dgutp"]
+[ext_resource type="AudioStream" uid="uid://cqirlw0fn7sdl" path="res://assets/door1.wav" id="6_dgutp"]
+[ext_resource type="AudioStream" uid="uid://conq8tsl5on0c" path="res://assets/door2.wav" id="7_6br2k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6iqkm"]
 size = Vector3(1, 1, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gsnpi"]
-albedo_color = Color(0.34117648, 0.3137255, 0.30980393, 1)
-albedo_texture = ExtResource("2_pstyr")
+albedo_color = Color(0.43137255, 0.32941177, 0.23921569, 1)
+albedo_texture = ExtResource("2_82ibu")
 texture_filter = 0
 
 [sub_resource type="QuadMesh" id="QuadMesh_qx72u"]
 material = SubResource("StandardMaterial3D_gsnpi")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qx72u"]
-albedo_color = Color(0.34117648, 0.3137255, 0.30980393, 1)
+albedo_color = Color(0.43137255, 0.32941177, 0.23921569, 1)
 uv1_scale = Vector3(-1, 1, 1)
 texture_filter = 0
 
@@ -28,7 +28,7 @@ texture_filter = 0
 material = SubResource("StandardMaterial3D_qx72u")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fp0bw"]
-albedo_texture = ExtResource("3_c3m54")
+albedo_texture = ExtResource("3_f7un4")
 texture_filter = 0
 
 [sub_resource type="QuadMesh" id="QuadMesh_g543t"]
@@ -36,7 +36,7 @@ material = SubResource("StandardMaterial3D_fp0bw")
 size = Vector2(0.85, 0.85)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e1rpd"]
-albedo_texture = ExtResource("4_i68ko")
+albedo_texture = ExtResource("4_f7un4")
 texture_filter = 0
 
 [sub_resource type="QuadMesh" id="QuadMesh_6br2k"]
@@ -134,21 +134,21 @@ _data = {
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u8pyo"]
-albedo_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+albedo_color = Color(0.43137255, 0.32941177, 0.23921569, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ub2wn"]
 material = SubResource("StandardMaterial3D_u8pyo")
 size = Vector3(0.1, 1, 0.85)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7aaki"]
-albedo_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+albedo_color = Color(0.43137255, 0.32941177, 0.23921569, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fblti"]
 material = SubResource("StandardMaterial3D_7aaki")
 size = Vector3(0.1, 1, 1.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tkmqe"]
-albedo_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+albedo_color = Color(0.43137255, 0.32941177, 0.23921569, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fp0bw"]
 material = SubResource("StandardMaterial3D_tkmqe")
@@ -166,12 +166,10 @@ size = Vector3(0.10265625, 1, 0.85)
 [sub_resource type="BoxShape3D" id="BoxShape3D_l6c33"]
 size = Vector3(1.2, 0.1, 0.925)
 
-[node name="safe" type="Area3D" groups=["interactive_objects"]]
+[node name="sheif" type="Area3D" groups=["interactive_objects"]]
 collision_layer = 8
 collision_mask = 15
-script = ExtResource("1_pstyr")
-need_key = true
-keyD = "keySafe"
+script = ExtResource("1_2cf5a")
 
 [node name="D1" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_6iqkm")
@@ -219,13 +217,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7611751, 0.01)
 visible = false
 texture_filter = 0
 text = "need a key"
-font = ExtResource("5_4i2vf")
+font = ExtResource("5_dgutp")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_y0ijf")
+stream = ExtResource("6_dgutp")
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_c3m54")
+stream = ExtResource("7_6br2k")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

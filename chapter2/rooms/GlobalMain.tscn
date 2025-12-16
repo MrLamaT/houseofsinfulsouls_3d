@@ -1,4 +1,4 @@
-[gd_scene load_steps=247 format=3 uid="uid://coa0qjrqe67hj"]
+[gd_scene load_steps=248 format=3 uid="uid://coa0qjrqe67hj"]
 
 [ext_resource type="Script" uid="uid://c1b3ijvg6fiwb" path="res://chapter2/rooms/global_main.gd" id="1_w630j"]
 [ext_resource type="PackedScene" uid="uid://6v0pay6q4xwe" path="res://chapter2/rooms/decoration/window.tscn" id="4_5xes0"]
@@ -11,11 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://bmkkd7w44kc34" path="res://chapter2/assets/items/battery.png" id="7_s4nlo"]
 [ext_resource type="PackedScene" uid="uid://iuthusc4lu48" path="res://chapter2/rooms/decoration/board.tscn" id="8_o4e3a"]
 [ext_resource type="Texture2D" uid="uid://dopl01nk55aia" path="res://chapter2/assets/items/taser.png" id="8_ocvev"]
-[ext_resource type="PackedScene" uid="uid://ppi5cu4cfp8g" path="res://chapter2/rooms/decoration/closet.tscn" id="9_5xes0"]
+[ext_resource type="PackedScene" uid="uid://ppi5cu4cfp8g" path="res://chapter2/closet/closet.tscn" id="9_5xes0"]
 [ext_resource type="Texture2D" uid="uid://bbpip5dybofnq" path="res://chapter2/assets/items/NailGun.png" id="9_jbft0"]
 [ext_resource type="Texture2D" uid="uid://dq6db8b2dlaom" path="res://chapter2/assets/items/book.png" id="9_n1w4u"]
 [ext_resource type="Texture2D" uid="uid://btmmp4wgsylsa" path="res://chapter2/assets/items/gear.png" id="10_3dqjl"]
-[ext_resource type="PackedScene" uid="uid://2260j2mjo6t8" path="res://chapter2/rooms/decoration/shelf.tscn" id="10_4ae2m"]
+[ext_resource type="PackedScene" uid="uid://dpbv8185gbpla" path="res://chapter2/closet/shelf.tscn" id="10_4ae2m"]
 [ext_resource type="PackedScene" uid="uid://v1w5plr0x4ls" path="res://chapter2/rooms/decoration/bed.tscn" id="11_58qht"]
 [ext_resource type="PackedScene" uid="uid://cn5qxioc77162" path="res://chapter2/Player/Player.tscn" id="11_fqaro"]
 [ext_resource type="PackedScene" uid="uid://7ntxuc07kbln" path="res://chapter2/doors/Opendoors.tscn" id="12_afyk1"]
@@ -31,14 +31,14 @@
 [ext_resource type="PackedScene" uid="uid://bag7u7i13xbgb" path="res://chapter2/rooms/decoration/web.tscn" id="19_58qht"]
 [ext_resource type="PackedScene" uid="uid://dq1nlqrg1a1d3" path="res://chapter2/rooms/decoration/NewYearTree.tscn" id="19_kfj8w"]
 [ext_resource type="Texture2D" uid="uid://do5y7jxljt63c" path="res://assets/textures/material11.png" id="20_afyk1"]
-[ext_resource type="PackedScene" uid="uid://sa5aeqjy8u2j" path="res://chapter2/rooms/decoration/Itemcloset.tscn" id="21_25t08"]
+[ext_resource type="PackedScene" uid="uid://sa5aeqjy8u2j" path="res://chapter2/closet/Itemcloset.tscn" id="21_25t08"]
 [ext_resource type="PackedScene" uid="uid://vp6d2sdlmwdf" path="res://chapter2/ventilation/ventilation.tscn" id="21_dyctc"]
 [ext_resource type="Texture2D" uid="uid://bd832m7qavblv" path="res://assets/textures/material1.png" id="21_fh80c"]
 [ext_resource type="PackedScene" uid="uid://dadgta0wdi4ug" path="res://chapter2/rooms/decoration/Bookshelf.tscn" id="22_mw8n5"]
 [ext_resource type="PackedScene" uid="uid://bfgon3gfaq61q" path="res://chapter2/rooms/decoration/rug.tscn" id="22_oxgi4"]
 [ext_resource type="Texture2D" uid="uid://bfegx3jao2xq8" path="res://assets/textures/material12.png" id="23_fqaro"]
 [ext_resource type="PackedScene" uid="uid://bb74eru3eac1i" path="res://chapter2/rooms/decoration/sofa2.tscn" id="23_jhkrm"]
-[ext_resource type="PackedScene" uid="uid://denoheqg287im" path="res://chapter2/rooms/decoration/safe.tscn" id="23_poeaw"]
+[ext_resource type="PackedScene" uid="uid://denoheqg287im" path="res://chapter2/closet/safe.tscn" id="23_poeaw"]
 [ext_resource type="PackedScene" uid="uid://dlc4ndjbvvxsi" path="res://chapter2/enemy/enemy2.tscn" id="25_kfv1g"]
 [ext_resource type="PackedScene" uid="uid://dpobeb8u5x1tt" path="res://chapter2/enemy/target_object2.tscn" id="26_0gqrf"]
 [ext_resource type="Texture2D" uid="uid://c8uj1j8awq1ii" path="res://assets/textures/material16.png" id="26_n1xav"]
@@ -50,7 +50,7 @@
 [ext_resource type="Texture2D" uid="uid://ciaaxtc5xhl4v" path="res://chapter2/assets/items/WireCutters.png" id="36_rhube"]
 [ext_resource type="PackedScene" uid="uid://cbu7r1vpww8t" path="res://chapter2/rooms/decoration/box.tscn" id="37_dxjcn"]
 [ext_resource type="Texture2D" uid="uid://vs334tbe2dsm" path="res://chapter2/assets/items/scrap.png" id="37_wpvhy"]
-[ext_resource type="PackedScene" uid="uid://ds6hqpqqpj6hr" path="res://chapter2/rooms/decoration/fridge.tscn" id="38_ptbxn"]
+[ext_resource type="PackedScene" uid="uid://ds6hqpqqpj6hr" path="res://chapter2/closet/fridge.tscn" id="38_ptbxn"]
 [ext_resource type="PackedScene" uid="uid://cmggski320s00" path="res://chapter2/rooms/decoration/tree.tscn" id="38_rhube"]
 [ext_resource type="Texture2D" uid="uid://b14njpr3ghmkp" path="res://chapter2/assets/items/painting2.png" id="38_xyqb7"]
 [ext_resource type="PackedScene" uid="uid://bkb3lr01j0ug3" path="res://chapter2/rooms/decoration/StreetWall.tscn" id="40_3xhh4"]
@@ -61,6 +61,7 @@
 [ext_resource type="Texture2D" uid="uid://dn0ww1s60swk1" path="res://chapter2/assets/enemy/ghost/ghost.png" id="42_2sus3"]
 [ext_resource type="PackedScene" uid="uid://cdrhprd8i3g4q" path="res://chapter2/rooms/decoration/light.tscn" id="42_3dqjl"]
 [ext_resource type="Texture2D" uid="uid://6iba73wp5kl1" path="res://chapter2/assets/items/keySafe2.png" id="45_eypie"]
+[ext_resource type="PackedScene" uid="uid://baqi51ygvoof" path="res://chapter2/closet/shield.tscn" id="47_emt8f"]
 [ext_resource type="PackedScene" uid="uid://c6ob6b8hbhn6m" path="res://chapter2/rooms/decoration/elevator.tscn" id="50_avtcs"]
 [ext_resource type="Texture2D" uid="uid://ccpmoysk2fpo8" path="res://assets/textures/material8.png" id="53_jbft0"]
 [ext_resource type="Texture2D" uid="uid://dcfnc1sf8w708" path="res://assets/textures/material20.png" id="54_ti352"]
@@ -448,6 +449,57 @@ size = Vector3(0.15268469, 0.28552246, 0.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_8lrw6"]
 size = Vector3(0.15268469, 0.41333008, 0.5)
 
+[sub_resource type="Animation" id="Animation_wrtcm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.15, 2.75, 6.75)]
+}
+
 [sub_resource type="Animation" id="Animation_emt8f"]
 resource_name = "TheEnd"
 length = 4.0
@@ -498,57 +550,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(1.15, 2.75, 6.75), Vector3(1.15, 2.75, 26.583)]
-}
-
-[sub_resource type="Animation" id="Animation_wrtcm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Label3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite3D2:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Camera3D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1.15, 2.75, 6.75)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cwx2t"]
@@ -1398,6 +1399,7 @@ transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, 4.05
 
 [node name="sheif2" parent="NavigationRegion3D/cabinet" instance=ExtResource("10_4ae2m")]
 transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, -6.408491, 1.1, -1.1073837)
+item = NodePath("../Item2")
 
 [node name="bed" parent="NavigationRegion3D/cabinet" instance=ExtResource("11_58qht")]
 transform = Transform3D(-0.99999994, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -0.99999994, 2.8330626, 0.89359117, -1.1513519)
@@ -1450,6 +1452,7 @@ texture = ExtResource("26_n1xav")
 
 [node name="Item2" parent="NavigationRegion3D/cabinet" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.969467, 0.7340996, -1.0483551)
+available = false
 item_texture = ExtResource("27_4hkdm")
 
 [node name="Item" parent="NavigationRegion3D/cabinet" instance=ExtResource("5_h1qgk")]
@@ -2097,6 +2100,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7379217, 1.1, -5.6824656)
 
 [node name="sheif3" parent="NavigationRegion3D/Foyer" instance=ExtResource("10_4ae2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.225873, 1.1, -5.6824646)
+item = NodePath("../Item")
 
 [node name="Opendoors" parent="NavigationRegion3D/Foyer" instance=ExtResource("12_afyk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.77237606, 1.5, 8.351038)
@@ -2253,6 +2257,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.43
 
 [node name="Item" parent="NavigationRegion3D/Foyer" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(0.9999999, 0, 0, 0, -4.3711385e-08, -1, 0, 0.9999999, -4.371139e-08, 4.1863403, 0.89289004, -6.1599884)
+available = false
 item_texture = ExtResource("7_80e1f")
 
 [node name="Item9" parent="NavigationRegion3D/Foyer" instance=ExtResource("5_h1qgk")]
@@ -2530,7 +2535,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.9, 2.989, 2.7999992)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 2.989, 2.8)
 
 [node name="InteractableObject" parent="NavigationRegion3D/outdoors/StreetWall" instance=ExtResource("16_k2u2h")]
-transform = Transform3D(-5, 0, -1.509958e-07, 0, 4, 0, 7.54979e-07, 0, -1, 1.1873341, 2.792682, 15.511902)
+transform = Transform3D(-5, 0, -1.509958e-07, 0, 4, 0, 7.54979e-07, 0, -1, 1.1873341, 2.792682, 8.137123)
 visible = false
 interaction_name = "EXIT"
 handler_node = NodePath("../../../..")
@@ -2686,6 +2691,15 @@ amount = 500
 lifetime = 10.0
 process_material = SubResource("ParticleProcessMaterial_2sus3")
 draw_pass_1 = SubResource("QuadMesh_emt8f")
+
+[node name="shield" parent="NavigationRegion3D/outdoors" instance=ExtResource("47_emt8f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.746218, 2.4239962, -25.747477)
+item = NodePath("../Item")
+
+[node name="Item" parent="NavigationRegion3D/outdoors" instance=ExtResource("5_h1qgk")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -18.77072, 2.0656176, -26.33919)
+available = false
+item_texture = ExtResource("10_3dqjl")
 
 [node name="outdoors2" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.000182, 0, 62.912304)
@@ -3144,6 +3158,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4514675, 1.6, 2.1728554)
 
 [node name="closet2" parent="NavigationRegion3D/kitchen" instance=ExtResource("21_25t08")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.187643, 1.6, 2.1728573)
+item = NodePath("../Item")
 
 [node name="sheif" parent="NavigationRegion3D/kitchen" instance=ExtResource("10_4ae2m")]
 transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, -1.786, 1.1, 7.6)
@@ -3171,6 +3186,7 @@ transform = Transform3D(-2.8284264, -2.0000007, -2.0000002, 0, 2.8284268, -2.828
 
 [node name="Item" parent="NavigationRegion3D/kitchen" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, -4.1502953, 1.7872834, 1.512207)
+available = false
 item_texture = ExtResource("45_eypie")
 
 [node name="hallway" type="Node3D" parent="NavigationRegion3D"]

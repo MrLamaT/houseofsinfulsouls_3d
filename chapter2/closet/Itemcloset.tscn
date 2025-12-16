@@ -1,6 +1,6 @@
 [gd_scene load_steps=32 format=3 uid="uid://sa5aeqjy8u2j"]
 
-[ext_resource type="Script" uid="uid://b1rkf7sldtwit" path="res://chapter2/rooms/decoration/closet.gd" id="1_l6c33"]
+[ext_resource type="Script" uid="uid://b1rkf7sldtwit" path="res://chapter2/closet/closet.gd" id="1_l6c33"]
 [ext_resource type="Texture2D" uid="uid://dothpbt8u5xb1" path="res://assets/textures/material6.png" id="2_k31vm"]
 [ext_resource type="Texture2D" uid="uid://d1yrjgdfnrsrq" path="res://assets/E.png" id="3_a7uqn"]
 [ext_resource type="Texture2D" uid="uid://c83n0xd647eyd" path="res://assets/NotE.png" id="4_k31vm"]

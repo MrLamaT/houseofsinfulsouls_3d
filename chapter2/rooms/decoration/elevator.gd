@@ -16,6 +16,9 @@ func handle_interaction(object_name: String):
 				if $wall3/Door.disabled:
 					$AnimationPlayer.play("close")
 				animate_button(object_name)
+				if elevator_id == destination_floors.get(object_name, ""):
+					IsTeleporting = false
+					return
 				teleport_player(object_name)
 		"open":
 			animate_button(object_name)

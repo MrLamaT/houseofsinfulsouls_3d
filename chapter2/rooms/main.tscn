@@ -18,8 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://cf1rnp7rtkfdx" path="res://chapter2/assets/items/vase.png" id="13_vmaj7"]
 [ext_resource type="Texture2D" uid="uid://btlwmjph2uu5r" path="res://chapter2/assets/items/BirdFood.png" id="14_ovupc"]
 [ext_resource type="Texture2D" uid="uid://duh6gy84p1n2s" path="res://chapter2/assets/ModIcon/Mod7_0.png" id="18_n5xo8"]
-[ext_resource type="PackedScene" uid="uid://ppi5cu4cfp8g" path="res://chapter2/rooms/decoration/closet.tscn" id="21_lf7vw"]
-[ext_resource type="PackedScene" uid="uid://2260j2mjo6t8" path="res://chapter2/rooms/decoration/shelf.tscn" id="22_c1l1x"]
+[ext_resource type="PackedScene" uid="uid://ppi5cu4cfp8g" path="res://chapter2/closet/closet.tscn" id="21_lf7vw"]
+[ext_resource type="PackedScene" uid="uid://2260j2mjo6t8" path="res://chapter2/closet/shelf.tscn" id="22_c1l1x"]
 [ext_resource type="PackedScene" uid="uid://dq1nlqrg1a1d3" path="res://chapter2/rooms/decoration/NewYearTree.tscn" id="22_ifo8a"]
 [ext_resource type="PackedScene" uid="uid://cdrhprd8i3g4q" path="res://chapter2/rooms/decoration/light.tscn" id="22_ovupc"]
 
@@ -190,6 +190,7 @@ item_texture = ExtResource("13_vmaj7")
 
 [node name="Item2" parent="." instance=ExtResource("3_q48q2")]
 transform = Transform3D(-0.9923903, -0.12313375, 5.3823435e-09, 3.5701825e-15, -4.3711402e-08, -1, 0.12313375, -0.9923903, 4.337877e-08, -0.25, 0.90849924, 4.5783906)
+available = false
 item_texture = ExtResource("14_ovupc")
 
 [node name="Table" parent="." instance=ExtResource("8_vy737")]
@@ -244,6 +245,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 1
 
 [node name="sheif3" parent="." instance=ExtResource("22_c1l1x")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.25, 1.1, 3.993)
+item = NodePath("../Item2")
 
 [node name="Light" parent="." instance=ExtResource("22_ovupc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.132, 0)
