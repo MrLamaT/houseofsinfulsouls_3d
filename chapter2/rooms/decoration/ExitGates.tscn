@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://2wrfubx7a0ln"]
+[gd_scene load_steps=19 format=3 uid="uid://2wrfubx7a0ln"]
 
 [ext_resource type="Texture2D" uid="uid://cmtiux7f2mf7g" path="res://assets/textures/material22.png" id="1_c3jm7"]
 [ext_resource type="Script" uid="uid://b6ib1sytl28fw" path="res://chapter2/rooms/decoration/exit_gates.gd" id="1_yxun7"]
 [ext_resource type="Texture2D" uid="uid://ilkd253irnxk" path="res://assets/textures/material14.png" id="2_k87ym"]
 [ext_resource type="PackedScene" uid="uid://bsbcsmkb4kgdi" path="res://chapter2/interactable_object/InteractableObject.tscn" id="3_equ5c"]
 [ext_resource type="PackedScene" uid="uid://baqi51ygvoof" path="res://chapter2/closet/shield.tscn" id="5_wxao6"]
+[ext_resource type="Texture2D" uid="uid://bmn27kj4pludh" path="res://assets/textures/scute.png" id="6_2so0o"]
+[ext_resource type="Texture2D" uid="uid://bq4bsnlxmt7gu" path="res://assets/textures/scute2.png" id="7_jwmcb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hxb8"]
 albedo_color = Color(0.28627452, 0.18039216, 0.10980392, 1)
@@ -26,6 +28,21 @@ size = Vector3(5, 0.5, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vdh0c"]
 size = Vector3(1, 5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wxao6"]
+albedo_color = Color(0.41960785, 0.37254903, 0.28627452, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2so0o"]
+material = SubResource("StandardMaterial3D_wxao6")
+size = Vector3(1, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2so0o"]
+shading_mode = 0
+albedo_color = Color(0.6117647, 0.56078434, 0.11372549, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jwmcb"]
+material = SubResource("StandardMaterial3D_2so0o")
+size = Vector3(0.25, 0.25, 0.25)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2hxb8"]
 size = Vector3(6, 4, 0.5)
@@ -52,6 +69,24 @@ mesh = SubResource("BoxMesh_c3jm7")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_vdh0c")
 
+[node name="lock" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9538903, 0, 0)
+collision_layer = 4
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="lock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.059344, 1.0478588, -0.13618487)
+mesh = SubResource("BoxMesh_2so0o")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="lock/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27753115, 0, -0.15277782)
+mesh = SubResource("BoxMesh_jwmcb")
+skeleton = NodePath("../..")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="lock/MeshInstance3D/MeshInstance3D2"]
+light_color = Color(0.6117647, 0.56078434, 0.11372549, 1)
+spot_range = 0.8787106
+
 [node name="StaticBody3D2" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6157093, 0, 0)
 collision_layer = 4
@@ -68,7 +103,7 @@ texture_filter = 0
 texture = ExtResource("1_c3jm7")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 1, 3.1174994, 0, -0.33616626)
+transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 1, 3.1174994, -1.7916558, -0.33616626)
 shaded = true
 texture_filter = 0
 render_priority = 1
@@ -82,3 +117,23 @@ handler_node = NodePath("..")
 
 [node name="shield" parent="." instance=ExtResource("5_wxao6")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 11.697, -0.35, -11.25)
+
+[node name="electro" type="StaticBody3D" parent="."]
+
+[node name="scute" type="Sprite3D" parent="."]
+transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 1, 11.741568, -0.42074364, -10.611908)
+shaded = true
+texture_filter = 0
+texture = ExtResource("6_2so0o")
+
+[node name="scute2" type="Sprite3D" parent="."]
+transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 1, 11.741568, -0.42074364, -10.611908)
+visible = false
+shaded = true
+texture_filter = 0
+texture = ExtResource("7_jwmcb")
+
+[node name="InteractableObject2" parent="." instance=ExtResource("3_equ5c")]
+transform = Transform3D(0.4, 0, 0, 0, 0.3, 0, 0, 0, 0.25, 11.75615, -0.14614758, -10.587649)
+interaction_name = "scute"
+handler_node = NodePath("..")

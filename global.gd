@@ -22,5 +22,7 @@ var game_settings: Dictionary = {
 	"nails_cartridge": 8,
 	"shock_cartridge": 2,
 	"IsDying": false,
-	"ThrownCamera": null
+	"ThrownCamera": null,
+	"doorExit": 0
 }
+var saved_portal_data: Dictionary = {}

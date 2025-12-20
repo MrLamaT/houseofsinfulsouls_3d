@@ -163,7 +163,7 @@ func parse_command(text: String):
 				SystemPrint("Player respawned")
 			else:
 				ErrorPrint("No rights")
-		"kill":
+		"kill", "HP", "hp":
 			if cheat_mod:
 				if argument == "":
 					player.PlayerDeath(-1)
