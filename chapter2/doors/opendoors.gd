@@ -23,9 +23,9 @@ func trigger_interaction():
 	D1BodyCollision.set_deferred("disabled", true)
 	D1.set_deferred("disabled", true)
 	audio_player.pitch_scale = randf_range(0.7, 0.9)
-	audio_player.volume_db = randf_range(-6.0, -3.0)
+	audio_player.volume_db = randf_range(-23.0, -20.0)
 	audio_player2.pitch_scale = randf_range(0.7, 0.9)
-	audio_player2.volume_db = randf_range(-6.0, -3.0)
+	audio_player2.volume_db = randf_range(-23.0, -20.0)
 	if open:
 		$AnimationPlayer.play("close")
 		audio_player2.play()

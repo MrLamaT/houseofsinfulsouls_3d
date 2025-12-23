@@ -60,7 +60,7 @@ var current_fov: float = base_fov
 var is_running = false
 var stamina = 100.0
 var max_stamina = 100.0
-var stamina_depletion_rate = 65.0  # Скорость расходования стамины в секунду
+var stamina_depletion_rate = 50.0  # Скорость расходования стамины в секунду
 var stamina_regen_rate = 10.0      # Скорость восстановления стамины в секунду
 var can_regenerate = true
 var regen_delay = 6  # Задержка перед восстановлением после бега
@@ -473,7 +473,6 @@ func play_footstep():
 	if movement_enabled:
 		footstep_player.pitch_scale = randf_range(0.9, 1.1) # Случайный тон
 		footstep_player.play()
-
 
 func _on_end_exit_pressed() -> void:
 	SceneManager.load_scene_with_loading("res://chapter2/rooms/main.tscn")

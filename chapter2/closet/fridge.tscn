@@ -214,12 +214,6 @@ texture_filter = 0
 text = "need a key"
 font = ExtResource("5_jgkm0")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_jgkm0")
-
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_q0ja6")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_clb7a")
@@ -271,6 +265,13 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.59504825, 0, -0.45000002)
 shape = SubResource("BoxShape3D_enub4")
 debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_jgkm0")
+max_db = -3.0
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_q0ja6")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

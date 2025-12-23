@@ -219,12 +219,6 @@ texture_filter = 0
 text = "need a key"
 font = ExtResource("5_dgutp")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_dgutp")
-
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_6br2k")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_clb7a")
@@ -282,6 +276,13 @@ shape = SubResource("BoxShape3D_l6c33")
 [node name="Collision_pol2" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.05, -0.45)
 shape = SubResource("BoxShape3D_l6c33")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_dgutp")
+max_db = -3.0
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_6br2k")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

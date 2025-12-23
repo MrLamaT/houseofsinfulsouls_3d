@@ -220,6 +220,7 @@ mesh = SubResource("BoxMesh_fp0bw")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_clb7a")
+max_db = -3.0
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_e1rpd")

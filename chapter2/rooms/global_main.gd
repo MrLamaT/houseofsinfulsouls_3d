@@ -82,16 +82,16 @@ func handle_interaction(object_name: String):
 				$NavigationRegion3D/barn/StaticBody3D/CollisionShape3D.queue_free()
 				$NavigationRegion3D/barn/AnimationPlayer.play("book")
 		"EXIT":
-			if Global.game_settings["doorExit"] >= 1:
+			if Global.game_settings["doorExit"] >= 3:
 				$NavigationRegion3D/outdoors/StreetWall/InteractableObject.position = Vector3(1.187, 2.793, 2.37)
 				$NavigationRegion3D/outdoors/StreetWall/InteractableObject.queue_free()
 				$NavigationRegion3D/outdoors/cutscene/Camera3D.current = true
+				$Player.global_position = Vector3(2.599, 0.656, 2.599)
+				Global.game_settings["god"] = true
 				$NavigationRegion3D/outdoors/cutscene/AnimationPlayer.play("TheEnd")
 				await get_tree().create_timer(4.0).timeout
 				$Player/head/Camera3D/TheEND.visible = true
 				$Player/head/Camera3D/TheEND2.visible = true
-				$Player.global_position = Vector3(0,0,0)
-				Global.game_settings["god"] = true
 				$Player.stopSpreedrun()
 				$Player.SpreedrunMod(true)
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
