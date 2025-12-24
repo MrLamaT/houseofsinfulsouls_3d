@@ -23,6 +23,8 @@ var game_settings: Dictionary = {
 	"shock_cartridge": 2,
 	"IsDying": false,
 	"ThrownCamera": null,
-	"doorExit": 0
+	"doorExit": 0,
+	"can_jump": true,
+	"affected_by_gravity": true
 }
 var saved_portal_data: Dictionary = {}

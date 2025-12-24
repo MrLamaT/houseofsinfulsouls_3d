@@ -8,6 +8,7 @@ extends CharacterBody3D
 @onready var footstep_player = $FootstepPlayer
 @onready var crosshair = $head/Camera3D/crosshair
 @onready var hand_sprite = $head/Camera3D/hand_position/Sprite3D
+@onready var hand_target: Marker3D = $head/Camera3D/HandTarget
 
 var interaction_manager: InteractionManager
 
@@ -18,7 +19,7 @@ var crouched = false
 var input_dir = Vector3(0,0,0)
 var direction = Vector3() 
 var sens = 0.005
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") 
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * 2
 var is_walking = false
 var footstep_timer = 0.0
 var footstep_delay = 0.5
@@ -69,6 +70,55 @@ var regen_timer = 0.0
 var is_paused = false
 var is_terminal = false
 
+#прыжок
+var jump_velocity = 4.5
+var is_jumping = false
+var jump_cooldown = 0.2
+var jump_cooldown_timer = 0.0
+
+var vertical_movement_speed = 5.0 # Скорость движения вверх/вниз при отключенной гравитации
+
+#стройка
+var grid_size = 0.25
+var ghost_block: Node3D = null
+var objects = []
+var current_object_index = 0
+
+func building(_delta):
+	var snap_pos: Vector3 = snap_to_grid(hand_target.global_position, grid_size)
+	ghost_block.global_position = lerp(ghost_block.global_position, snap_pos, 0.1)
+	if Input.is_action_just_pressed("rotate"):
+		ghost_block.rotation.y += deg_to_rad(45)
+	if Input.is_action_just_pressed("UI_click") and ghost_block.can_place:
+		var block_instance = objects[current_object_index].instantiate()
+		get_parent().add_child(block_instance)
+		block_instance.place()
+		block_instance.global_transform.origin = snap_to_grid(ghost_block.global_transform.origin, grid_size)
+		block_instance.global_position = ghost_block.global_position
+		block_instance.global_rotation = ghost_block.global_rotation
+
+func object_change(directionBlock):
+	if ghost_block:
+		ghost_block.queue_free()
+		current_object_index += directionBlock
+		if (current_object_index < 0):
+			current_object_index += objects.size()
+		elif current_object_index >= objects.size():
+			current_object_index -= objects.size()
+		spawn_ghost_block()
+
+func snap_to_grid(input_position: Vector3, grid_snap: float) -> Vector3:
+	var x = round(input_position.x / grid_snap) * grid_snap
+	var y = round(input_position.y / grid_snap) * grid_snap
+	var z = round(input_position.z / grid_snap) * grid_snap
+	return Vector3(x,y,z)
+
+func spawn_ghost_block():
+	ghost_block = objects[current_object_index].instantiate()
+	get_parent().add_child(ghost_block)
+	ghost_block.global_position = self.global_position
+	ghost_block.global_position.y -= 1.0
+
 func look_at_point(target_point: Vector3):
 	var head_look_point = Vector3(target_point.x, head.global_position.y, target_point.z)
 	head.look_at(head_look_point, Vector3.UP)
@@ -86,6 +136,7 @@ func _ready():
 	movement_enabled = true
 	Global.game_settings["Item"] = ""
 	Global.game_settings["GodMod"] = false
+	Global.game_settings["affected_by_gravity"] = true
 	Global.game_settings["nails_cartridge"] = 8
 	Global.game_settings["shock_cartridge"] = 2
 	base_camera_position = cam.position
@@ -95,6 +146,8 @@ func _ready():
 	if Global.game_settings["ModHard"]:
 		DarkHardMod(true)
 	update_gui_visibility()
+	objects.append(preload("res://chapter2/Objects/light.tscn"))
+	objects.append(preload("res://chapter2/Objects/foundation.tscn"))
 
 func DarkHardMod(mod):
 	if mod:
@@ -139,6 +192,8 @@ func respawn_player():
 		Global.game_settings["ThrownCamera"] = null
 	cam.current = true
 	velocity = Vector3.ZERO
+	if Global.game_settings["affected_by_gravity"]:
+		velocity.y = 0
 	if Global.game_settings["HP"] <= 1:
 		global_position = Vector3(-22.0, -6.24, -15.0)
 	else:
@@ -278,7 +333,7 @@ func _input(event: InputEvent): #повороты мышкой
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	if Input.is_action_just_pressed("+crouch"):
+	if Input.is_action_just_pressed("+crouch") and Global.game_settings["affected_by_gravity"]:
 		if crouched:
 			if Global.game_settings["CanStandUp"]:
 				crouched = false
@@ -295,9 +350,11 @@ func _input(event: InputEvent): #повороты мышкой
 func ghost_cheat():
 	cheat_f3 = !cheat_f3
 	if cheat_f3:
-		collision_mask = 1 << 5
+		collision_mask = 1
+		Global.game_settings["affected_by_gravity"] = false
 	else:
 		collision_mask = (1 << 2) | (1 << 3) | (1 << 5)
+		Global.game_settings["affected_by_gravity"] = true
 
 func _process(delta):
 	$head/Camera3D/fps.text = "FPS: %d" % Engine.get_frames_per_second()
@@ -405,6 +462,32 @@ func message(Mtext):
 
 func _physics_process(delta):
 	$head/Camera3D/coordinates.text = "%03d:%03d:%03d" % [global_position.x, global_position.y, global_position.z]
+	if Input.is_action_just_pressed("+f2"):
+		if ghost_block:
+			ghost_block.destroy()
+		else:
+			spawn_ghost_block()
+	if ghost_block:
+		building(delta)
+		if Input.is_action_just_pressed("+f3"):
+			object_change(1)
+	if Global.game_settings["affected_by_gravity"]:
+		if Input.is_action_just_pressed("+space") and is_on_floor() and Global.game_settings["can_jump"] and movement_enabled and Global.game_settings["CanStandUp"]:
+			if jump_cooldown_timer <= 0:
+				velocity.y = jump_velocity
+				is_jumping = true
+				jump_cooldown_timer = jump_cooldown
+		if jump_cooldown_timer > 0:
+			jump_cooldown_timer -= delta
+		if is_on_floor():
+			is_jumping = false
+	if Global.game_settings["affected_by_gravity"]:
+		if not is_on_floor():
+			velocity.y -= gravity * delta
+	else:
+		velocity.y = 0
+		if movement_enabled:
+			handle_flight_movement(delta)
 	if Input.is_action_pressed("+shift") and stamina > 0 and input_dir.length() > 0 and movement_enabled and not crouched:
 		if not is_running:
 			is_running = true
@@ -434,16 +517,12 @@ func _physics_process(delta):
 		$CollisionShape3D.scale.y = lerp($CollisionShape3D.scale.y, 1.0 ,0.4)
 		$CollisionShape3D.position.y = lerp($CollisionShape3D.position.y, 1.143,0.4)
 		head.position.y = lerp(head.position.y, 1.85 , 0.3)
- 
-	if not is_on_floor(): #гравитация
-		velocity.y -= gravity * delta
 	
 	input_dir = Input.get_vector("+a", "+d", "+w", "+s")
 	direction = ($head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if movement_enabled: 
 		velocity.x = lerp(velocity.x ,direction.x * SPEED, accel * delta)
 		velocity.z = lerp(velocity.z ,direction.z * SPEED, accel * delta)
-	
 	move_and_slide()
 	interaction_manager.check_interactable()
 
@@ -451,6 +530,22 @@ func force_stand_up():
 	if crouched:
 		crouched = false
 		update_running_speed()
+
+func handle_flight_movement(delta):
+	var vertical_input = 0
+	if Input.is_action_pressed("+space"):  # Используем Space для подъема
+		vertical_input += 1
+	if Input.is_action_pressed("+crouch"):   # Используем Ctrl для спуска
+		vertical_input -= 1
+	if vertical_input != 0:
+		velocity.y = vertical_input * vertical_movement_speed
+	else:
+		velocity.y = 0
+	input_dir = Input.get_vector("+a", "+d", "+w", "+s")
+	direction = ($head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if movement_enabled: 
+		velocity.x = lerp(velocity.x, direction.x * SPEED, accel * delta)
+		velocity.z = lerp(velocity.z, direction.z * SPEED, accel * delta)
 
 func update_running_speed():
 	if is_running and stamina > 0:

@@ -717,6 +717,9 @@ show_percentage = false
 [node name="Terminal" parent="head/Camera3D" instance=ExtResource("10_u8yn7")]
 visible = false
 
+[node name="HandTarget" type="Marker3D" parent="head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
 [node name="FootstepPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_kd1ih")
 volume_db = -25.0
