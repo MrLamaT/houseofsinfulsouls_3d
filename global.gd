@@ -25,6 +25,7 @@ var game_settings: Dictionary = {
 	"ThrownCamera": null,
 	"doorExit": 0,
 	"can_jump": true,
-	"affected_by_gravity": true
+	"affected_by_gravity": true,
+	"FloatHeight": 0
 }
 var saved_portal_data: Dictionary = {}

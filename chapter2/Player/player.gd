@@ -84,6 +84,12 @@ var ghost_block: Node3D = null
 var objects = []
 var current_object_index = 0
 
+#полёт
+var is_floating: bool = false
+var float_start_height: float = 0.0
+var float_target_height: float = 0.0
+var float_speed: float = 3.0 # скорость подъема/спуска при парении
+
 func building(_delta):
 	var snap_pos: Vector3 = snap_to_grid(hand_target.global_position, grid_size)
 	ghost_block.global_position = lerp(ghost_block.global_position, snap_pos, 0.1)
@@ -198,6 +204,7 @@ func respawn_player():
 		global_position = Vector3(-22.0, -6.24, -15.0)
 	else:
 		global_position = Vector3(2.599, 0.656, 2.599)
+	is_floating = false  
 	movement_enabled = false
 	stamina = max_stamina
 	is_running = false
@@ -350,6 +357,7 @@ func _input(event: InputEvent): #повороты мышкой
 func ghost_cheat():
 	cheat_f3 = !cheat_f3
 	if cheat_f3:
+		crouched = false
 		collision_mask = 1
 		Global.game_settings["affected_by_gravity"] = false
 	else:
@@ -462,6 +470,8 @@ func message(Mtext):
 
 func _physics_process(delta):
 	$head/Camera3D/coordinates.text = "%03d:%03d:%03d" % [global_position.x, global_position.y, global_position.z]
+	if not Global.game_settings["affected_by_gravity"]:
+		is_floating = false
 	if Input.is_action_just_pressed("+f2"):
 		if ghost_block:
 			ghost_block.destroy()
@@ -472,22 +482,35 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("+f3"):
 			object_change(1)
 	if Global.game_settings["affected_by_gravity"]:
-		if Input.is_action_just_pressed("+space") and is_on_floor() and Global.game_settings["can_jump"] and movement_enabled and Global.game_settings["CanStandUp"]:
+		if Input.is_action_just_pressed("+space") and is_on_floor() and Global.game_settings["can_jump"] and movement_enabled and !crouched:
 			if jump_cooldown_timer <= 0:
 				velocity.y = jump_velocity
 				is_jumping = true
 				jump_cooldown_timer = jump_cooldown
+		if Global.game_settings["FloatHeight"] > 0:
+			if Input.is_action_pressed("+space") and not is_on_floor() and movement_enabled and not crouched:
+				if not is_floating:
+					is_floating = true
+					float_start_height = global_position.y
+					float_target_height = float_start_height + Global.game_settings["FloatHeight"]
+					velocity.y = 0
+				else:
+					if global_position.y < float_target_height:
+						velocity.y = float_speed
+					else:
+						velocity.y = 0
+			if Input.is_action_just_released("+space") and is_floating:
+				is_floating = false
+			if is_on_floor():
+				is_floating = false
 		if jump_cooldown_timer > 0:
 			jump_cooldown_timer -= delta
 		if is_on_floor():
 			is_jumping = false
-	if Global.game_settings["affected_by_gravity"]:
-		if not is_on_floor():
+		if not is_on_floor() and not is_floating:
 			velocity.y -= gravity * delta
 	else:
-		velocity.y = 0
-		if movement_enabled:
-			handle_flight_movement(delta)
+		handle_flight_movement(delta)
 	if Input.is_action_pressed("+shift") and stamina > 0 and input_dir.length() > 0 and movement_enabled and not crouched:
 		if not is_running:
 			is_running = true
@@ -496,7 +519,7 @@ func _physics_process(delta):
 		if is_running:
 			is_running = false
 			update_running_speed()
-	if is_on_floor() and input_dir.length() > 0:
+	if Global.game_settings["affected_by_gravity"] and is_on_floor() and input_dir.length() > 0:
 		if not is_walking:
 			is_walking = true
 			footstep_timer = 0
@@ -507,7 +530,6 @@ func _physics_process(delta):
 			footstep_timer = 0
 	else:
 		is_walking = false
-			
 	if crouched:
 		SPEED = 2.5
 		$CollisionShape3D.scale.y = lerp($CollisionShape3D.scale.y,0.4,0.4)
@@ -517,12 +539,12 @@ func _physics_process(delta):
 		$CollisionShape3D.scale.y = lerp($CollisionShape3D.scale.y, 1.0 ,0.4)
 		$CollisionShape3D.position.y = lerp($CollisionShape3D.position.y, 1.143,0.4)
 		head.position.y = lerp(head.position.y, 1.85 , 0.3)
-	
-	input_dir = Input.get_vector("+a", "+d", "+w", "+s")
-	direction = ($head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if movement_enabled: 
-		velocity.x = lerp(velocity.x ,direction.x * SPEED, accel * delta)
-		velocity.z = lerp(velocity.z ,direction.z * SPEED, accel * delta)
+	if Global.game_settings["affected_by_gravity"]:
+		input_dir = Input.get_vector("+a", "+d", "+w", "+s")
+		direction = ($head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		if movement_enabled: 
+			velocity.x = lerp(velocity.x ,direction.x * SPEED, accel * delta)
+			velocity.z = lerp(velocity.z ,direction.z * SPEED, accel * delta)
 	move_and_slide()
 	interaction_manager.check_interactable()
 
@@ -532,20 +554,23 @@ func force_stand_up():
 		update_running_speed()
 
 func handle_flight_movement(delta):
-	var vertical_input = 0
-	if Input.is_action_pressed("+space"):  # Используем Space для подъема
-		vertical_input += 1
-	if Input.is_action_pressed("+crouch"):   # Используем Ctrl для спуска
-		vertical_input -= 1
-	if vertical_input != 0:
-		velocity.y = vertical_input * vertical_movement_speed
-	else:
-		velocity.y = 0
 	input_dir = Input.get_vector("+a", "+d", "+w", "+s")
-	direction = ($head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if movement_enabled: 
-		velocity.x = lerp(velocity.x, direction.x * SPEED, accel * delta)
-		velocity.z = lerp(velocity.z, direction.z * SPEED, accel * delta)
+	var cam_basis = cam.global_transform.basis
+	var move_direction = Vector3.ZERO
+	if input_dir.length() > 0:
+		var forward = cam_basis.z  
+		var right = cam_basis.x    
+		move_direction = (forward * input_dir.y) + (right * input_dir.x)
+		move_direction = move_direction.normalized()
+	if movement_enabled and move_direction.length() > 0:
+		var target_velocity = move_direction * float(SPEED)
+		velocity.x = lerp(velocity.x, target_velocity.x, accel * delta)
+		velocity.y = lerp(velocity.y, target_velocity.y, accel * delta)
+		velocity.z = lerp(velocity.z, target_velocity.z, accel * delta)
+	else:
+		velocity.x = lerp(velocity.x, 0.0, accel * delta)
+		velocity.y = lerp(velocity.y, 0.0, accel * delta)
+		velocity.z = lerp(velocity.z, 0.0, accel * delta)
 
 func update_running_speed():
 	if is_running and stamina > 0:

@@ -4,11 +4,13 @@ extends Node3D
 @onready var collision_area = $Area3D
 var check = true
 var possible_positions = [
-	Vector3(10, 0.747, -14),
-	Vector3(9.652, 0.747, -9.061),
-	Vector3(5, 0.747, -12),
-	Vector3(12, 0.747, -8),
-	Vector3(7, 0.747, -15)
+	Vector3(-10.0, 0.747, 1.0),
+	Vector3(9.0, 0.747, -9.0),
+	Vector3(1.0, 0.747, -23.0),
+	Vector3(-10.0, 0.747, -22.0),
+	Vector3(-23.0, 0.747, -22.0),
+	Vector3(-30.0, 0.747, -22.0),
+	Vector3(-10.0, 0.747, -35.0)
 ]
 var available_positions = []
 var last_used_position = null

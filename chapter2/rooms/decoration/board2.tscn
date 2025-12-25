@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://wstyeotnokcn"]
+
+[ext_resource type="Texture2D" uid="uid://dcn3lo80e4vca" path="res://assets/paintings/picture15.png" id="1_47e22"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cjmea"]
+size = Vector3(0.85, 1, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pb3do"]
+albedo_color = Color(0.5058824, 0.3882353, 0.28235295, 1)
+uv1_scale = Vector3(12, 5, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d26q7"]
+albedo_color = Color(0.5058824, 0.3882353, 0.28235295, 1)
+uv1_scale = Vector3(12, 5, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+
+[node name="board2" type="Node3D"]
+
+[node name="StaticBody" type="StaticBody3D" parent="."]
+transform = Transform3D(1.91069e-15, -4.37114e-09, -1, -1, -4.37114e-09, -3.59989e-21, -4.37114e-08, 0.1, -4.37114e-08, 0, 0, 0)
+collision_layer = 4
+collision_mask = 3
+
+[node name="Sprite3D" type="Sprite3D" parent="StaticBody"]
+transform = Transform3D(-3.496911e-09, -0.085, -4.371139e-08, 0, -3.715468e-09, 1, -0.08, 3.715468e-09, 1.9106855e-15, 0, 0.6, 0)
+shaded = true
+texture = ExtResource("1_47e22")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody"]
+shape = SubResource("BoxShape3D_cjmea")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="StaticBody"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody/CSGCombiner3D"]
+transform = Transform3D(0.9999999, 0, 2.5579538e-13, -2.842171e-14, 0.99999976, 0, -6.0595085e-11, 0, 0.9999574, 0, 0, 0)
+size = Vector3(0.85, 1, 0.8)
+material = SubResource("StandardMaterial3D_pb3do")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="StaticBody/CSGCombiner3D"]
+transform = Transform3D(0.9999999, 0, 2.5579538e-13, -8.526513e-14, 0.99999976, 0, -6.0595085e-11, 0, 0.9999574, -0.006289662, 0.09484873, 1.4860113e-11)
+operation = 2
+size = Vector3(0.29, 1.522, 0.5)
+material = SubResource("StandardMaterial3D_d26q7")
