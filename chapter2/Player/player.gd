@@ -9,6 +9,7 @@ extends CharacterBody3D
 @onready var crosshair = $head/Camera3D/crosshair
 @onready var hand_sprite = $head/Camera3D/hand_position/Sprite3D
 @onready var hand_target: Marker3D = $head/Camera3D/HandTarget
+@onready var raycast: RayCast3D = $head/Camera3D/RayCast
 
 var interaction_manager: InteractionManager
 
@@ -81,8 +82,11 @@ var vertical_movement_speed = 5.0 # Скорость движения вверх
 #стройка
 var grid_size = 0.25
 var ghost_block: Node3D = null
-var objects = []
-var current_object_index = 0
+var objects = {
+	"light": preload("res://chapter2/Objects/light.tscn"),
+	"foundation": preload("res://chapter2/Objects/foundation.tscn")
+}
+var current_build_object: String = ""
 
 #полёт
 var is_floating: bool = false
@@ -91,27 +95,18 @@ var float_target_height: float = 0.0
 var float_speed: float = 3.0 # скорость подъема/спуска при парении
 
 func building(_delta):
+	if not ghost_block or current_build_object == "":
+		return
 	var snap_pos: Vector3 = snap_to_grid(hand_target.global_position, grid_size)
 	ghost_block.global_position = lerp(ghost_block.global_position, snap_pos, 0.1)
 	if Input.is_action_just_pressed("rotate"):
 		ghost_block.rotation.y += deg_to_rad(45)
 	if Input.is_action_just_pressed("UI_click") and ghost_block.can_place:
-		var block_instance = objects[current_object_index].instantiate()
+		var block_instance = objects[current_build_object].instantiate()
 		get_parent().add_child(block_instance)
 		block_instance.place()
 		block_instance.global_transform.origin = snap_to_grid(ghost_block.global_transform.origin, grid_size)
-		block_instance.global_position = ghost_block.global_position
 		block_instance.global_rotation = ghost_block.global_rotation
-
-func object_change(directionBlock):
-	if ghost_block:
-		ghost_block.queue_free()
-		current_object_index += directionBlock
-		if (current_object_index < 0):
-			current_object_index += objects.size()
-		elif current_object_index >= objects.size():
-			current_object_index -= objects.size()
-		spawn_ghost_block()
 
 func snap_to_grid(input_position: Vector3, grid_snap: float) -> Vector3:
 	var x = round(input_position.x / grid_snap) * grid_snap
@@ -119,11 +114,26 @@ func snap_to_grid(input_position: Vector3, grid_snap: float) -> Vector3:
 	var z = round(input_position.z / grid_snap) * grid_snap
 	return Vector3(x,y,z)
 
-func spawn_ghost_block():
-	ghost_block = objects[current_object_index].instantiate()
-	get_parent().add_child(ghost_block)
-	ghost_block.global_position = self.global_position
-	ghost_block.global_position.y -= 1.0
+func spawn_ghost_block(object_type: String):
+	if current_build_object == object_type and ghost_block:
+		return
+	if ghost_block:
+		ghost_block.queue_free()
+		ghost_block = null
+	if objects.has(object_type):
+		current_build_object = object_type
+		ghost_block = objects[object_type].instantiate()
+		get_parent().add_child(ghost_block)
+		ghost_block.global_position = self.global_position
+		ghost_block.global_position.y -= 1.0
+	else:
+		current_build_object = ""
+
+func stop_building():
+	if ghost_block:
+		ghost_block.queue_free()
+		ghost_block = null
+	current_build_object = ""
 
 func look_at_point(target_point: Vector3):
 	var head_look_point = Vector3(target_point.x, head.global_position.y, target_point.z)
@@ -152,8 +162,6 @@ func _ready():
 	if Global.game_settings["ModHard"]:
 		DarkHardMod(true)
 	update_gui_visibility()
-	objects.append(preload("res://chapter2/Objects/light.tscn"))
-	objects.append(preload("res://chapter2/Objects/foundation.tscn"))
 
 func DarkHardMod(mod):
 	if mod:
@@ -472,15 +480,12 @@ func _physics_process(delta):
 	$head/Camera3D/coordinates.text = "%03d:%03d:%03d" % [global_position.x, global_position.y, global_position.z]
 	if not Global.game_settings["affected_by_gravity"]:
 		is_floating = false
-	if Input.is_action_just_pressed("+f2"):
-		if ghost_block:
-			ghost_block.destroy()
-		else:
-			spawn_ghost_block()
-	if ghost_block:
+	if ghost_block and current_build_object != "":
 		building(delta)
+	elif raycast.is_colliding():
 		if Input.is_action_just_pressed("+f3"):
-			object_change(1)
+			if raycast.get_collider().is_in_group("Object"):
+				raycast.get_collider().destroy()
 	if Global.game_settings["affected_by_gravity"]:
 		if Input.is_action_just_pressed("+space") and is_on_floor() and Global.game_settings["can_jump"] and movement_enabled and !crouched:
 			if jump_cooldown_timer <= 0:
