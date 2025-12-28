@@ -45,7 +45,6 @@ func _ready():
 	update_state_label("Patrolling")
 	previous_position = global_position
 	sprite_3d.play("idle_front")
-	apply_shock(5.0)
 	spawnpoint = global_position
 
 func initialize_sprites():
@@ -153,8 +152,18 @@ func lose_player():
 
 func find_target():
 	var targets = get_tree().get_nodes_in_group("enemy_targets2")
+	print("=== Enemy2 поиск целей ===")
+	print("Целей в группе 'enemy_targets2': ", targets.size())
+	
+	for target in targets:
+		print("  Цель: ", target.name)
+		print("  Скрипт: ", target.get_script().resource_path if target.get_script() else "нет скрипта")
+		print("  Позиция: ", target.global_position)
+		print("  Y-координата: ", target.global_position.y)
+	
 	if targets.size() > 0:
 		current_target = targets[0]
+		print("Выбрана цель: ", current_target.name, " позиция: ", current_target.global_position)
 		update_state_label("Moving to Target")
 		is_chasing_player = false
 

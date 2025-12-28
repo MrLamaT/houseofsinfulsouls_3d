@@ -6,7 +6,7 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3uuwj"]
 
-[node name="TargetObject_tscn2" type="Node3D" groups=["enemy_targets2", "target_object"]]
+[node name="TargetObject_tscn2" type="Node3D" groups=["enemy_targets2"]]
 script = ExtResource("1_s708y")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

@@ -6,6 +6,7 @@ var game_settings: Dictionary = {
 	"ModScar": false,
 	"ModTraps": false,
 	"ModHard": false,
+	"ModSeason": false,
 	"gui_settings": {
 		"coordinates": false,
 		"fps": false,

@@ -4,19 +4,15 @@ extends Node3D
 @onready var collision_area = $Area3D
 var check = true
 var possible_positions = [
-	Vector3(-10.0, 0.747, 1.0),
-	Vector3(9.0, 0.747, -9.0),
-	Vector3(1.0, 0.747, -23.0),
-	Vector3(-10.0, 0.747, -22.0),
-	Vector3(-23.0, 0.747, -22.0),
-	Vector3(-30.0, 0.747, -22.0),
-	Vector3(-10.0, 0.747, -35.0)
+	Vector3(-7.0, 7.674, -19.0),
+	Vector3(-20.0, 7.674, -15.0)
 ]
 var available_positions = []
 var last_used_position = null
 
 func _ready() -> void:
 	available_positions = possible_positions.duplicate()
+	print(possible_positions)
 	set_random_position_from_list()
 
 func _on_body_entered(body):

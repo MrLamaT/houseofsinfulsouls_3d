@@ -5,11 +5,7 @@ func _ready():
 	set_random_texture()
 
 func set_random_texture():
-	var now = Time.get_datetime_dict_from_system()
-	var month = now["month"]
-	var day = now["day"]
-	
-	var is_new_year_period = (month == 12 and day >= 10) or (month == 1 and day <= 15)
+	var is_new_year_period = !Global.game_settings["ModSeason"]
 	var texture_paths = []
 	if is_new_year_period:
 		texture_paths = [

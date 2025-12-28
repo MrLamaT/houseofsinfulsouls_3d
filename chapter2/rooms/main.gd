@@ -19,6 +19,7 @@ func _ready() -> void:
 	Global.game_settings["ModScar"] = false
 	Global.game_settings["ModTraps"] = false
 	Global.game_settings["ModHard"] = false
+	Global.game_settings["ModSeason"] = false
 	Global.game_settings["HP"] = 6
 	Global.game_settings["preset"] = randi() % 5 + 1
 	print("Preset: ", Global.game_settings["preset"])
@@ -34,18 +35,19 @@ func handle_interaction(object_name: String):
 			else:
 				$ModSkin/Node3D/Sprite3D.texture = preload("res://chapter2/assets/ModIcon/Mod1_0.png")
 			Global.game_settings["ModSkin"] = !Global.game_settings["ModSkin"]
-		"Eye":
-			if !Global.game_settings["ModEye"]: 
+		"season":
+			if !Global.game_settings["ModSeason"]: 
 				$ModEye/Node3D/Sprite3D.texture = preload("res://chapter2/assets/ModIcon/Mod2_1.png")
 			else:
 				$ModEye/Node3D/Sprite3D.texture = preload("res://chapter2/assets/ModIcon/Mod2_0.png")
-			Global.game_settings["ModEye"] = !Global.game_settings["ModEye"]
-		"Scar":
+			Global.game_settings["ModSeason"] = !Global.game_settings["ModSeason"]
+		"enemy":
 			if !Global.game_settings["ModScar"]: 
 				$ModScar/Node3D/Sprite3D.texture = preload("res://chapter2/assets/ModIcon/Mod3_1.png")
 			else:
 				$ModScar/Node3D/Sprite3D.texture = preload("res://chapter2/assets/ModIcon/Mod3_0.png")
 			Global.game_settings["ModScar"] = !Global.game_settings["ModScar"]
+			Global.game_settings["ModEye"] = Global.game_settings["ModScar"]
 		"Traps":
 			if !Global.game_settings["ModTraps"]: 
 				$ModTraps/Node3D/Sprite3D.texture = preload("res://chapter2/assets/ModIcon/Mod6_1.png")

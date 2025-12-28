@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://cf1rnp7rtkfdx" path="res://chapter2/assets/items/vase.png" id="13_vmaj7"]
 [ext_resource type="Texture2D" uid="uid://duh6gy84p1n2s" path="res://chapter2/assets/ModIcon/Mod7_0.png" id="18_n5xo8"]
 [ext_resource type="PackedScene" uid="uid://ppi5cu4cfp8g" path="res://chapter2/closet/closet.tscn" id="21_lf7vw"]
-[ext_resource type="PackedScene" uid="uid://dpbv8185gbpla" path="res://chapter2/closet/shelf.tscn" id="22_c1l1x"]
+[ext_resource type="PackedScene" uid="uid://dpbv8185gbpla" path="res://chapter2/closet/sheif.tscn" id="22_c1l1x"]
 [ext_resource type="PackedScene" uid="uid://dq1nlqrg1a1d3" path="res://chapter2/rooms/decoration/NewYearTree.tscn" id="22_ifo8a"]
 [ext_resource type="PackedScene" uid="uid://cdrhprd8i3g4q" path="res://chapter2/rooms/decoration/light.tscn" id="22_ovupc"]
 
@@ -113,19 +113,19 @@ sprite_label = "enemy skin"
 
 [node name="ModEye" parent="." instance=ExtResource("2_q48q2")]
 transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, 3.57832, 2.056, -4.432)
-interaction_name = "Eye"
+interaction_name = "season"
 handler_node = NodePath("..")
 use_billboard_sprite = true
 sprite_texture = ExtResource("6_lf7vw")
-sprite_label = "enemy: Eye"
+sprite_label = "season of the year"
 
 [node name="ModScar" parent="." instance=ExtResource("2_q48q2")]
 transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, 2.66088, 2.056, -4.432)
-interaction_name = "Scar"
+interaction_name = "enemy"
 handler_node = NodePath("..")
 use_billboard_sprite = true
 sprite_texture = ExtResource("6_3uym5")
-sprite_label = "enemy: Scar"
+sprite_label = "enemy"
 
 [node name="ModTraps" parent="." instance=ExtResource("2_q48q2")]
 transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, 1.74, 2.062, -4.432)

@@ -6,18 +6,15 @@ func _ready() -> void:
 	$Player.startSpreedrun()
 	$Player.PlayerDeath(-1)
 	$NavigationRegion3D/Living/Label3D.text = Global.game_settings["password"].substr(0, 2) + "??"
+	$NavigationRegion3D3/attic/Label3D.text = "??" + Global.game_settings["password"].substr(2, 5)
 	setup_seasonal_materials()
 	var env_scene = preload("res://chapter2/sky/skybox.tscn")
 	var env_instance = env_scene.instantiate()
 	add_child(env_instance)
 
 func setup_seasonal_materials():
-	# Получаем текущую дату
-	var now = Time.get_datetime_dict_from_system()
-	var month = now["month"]
-	var day = now["day"]
 	var material = StandardMaterial3D.new()
-	if (month == 12 and day >= 10) or (month == 1 and day <= 10):
+	if !Global.game_settings["ModSeason"]:
 		material.albedo_color = Color("c2c4d0")
 	else:
 		material.albedo_color = Color("323f18")
@@ -39,7 +36,11 @@ func setup_seasonal_materials():
 func _on_kill_zona_body_entered(body: Node3D) -> void:
 	print("item killZona!!!")
 	print(body)
-	body.global_position = Vector3(0, 1, 0)
+	if body.is_in_group("player"):
+		if Global.game_settings["affected_by_gravity"]:
+			body.global_position = Vector3(0, 1, 0)
+	else:
+		body.global_position = Vector3(0, 1, 0)
 
 func handle_interaction(object_name: String):
 	match object_name:

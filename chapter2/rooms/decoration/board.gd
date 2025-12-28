@@ -51,16 +51,12 @@ func _get_image_files(path: String) -> Array[String]:
 	var files: Array[String] = []
 	var dir = DirAccess.open(path)
 	
-	print("Opening directory: ", path)
 	if dir:
-		print("Directory opened successfully")
 		var file_names = dir.get_files()
-		print("Files found: ", file_names)
 		for file_name in file_names:
 			if file_name.ends_with(".png.import"):
 				var cleaned = file_name.replace(".png.import", ".png")
 				files.append(path.path_join(cleaned))
-				print("Added file: ", file_name)
 	else:
 		print("Failed to open directory")
 	

@@ -1,12 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://d7gsydv2vesp"]
+[gd_scene load_steps=5 format=3 uid="uid://d7gsydv2vesp"]
 
 [ext_resource type="Script" uid="uid://cry8q88vjc1r0" path="res://chapter2/enemy/target_object_1.gd" id="1_v3agd"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v3agd"]
+albedo_color = Color(1, 0.32999998, 0.32999998, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_v3agd"]
+material = SubResource("StandardMaterial3D_v3agd")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3uuwj"]
 
-[node name="TargetObject_tscn1" type="Node3D" groups=["enemy_targets1", "target_object"]]
+[node name="TargetObject_tscn1" type="Node3D" groups=["enemy_targets1"]]
 script = ExtResource("1_v3agd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

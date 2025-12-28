@@ -54,5 +54,6 @@ func _on_mouse_exited() -> void:
 	$D1/DoorENot.visible = false
 
 func _on_animation_player_animation_finished(_anim_name: String) -> void:
+	print("Animation finished: ", _anim_name)
 	D1BodyCollision.disabled = false
 	D1.disabled = false
