@@ -15,6 +15,10 @@ func _ready():
 	if item_preset != 0 and item_preset != Global.game_settings["preset"]:
 		queue_free()
 		return
+	if !Global.game_settings["debugging"]:
+		$test.queue_free()
+	else:
+		$test.visible = true
 	# Инициализация
 	sprite_3d.play("idle")
 

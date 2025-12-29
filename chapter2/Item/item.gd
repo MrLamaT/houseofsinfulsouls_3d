@@ -9,8 +9,13 @@ extends RigidBody3D
 @export var item_texture_5: Texture2D
 
 @onready var audio_player = $AudioStreamPlayer3D
+var check = false
 
 func _ready():
+	if !Global.game_settings["debugging"]:
+		$test.queue_free()
+	else:
+		$test.visible = true
 	apply_preset_texture()
 	
 	if !available:
@@ -59,7 +64,9 @@ func create_item_mesh():
 
 func _on_body_entered(body):
 	if (body is StaticBody3D or body is RigidBody3D or body is CharacterBody3D) and linear_velocity.length() > 1:
-		play_collision_sound()
+		if !check:
+			play_collision_sound()
+			check = true
 
 func play_collision_sound():
 	var targets = get_tree().get_nodes_in_group("enemy_targets1")

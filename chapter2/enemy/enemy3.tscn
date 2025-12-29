@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ro2y8yu5gcwx"]
+[gd_scene load_steps=8 format=3 uid="uid://ro2y8yu5gcwx"]
 
 [ext_resource type="Script" uid="uid://dvbwqjk3rpdbr" path="res://chapter2/enemy/enemy_3.gd" id="1_7a48c"]
 [ext_resource type="Texture2D" uid="uid://3cqaqtjdnga6" path="res://chapter2/assets/enemy/Bat/Bat1.png" id="2_qr217"]
 [ext_resource type="Texture2D" uid="uid://dssltf5yfjkb1" path="res://chapter2/assets/enemy/Bat/Bat.png" id="3_1jmql"]
+[ext_resource type="Texture2D" uid="uid://baxmh0q5dkq1x" path="res://assets/test.png" id="4_qr217"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_se8os"]
 radius = 0.4
@@ -60,5 +61,13 @@ shape = SubResource("BoxShape3D_0mjta")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionArea"]
 shape = SubResource("CapsuleShape3D_se8os")
 debug_color = Color(0, 0.59607846, 0.7019608, 1)
+
+[node name="test" type="Sprite3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.17854643, 2.49727)
+visible = false
+modulate = Color(1, 0, 0, 1)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("4_qr217")
 
 [connection signal="body_entered" from="VisionArea" to="." method="_on_vision_area_body_entered"]

@@ -117,7 +117,7 @@ interaction_name = "season"
 handler_node = NodePath("..")
 use_billboard_sprite = true
 sprite_texture = ExtResource("6_lf7vw")
-sprite_label = "season of the year"
+sprite_label = "season"
 
 [node name="ModScar" parent="." instance=ExtResource("2_q48q2")]
 transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, 2.66088, 2.056, -4.432)

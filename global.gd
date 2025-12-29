@@ -27,6 +27,7 @@ var game_settings: Dictionary = {
 	"doorExit": 0,
 	"can_jump": true,
 	"affected_by_gravity": true,
-	"FloatHeight": 0
+	"FloatHeight": 0,
+	"debugging": false
 }
 var saved_portal_data: Dictionary = {}

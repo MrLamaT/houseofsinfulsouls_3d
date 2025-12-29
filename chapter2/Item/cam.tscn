@@ -6,7 +6,7 @@
 size = Vector3(1, 0.25, 1)
 
 [node name="cam" type="RigidBody3D"]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 4
 axis_lock_angular_x = true
 axis_lock_angular_z = true

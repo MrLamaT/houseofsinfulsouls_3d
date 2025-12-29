@@ -1,6 +1,5 @@
 extends Node3D
 
-@onready var mesh_instance = $MeshInstance3D
 @onready var collision_area = $Area3D
 var check = true
 var possible_positions = [
@@ -11,8 +10,11 @@ var available_positions = []
 var last_used_position = null
 
 func _ready() -> void:
+	if !Global.game_settings["debugging"]:
+		$test.queue_free()
+	else:
+		$test.visible = true
 	available_positions = possible_positions.duplicate()
-	print(possible_positions)
 	set_random_position_from_list()
 
 func _on_body_entered(body):

@@ -80,9 +80,8 @@ func parse_command(text: String):
 	match command:
 		"cheat":
 			SystemPrint("Cheats included")
-			player.get_node("head/Camera3D/cheat").visible = true
 			cheat_mod = true
-		"ghost":
+		"ghost", "noclip":
 			if cheat_mod:
 				SystemPrint("Ghost mode has been changed")
 				player.ghost_cheat()
@@ -126,6 +125,9 @@ func parse_command(text: String):
 				SystemPrint("God mode changed")
 			else:
 				ErrorPrint("No rights")
+		"debugging", "deb":
+			Global.game_settings["debugging"] = !Global.game_settings["debugging"]
+			SystemPrint("debugging mode changed")
 		"info":
 			if argument == "":
 				for key in Global.game_settings.keys():

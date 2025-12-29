@@ -11,6 +11,10 @@ extends Area3D
 @onready var billboard_label: Label3D = $Node3D/Label3D
 
 func _ready():
+	if !Global.game_settings["debugging"]:
+		$test.queue_free()
+	else:
+		$test.visible = true
 	$MeshInstance3D.visible = false
 	if billboard_sprite:
 		$Node3D.visible = true
