@@ -96,3 +96,12 @@ func handle_interaction(object_name: String):
 				$Player.stopSpreedrun()
 				$Player.SpreedrunMod(true)
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func _on_grass_trig_body_entered(body: Node3D) -> void:
+	if body.is_in_group("player"):
+		body.stepGrass = true
+
+func _on_grass_trig_body_exited(body: Node3D) -> void:
+	if body.is_in_group("player"):
+		body.stepGrass = false

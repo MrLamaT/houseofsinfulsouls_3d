@@ -6,6 +6,7 @@ extends CharacterBody3D
 @onready var time_label = $head/Camera3D/TimeLabel
 @onready var blood_overlay = $head/Camera3D/blood1
 @onready var footstep_player = $FootstepPlayer
+@onready var footstep_player2 = $FootstepPlayer2
 @onready var crosshair = $head/Camera3D/crosshair
 @onready var hand_sprite = $head/Camera3D/hand_position/Sprite3D
 @onready var hand_target: Marker3D = $head/Camera3D/HandTarget
@@ -63,9 +64,9 @@ var is_running = false
 var stamina = 100.0
 var max_stamina = 100.0
 var stamina_depletion_rate = 50.0  # Скорость расходования стамины в секунду
-var stamina_regen_rate = 10.0      # Скорость восстановления стамины в секунду
+var stamina_regen_rate = 20.0      # Скорость восстановления стамины в секунду
 var can_regenerate = true
-var regen_delay = 6  # Задержка перед восстановлением после бега
+var regen_delay = 3  # Задержка перед восстановлением после бега
 var regen_timer = 0.0
 
 var is_paused = false
@@ -93,6 +94,8 @@ var is_floating: bool = false
 var float_start_height: float = 0.0
 var float_target_height: float = 0.0
 var float_speed: float = 3.0 # скорость подъема/спуска при парении
+
+var stepGrass = false
 
 func building(_delta):
 	if not ghost_block or current_build_object == "":
@@ -223,6 +226,7 @@ func respawn_player():
 	$head/Camera3D/label.visible = false
 	time_label.visible = true
 	blood_overlay.visible = false
+	stepGrass = false
 	if Global.game_settings["HP"] == 4:
 		time_label.text = "01:30"
 	elif Global.game_settings["HP"] == 3:
@@ -333,7 +337,7 @@ func _input(event: InputEvent): #повороты мышкой
 			toggle_pause()
 		else:
 			toggle_terminal()
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and not Global.game_settings["IsDying"]:
 		if event is InputEventMouseMotion:
 			head.rotate_y(-event.relative.x * sens)
 			var vertical_rotation = -event.relative.y * sens
@@ -360,7 +364,8 @@ func _input(event: InputEvent): #повороты мышкой
 			toggle_terminal()
 		else:
 			toggle_pause()
-	interaction_manager.process_interaction_input()
+	if not Global.game_settings["IsDying"]:
+		interaction_manager.process_interaction_input()
 
 func ghost_cheat():
 	cheat_f3 = !cheat_f3
@@ -595,8 +600,11 @@ func AnimationPlayPlayer(Anim):
 		push_error("AnimationPlayer или анимация не найдены: " + str(Anim))
 
 func play_footstep():
-	if movement_enabled:
-		footstep_player.pitch_scale = randf_range(0.9, 1.1) # Случайный тон
+	if movement_enabled and stepGrass:
+		footstep_player2.pitch_scale = randf_range(0.9, 1.1)
+		footstep_player2.play()
+	else:
+		footstep_player.pitch_scale = randf_range(0.9, 1.1)
 		footstep_player.play()
 
 func _on_end_exit_pressed() -> void:

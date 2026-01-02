@@ -63,7 +63,7 @@ func create_item_mesh():
 	add_child(mesh_instance)
 
 func _on_body_entered(body):
-	if (body is StaticBody3D or body is RigidBody3D or body is CharacterBody3D) and linear_velocity.length() > 1:
+	if body is StaticBody3D or body is RigidBody3D or body is CharacterBody3D:
 		if !check:
 			play_collision_sound()
 			check = true

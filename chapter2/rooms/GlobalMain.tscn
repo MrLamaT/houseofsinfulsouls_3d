@@ -1,4 +1,4 @@
-[gd_scene load_steps=277 format=3 uid="uid://coa0qjrqe67hj"]
+[gd_scene load_steps=281 format=3 uid="uid://coa0qjrqe67hj"]
 
 [ext_resource type="Script" uid="uid://c1b3ijvg6fiwb" path="res://chapter2/rooms/global_main.gd" id="1_w630j"]
 [ext_resource type="PackedScene" uid="uid://6v0pay6q4xwe" path="res://chapter2/rooms/decoration/window.tscn" id="4_5xes0"]
@@ -771,6 +771,18 @@ texture_filter = 0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e36gd"]
 albedo_color = Color(0.50980395, 0.18039216, 0.16862746, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_s5wav"]
+size = Vector3(0.30281642, 2.206543, 0.38160694)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y5toe"]
+size = Vector3(0.3021903, 2.206543, 0.08283985)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7finy"]
+size = Vector3(0.04994777, 2.206543, 0.638)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t2nj5"]
+size = Vector3(0.66213036, 2.206543, 0.638)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_3u7b0"]
 size = Vector3(1.0138267, 1, 0.2194519)
 
@@ -1316,7 +1328,11 @@ item_texture = ExtResource("6_h6cr0")
 
 [node name="Item2" parent="NavigationRegion3D/PlayerRoom" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(0.9999999, 0, 0, 0, -4.3711385e-08, -1, 0, 0.9999999, -4.371139e-08, -2.9001856, 1.8279816, -5.3109426)
-item_texture = ExtResource("7_n6bb2")
+item_texture_1 = ExtResource("7_n6bb2")
+item_texture_2 = ExtResource("37_wpvhy")
+item_texture_3 = ExtResource("36_rhube")
+item_texture_4 = ExtResource("8_ocvev")
+item_texture_5 = ExtResource("35_7sbb1")
 
 [node name="Table" parent="NavigationRegion3D/PlayerRoom" instance=ExtResource("7_ges2j")]
 transform = Transform3D(-8.742278e-08, 0, 1.2, 0, 1, 0, -2, 0, -5.2453668e-08, -4.35, 0.5, 1.4857625)
@@ -1587,11 +1603,21 @@ texture = ExtResource("26_n1xav")
 [node name="Item2" parent="NavigationRegion3D/cabinet" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.969467, 0.7330565, -1.1147137)
 available = false
-item_texture = ExtResource("27_4hkdm")
+item_texture_1 = ExtResource("27_4hkdm")
+item_texture_2 = ExtResource("9_jbft0")
+item_texture_3 = ExtResource("37_wpvhy")
+item_texture_4 = ExtResource("10_3dqjl")
+item_texture_5 = ExtResource("45_eypie")
 
 [node name="Item" parent="NavigationRegion3D/cabinet" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -2.716539, 2.9091558, 4.773838)
-item_texture = ExtResource("9_n1w4u")
+item_texture_1 = ExtResource("9_n1w4u")
+item_texture_2 = ExtResource("10_3dqjl")
+
+[node name="Item3" parent="NavigationRegion3D/cabinet" instance=ExtResource("5_h1qgk")]
+transform = Transform3D(0.30012313, 0.95390046, -4.1696314e-08, 0, -4.371139e-08, -1, -0.95390046, 0.30012313, -1.31187985e-08, -4.3601046, 2.1609504, 0.076828)
+item_texture_4 = ExtResource("37_wpvhy")
+item_texture_5 = ExtResource("7_80e1f")
 
 [node name="InteractableObject" parent="NavigationRegion3D/cabinet" instance=ExtResource("16_k2u2h")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -9.216, 1.885, 1.816)
@@ -1852,11 +1878,15 @@ specific_painting = "picture4.png"
 
 [node name="Item" parent="NavigationRegion3D/barn" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(0.63378596, -0.7735085, 3.381113e-08, 0, -4.371139e-08, -1, 0.7735085, 0.63378596, -2.7703665e-08, 2.126, 2, 4.3168373)
-item_texture = ExtResource("8_ocvev")
+item_texture_1 = ExtResource("8_ocvev")
 
 [node name="Item2" parent="NavigationRegion3D/barn" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8306847, 0.64067256, 1.5193672)
-item_texture = ExtResource("10_3dqjl")
+item_texture_1 = ExtResource("10_3dqjl")
+item_texture_2 = ExtResource("36_rhube")
+item_texture_3 = ExtResource("35_7sbb1")
+item_texture_4 = ExtResource("35_7sbb1")
+item_texture_5 = ExtResource("36_rhube")
 
 [node name="InvisibleTrigger" parent="NavigationRegion3D/barn" instance=ExtResource("13_fh80c")]
 transform = Transform3D(-0.49688092, 0, -9.941477e-08, 0, 1, 0, 4.343871e-08, 0, -1.1371725, -5.251973, 1, 1.484314)
@@ -2067,6 +2097,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.402412, 1.0999999, -3.6444
 [node name="Light" parent="NavigationRegion3D/bathroom" instance=ExtResource("42_3dqjl")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.2119355, 3.132, -0.7894659)
 
+[node name="Item" parent="NavigationRegion3D/bathroom" instance=ExtResource("5_h1qgk")]
+transform = Transform3D(0.99999994, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139e-08, -3.4010425, 1.6075491, -4.0942774)
+item_texture_2 = ExtResource("8_ocvev")
+item_texture_4 = ExtResource("27_4hkdm")
+
 [node name="Room" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.000182, 0, 0)
 
@@ -2135,6 +2170,7 @@ transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 4.234, 1.6, -4)
 
 [node name="sheif" parent="NavigationRegion3D/Room" instance=ExtResource("10_4ae2m")]
 transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, 4.048559, 1.1, 1.5134375)
+item = NodePath("../Item2")
 
 [node name="bed" parent="NavigationRegion3D/Room" instance=ExtResource("11_58qht")]
 transform = Transform3D(-0.15032917, 0, 0.988636, 0, 1, 0, -0.988636, 0, -0.15032917, -3.4342976, 0.3219807, -2.1846747)
@@ -2173,7 +2209,15 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 3
 
 [node name="Item" parent="NavigationRegion3D/Room" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(0.9999999, 0, 0, 0, -4.3711385e-08, -1, 0, 0.9999999, -4.371139e-08, 0.33487034, 2.1379163, -4.3314166)
-item_texture = ExtResource("36_rhube")
+item_texture_1 = ExtResource("36_rhube")
+item_texture_4 = ExtResource("9_jbft0")
+
+[node name="Item2" parent="NavigationRegion3D/Room" instance=ExtResource("5_h1qgk")]
+transform = Transform3D(-4.3711385e-08, 0, 1, 0, 0.9999999, 0, -0.9999999, 0, -4.371139e-08, 4.5093355, 0.735882, 1.519144)
+available = false
+item_texture_2 = ExtResource("45_eypie")
+item_texture_3 = ExtResource("7_80e1f")
+item_texture_5 = ExtResource("27_4hkdm")
 
 [node name="chair" parent="NavigationRegion3D/Room" instance=ExtResource("62_wrtcm")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0928211, 0.75, -3.654163)
@@ -2446,7 +2490,14 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.43
 [node name="Item" parent="NavigationRegion3D/Foyer" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(0.9999999, 0, 0, 0, -4.3711385e-08, -1, 0, 0.9999999, -4.371139e-08, 4.1863403, 0.89289004, -6.1599884)
 available = false
-item_texture = ExtResource("7_80e1f")
+item_texture_1 = ExtResource("7_80e1f")
+item_texture_2 = ExtResource("7_80e1f")
+item_texture_3 = ExtResource("10_3dqjl")
+item_texture_4 = ExtResource("10_3dqjl")
+
+[node name="Item2" parent="NavigationRegion3D/Foyer" instance=ExtResource("5_h1qgk")]
+transform = Transform3D(0.9999999, 0, 0, 0, -4.3711385e-08, -1, 0, 0.9999999, -4.371139e-08, -3.7910395, 2.378526, -6.3396683)
+item_texture_3 = ExtResource("9_n1w4u")
 
 [node name="outdoors" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.000182, 0, -53.449932)
@@ -2883,7 +2934,11 @@ item = NodePath("../Item")
 [node name="Item" parent="NavigationRegion3D/outdoors" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -18.77072, 2.0656176, -26.33919)
 available = false
-item_texture = ExtResource("35_7sbb1")
+item_texture_1 = ExtResource("35_7sbb1")
+item_texture_2 = ExtResource("27_4hkdm")
+item_texture_3 = ExtResource("27_4hkdm")
+item_texture_4 = ExtResource("36_rhube")
+item_texture_5 = ExtResource("10_3dqjl")
 
 [node name="outdoors2" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.000182, 0, 62.912304)
@@ -3254,6 +3309,10 @@ handler_node = NodePath("../../..")
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.053129196, 0.75, -14.760173)
 item_texture = ExtResource("41_n1w4u")
 
+[node name="Item2" parent="NavigationRegion3D/Living" instance=ExtResource("5_h1qgk")]
+transform = Transform3D(0.5863723, -0.81004167, -2.563115e-08, -4.371139e-08, 1.9106855e-15, -1, 0.81004167, 0.5863723, -3.5408046e-08, 0.76008224, 2.1990523, 0.9661255)
+item_texture_5 = ExtResource("9_jbft0")
+
 [node name="Light" parent="NavigationRegion3D/Living" instance=ExtResource("42_3dqjl")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 3.132, 0)
 
@@ -3358,7 +3417,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -3.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4514675, 1.6, 2.1728554)
 
 [node name="closet2" parent="NavigationRegion3D/kitchen" instance=ExtResource("21_25t08")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.187643, 1.6, 2.1728573)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.188343, 1.6, 2.172718)
 item = NodePath("../Item")
 
 [node name="sheif" parent="NavigationRegion3D/kitchen" instance=ExtResource("10_4ae2m")]
@@ -3388,7 +3447,8 @@ transform = Transform3D(-2.8284264, -2.0000007, -2.0000002, 0, 2.8284268, -2.828
 [node name="Item" parent="NavigationRegion3D/kitchen" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, -4.1502953, 1.7872834, 1.512207)
 available = false
-item_texture = ExtResource("45_eypie")
+item_texture_1 = ExtResource("45_eypie")
+item_texture_3 = ExtResource("9_jbft0")
 
 [node name="hallway" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11, 0, -5.5)
@@ -3613,6 +3673,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31088436, 0, -0.028099418)
 size = Vector3(0.29953384, 1, 0.1556549)
 material = SubResource("StandardMaterial3D_e36gd")
 
+[node name="grassTrig" type="Area3D" parent="NavigationRegion3D/floor_ceiling/dirt"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/floor_ceiling/dirt/grassTrig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.311623, 0.6032715, -0.29868352)
+shape = SubResource("BoxShape3D_s5wav")
+debug_fill = false
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="NavigationRegion3D/floor_ceiling/dirt/grassTrig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31228122, 0.6032715, 0.09658003)
+shape = SubResource("BoxShape3D_y5toe")
+debug_fill = false
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="NavigationRegion3D/floor_ceiling/dirt/grassTrig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4880261, 0.6032715, -0.181)
+shape = SubResource("BoxShape3D_7finy")
+debug_fill = false
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/floor_ceiling/dirt/grassTrig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16993484, 0.6032715, -0.181)
+shape = SubResource("BoxShape3D_t2nj5")
+debug_fill = false
+
 [node name="dirt2" type="StaticBody3D" parent="NavigationRegion3D/floor_ceiling"]
 transform = Transform3D(-50, 0, 4.371139e-06, 0, 1, 0, -4.371139e-06, 0, -50, 0, 0, 31.85)
 collision_layer = 36
@@ -3779,6 +3861,13 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3.06
 [node name="Light" parent="NavigationRegion3D3/torture" instance=ExtResource("42_3dqjl")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3.052302, 3.095378, -8.888163)
 
+[node name="Item" parent="NavigationRegion3D3/torture" instance=ExtResource("5_h1qgk")]
+transform = Transform3D(1, 0, -4.371139e-08, -4.371139e-08, 1.9106855e-15, -1, 0, 1, 1.9106855e-15, 3.0658302, 1.7581978, -3.130497)
+item_texture_2 = ExtResource("9_n1w4u")
+item_texture_3 = ExtResource("8_ocvev")
+item_texture_4 = ExtResource("45_eypie")
+item_texture_5 = ExtResource("8_ocvev")
+
 [node name="attic" type="Node3D" parent="NavigationRegion3D3"]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -9.1, 0, -24)
 
@@ -3897,7 +3986,10 @@ item = NodePath("../Item")
 [node name="Item" parent="NavigationRegion3D3/attic" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(4.371139e-08, 1, 8.742278e-08, 1, -4.371139e-08, 0, 3.821371e-15, 8.742278e-08, -1, 4.566698, 2.1157198, -3.4093533)
 available = false
-item_texture = ExtResource("10_3dqjl")
+item_texture_1 = ExtResource("10_3dqjl")
+item_texture_2 = ExtResource("10_3dqjl")
+item_texture_3 = ExtResource("45_eypie")
+item_texture_5 = ExtResource("9_n1w4u")
 
 [node name="Table" parent="NavigationRegion3D3/attic" instance=ExtResource("7_ges2j")]
 transform = Transform3D(-1, 0, -1.8119498e-07, 0, 1, 0, 1.509958e-07, 0, -1.2, 1.6372728, 0.5, -2.2714195)
@@ -4018,6 +4110,10 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.19
 
 [node name="TV" parent="NavigationRegion3D3/cabinet" instance=ExtResource("63_16vr6")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -3.1209621, 2.2250004, 3.927827)
+
+[node name="Item" parent="NavigationRegion3D3/cabinet" instance=ExtResource("5_h1qgk")]
+transform = Transform3D(-2.4396284e-08, -0.55812186, 0.82975894, 1, -4.371139e-08, 0, 3.6269917e-08, 0.82975894, 0.55812186, -1.4221687, 2.1371546, 4.3491545)
+item_texture_4 = ExtResource("7_n6bb2")
 
 [node name="floor_ceiling" type="Node3D" parent="NavigationRegion3D3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0, -19.5)
@@ -4454,7 +4550,11 @@ item = NodePath("../Item")
 [node name="Item" parent="NavigationRegion3D2/basement" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3.5107975, 0.7609353, 1.4780626)
 available = false
-item_texture = ExtResource("37_wpvhy")
+item_texture_1 = ExtResource("37_wpvhy")
+item_texture_2 = ExtResource("35_7sbb1")
+item_texture_3 = ExtResource("10_3dqjl")
+item_texture_4 = ExtResource("9_n1w4u")
+item_texture_5 = ExtResource("10_3dqjl")
 
 [node name="Opendoors3" parent="NavigationRegion3D2/basement" instance=ExtResource("12_afyk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7639532, 1.4849491, 4.1012955)
@@ -4742,7 +4842,11 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -23.
 [node name="Item" parent="NavigationRegion3D2/basementCell" instance=ExtResource("5_h1qgk")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, -26.033096, 0.7418394, -10.586023)
 available = false
-item_texture = ExtResource("9_jbft0")
+item_texture_1 = ExtResource("9_jbft0")
+item_texture_2 = ExtResource("7_n6bb2")
+item_texture_3 = ExtResource("7_n6bb2")
+item_texture_4 = ExtResource("7_80e1f")
+item_texture_5 = ExtResource("37_wpvhy")
 
 [node name="safe" parent="NavigationRegion3D2/basementCell" instance=ExtResource("23_poeaw")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -26.037, 1.103, -11.215)
@@ -4756,4 +4860,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.051645, 0.7629025, -35.03
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.052, 7.674, -19.033)
 
 [connection signal="body_entered" from="NavigationRegion3D/floor_ceiling/KillZona" to="." method="_on_kill_zona_body_entered"]
+[connection signal="body_entered" from="NavigationRegion3D/floor_ceiling/dirt/grassTrig" to="." method="_on_grass_trig_body_entered"]
+[connection signal="body_exited" from="NavigationRegion3D/floor_ceiling/dirt/grassTrig" to="." method="_on_grass_trig_body_exited"]
 [connection signal="body_entered" from="NavigationRegion3D3/floor_ceiling/KillZona" to="." method="_on_kill_zona_body_entered"]
